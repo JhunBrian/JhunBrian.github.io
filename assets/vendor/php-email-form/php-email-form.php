@@ -11,7 +11,7 @@ function sanitize_input($data) {
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Replace 'your-email@example.com' with your actual receiving email address
-  $receiving_email_address = 'your-email@example.com';
+  $receiving_email_address = 'brianandam123@gmail.com';
 
   // Sanitize form data
   $name = sanitize_input($_POST['name']);
