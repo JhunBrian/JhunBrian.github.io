@@ -1,0 +1,26 @@
+{
+  "about.qmd": {
+    "about.html": "03b8da66"
+  },
+  "announcements/2025-05-13-new-lab.qmd": {
+    "2025-05-13-new-lab.html": "b0c63133"
+  },
+  "announcements/index.qmd": {
+    "index.html": "56b08a22"
+  },
+  "index.qmd": {
+    "index.html": "fcdadcb2"
+  },
+  "posts/blog-welcome.ipynb": {
+    "blog-welcome.html": "ce1cee61"
+  },
+  "posts/index.qmd": {
+    "index.html": "592d7ade"
+  },
+  "projects/ai-thesis-2025.qmd": {
+    "ai-thesis-2025.html": "44b6869e"
+  },
+  "projects/index.qmd": {
+    "index.html": "d281efa3"
+  }
+}

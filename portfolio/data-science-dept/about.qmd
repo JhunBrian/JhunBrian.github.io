@@ -1,0 +1,6 @@
+---
+title: "About Us"
+---
+
+The Department of Data Science at Our College focuses on cutting-edge education and research in machine learning, data analytics, and AI.  
+We aim to bridge theory and practice by fostering interdisciplinary projects and innovation.

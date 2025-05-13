@@ -1,0 +1,6 @@
+---
+title: "Announcements"
+listing: default
+---
+
+Here you’ll find the latest announcements from the Department of Data Science.

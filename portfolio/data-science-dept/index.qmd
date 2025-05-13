@@ -1,0 +1,8 @@
+---
+title: "Welcome"
+---
+
+# Department of Data Science
+
+Welcome to our official page!  
+Stay up to date with our latest research, student projects, and announcements.

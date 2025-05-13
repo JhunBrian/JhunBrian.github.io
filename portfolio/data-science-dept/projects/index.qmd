@@ -1,0 +1,6 @@
+---
+title: "Student Projects"
+listing: default
+---
+
+Explore featured student and faculty research projects.

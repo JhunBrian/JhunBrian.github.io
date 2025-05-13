@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Department of Data Science"
+  navbar:
+    right:
+      - text: Home
+        href: index.qmd
+      - text: About
+        href: about.qmd
+      - text: Announcements
+        href: announcements/
+      - text: Projects
+        href: projects/
+      - text: Blog
+        href: posts/
+
+format:
+  html:
+    theme: cosmo
+    toc: true

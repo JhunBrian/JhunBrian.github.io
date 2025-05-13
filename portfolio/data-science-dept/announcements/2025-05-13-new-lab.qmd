@@ -1,0 +1,6 @@
+---
+title: "New AI Lab Opened"
+date: 2025-05-13
+---
+
+We are excited to announce the opening of our new AI Research Lab in Room 301. The lab is equipped with high-performance GPUs and collaborative workstations.

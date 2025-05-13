@@ -1,0 +1,6 @@
+---
+title: "Blog"
+listing: default
+---
+
+Our blog shares tutorials, news, and reflections from the department.

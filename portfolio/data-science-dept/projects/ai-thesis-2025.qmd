@@ -1,0 +1,9 @@
+---
+title: "AI-Based Rice Disease Detection"
+author: Jane Doe
+date: 2025-03-01
+categories: [Computer Vision, Research]
+---
+
+This project uses U-Net with a ResNet34 backbone to detect diseases in rice leaves.  
+It achieved an IoU of 0.84 on a validation dataset and supports smallholder farmers.
