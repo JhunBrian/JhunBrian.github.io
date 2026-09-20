@@ -1,0 +1,38 @@
+# DS212 uses the Sphinx-based Jupyter Book 1 theme.
+title: DS212 · Object-Oriented Programming
+author: Department of Data Science · USTP
+logo: _static/ds212-mark.svg
+exclude_patterns: ['_build', '.venv', '**.ipynb_checkpoints', 'README.md']
+execute:
+  execute_notebooks: force
+latex:
+  latex_documents:
+    targetname: book.tex
+bibtex_bibfiles:
+  - references.bib
+html:
+  favicon: _static/favicon.svg
+  use_issues_button: false
+  use_repository_button: false
+  home_page_in_navbar: true
+  extra_footer: '<span>DS212 · Python for Data Science</span>'
+sphinx:
+  extra_extensions:
+    - sphinxcontrib.mermaid
+  config:
+    html_static_path: ['_static']
+    html_css_files: ['ds212.css']
+    html_extra_path: ['files']
+    html_theme_options:
+      logo:
+        text: 'Object-Oriented Programming'
+      home_page_in_toc: true
+      show_navbar_depth: 2
+      max_navbar_depth: 2
+      collapse_navbar: false
+      navigation_with_keys: false
+      show_toc_level: 1
+      toc_title: 'On this page'
+      use_download_button: true
+      use_fullscreen_button: true
+    html_show_copyright: false

@@ -1,0 +1,164 @@
+Running Jupyter-Book v1.0.4.post1
+Source Folder: C:\Users\Brian\Desktop\IMS\IM-DS212
+Config Path: C:\Users\Brian\Desktop\IMS\IM-DS212\_config.yml
+Output Path: C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html
+[01mRunning Sphinx v7.4.7[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+C:\Users\Brian\anaconda3\Lib\site-packages\sphinxcontrib\applehelp\__init__.py:24: RemovedInSphinx80Warning: The alias 'sphinx.util.SkipProgressMessage' is deprecated, use 'sphinx.util.display.SkipProgressMessage' instead. Check CHANGES for Sphinx API modifications.
+  from sphinx.util import SkipProgressMessage, progress_message
+C:\Users\Brian\anaconda3\Lib\site-packages\sphinxcontrib\applehelp\__init__.py:24: RemovedInSphinx80Warning: The alias 'sphinx.util.progress_message' is deprecated, use 'sphinx.util.display.progress_message' instead. Check CHANGES for Sphinx API modifications.
+  from sphinx.util import SkipProgressMessage, progress_message
+C:\Users\Brian\anaconda3\Lib\site-packages\sphinxcontrib\htmlhelp\__init__.py:26: RemovedInSphinx80Warning: The alias 'sphinx.util.progress_message' is deprecated, use 'sphinx.util.display.progress_message' instead. Check CHANGES for Sphinx API modifications.
+  from sphinx.util import progress_message
+[etoc] Changing master_doc to 'intro'
+[01mmyst v3.0.1:[39;49;00m MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'tasklist', 'linkify', 'colon_fence', 'dollarmath', 'substitution'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('mailto', 'http', 'https'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+[01mmyst-nb v1.4.0:[39;49;00m NbParserConfig(custom_formats={}, metadata_key='mystnb', cell_metadata_key='mystnb', kernel_rgx_aliases={}, eval_name_regex='^[a-zA-Z_][a-zA-Z0-9_]*$', execution_mode='force', execution_cache_path='', execution_excludepatterns=[], execution_timeout=30, execution_in_temp=False, execution_allow_errors=False, execution_raise_on_error=False, execution_show_tb=False, merge_streams=False, render_plugin='default', remove_code_source=False, remove_code_outputs=False, scroll_outputs=False, code_prompt_show='Show code cell {type}', code_prompt_hide='Hide code cell {type}', number_source_lines=False, output_stderr='show', render_text_lexer='myst-ansi', render_error_lexer='ipythontb', render_image_options={}, render_figure_options={}, render_markdown_format='commonmark', output_folder='build', append_css=True, metadata_to_fm=False)
+Using jupyter-cache at: C:\Users\Brian\Desktop\IMS\IM-DS212\_build\.jupyter_cache
+[01msphinx-multitoc-numbering v0.1.3:[39;49;00m Loaded
+checking bibtex cache... out of date
+parsing bibtex file C:\Users\Brian\Desktop\IMS\IM-DS212\references.bib... parsed 5 entries
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 10 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 10 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 10%] [35mcourse-guide[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mintro[39;49;00m
+[01mreading sources... [39;49;00m[ 30%] [35mnotebooks/00_Introduction[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/00_Introduction.ipynb: Executing notebook using local CWD [mystnb]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+C:\Users\Brian\anaconda3\Lib\site-packages\zmq\_future.py:693: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+0.02s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/00_Introduction.ipynb: Executed notebook in 5.76 seconds [mystnb]
+[01mreading sources... [39;49;00m[ 40%] [35mnotebooks/01_History[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/01_History.ipynb: Executing notebook using local CWD [mystnb]
+0.02s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/01_History.ipynb: Executed notebook in 7.21 seconds [mystnb]
+[01mreading sources... [39;49;00m[ 50%] [35mnotebooks/02_PythonReview1[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/02_PythonReview1.ipynb: Executing notebook using local CWD [mystnb]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/02_PythonReview1.ipynb: Executed notebook in 4.48 seconds [mystnb]
+[01mreading sources... [39;49;00m[ 60%] [35mnotebooks/03_PythonReview2[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/03_PythonReview2.ipynb: Executing notebook using local CWD [mystnb]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/03_PythonReview2.ipynb: Executed notebook in 4.01 seconds [mystnb]
+[01mreading sources... [39;49;00m[ 70%] [35mnotebooks/exercises/00_Exercise[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/exercises/00_Exercise.ipynb: Executing notebook using local CWD [mystnb]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/exercises/00_Exercise.ipynb: Executed notebook in 3.96 seconds [mystnb]
+[01mreading sources... [39;49;00m[ 80%] [35mnotebooks/exercises/01_Exercise[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/exercises/01_Exercise.ipynb: Executing notebook using local CWD [mystnb]
+0.02s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/exercises/01_Exercise.ipynb: Executed notebook in 4.02 seconds [mystnb]
+[01mreading sources... [39;49;00m[ 90%] [35mnotebooks/exercises/02_Exercise[39;49;00m
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/exercises/02_Exercise.ipynb: Executing notebook using local CWD [mystnb]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\security
+[IPKernelApp] WARNING | Could not set permissions on C:\Users\Brian\.ipython\profile_default\pid
+C:\Users\Brian\Desktop\IMS\IM-DS212\notebooks/exercises/02_Exercise.ipynb: Executed notebook in 4.10 seconds [mystnb]
+[01mreading sources... [39;49;00m[100%] [35msyllabus[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying downloadable files... [39;49;00m[100%] [33mfiles/Syllabus.pdf[39;49;00m
+
+[01mcopying static files... [39;49;00mCopying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static/webpack-macros.html to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/webpack-macros.html will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static\scripts/bootstrap.js to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/scripts\bootstrap.js will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static\scripts/bootstrap.js.map to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/scripts\bootstrap.js.map will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static\scripts/pydata-sphinx-theme.js to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/scripts\pydata-sphinx-theme.js will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static\scripts/pydata-sphinx-theme.js.map to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/scripts\pydata-sphinx-theme.js.map will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static\styles/pydata-sphinx-theme.css to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/styles\pydata-sphinx-theme.css will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\pydata_sphinx_theme\theme\pydata_sphinx_theme\static\styles/pydata-sphinx-theme.css.map to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/styles\pydata-sphinx-theme.css.map will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\sphinx_book_theme\theme\sphinx_book_theme\static\scripts/sphinx-book-theme.js to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/scripts\sphinx-book-theme.js will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\sphinx_book_theme\theme\sphinx_book_theme\static\scripts/sphinx-book-theme.js.map to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/scripts\sphinx-book-theme.js.map will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\sphinx_book_theme\theme\sphinx_book_theme\static\styles/sphinx-book-theme.css to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/styles\sphinx-book-theme.css will overwrite data, as a file already exists at the destination path and the content does not match.
+Copying the source path C:\Users\Brian\Desktop\IMS\IM-DS212\.venv\Lib\site-packages\sphinx_book_theme\theme\sphinx_book_theme\static\styles/sphinx-book-theme.css.map to C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\_static/styles\sphinx-book-theme.css.map will overwrite data, as a file already exists at the destination path and the content does not match.
+done
+[01mcopying extra files... [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 10%] [32mcourse-guide[39;49;00m
+[01mwriting output... [39;49;00m[ 20%] [32mintro[39;49;00m
+[01mwriting output... [39;49;00m[ 30%] [32mnotebooks/00_Introduction[39;49;00m
+[01mwriting output... [39;49;00m[ 40%] [32mnotebooks/01_History[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mnotebooks/02_PythonReview1[39;49;00m
+[01mwriting output... [39;49;00m[ 60%] [32mnotebooks/03_PythonReview2[39;49;00m
+[01mwriting output... [39;49;00m[ 70%] [32mnotebooks/exercises/00_Exercise[39;49;00m
+[01mwriting output... [39;49;00m[ 80%] [32mnotebooks/exercises/01_Exercise[39;49;00m
+[01mwriting output... [39;49;00m[ 90%] [32mnotebooks/exercises/02_Exercise[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32msyllabus[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mcopying images... [39;49;00m[100%] [33mnotebooks/images/Bubble_chart_of_programming_paradigms_en.svg.png[39;49;00m
+
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in _build\html.
+
+[92m===============================================================================[0m
+
+Finished generating HTML for book.
+Your book's HTML pages are here:
+    _build\html\
+You can look at your book by opening this file in a browser:
+    _build\html\index.html
+Or paste this line directly into your browser bar:
+    file://C:\Users\Brian\Desktop\IMS\IM-DS212\_build\html\index.html            
+
+[92m===============================================================================[0m
+

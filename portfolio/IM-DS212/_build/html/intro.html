@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Course home &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="icon" href="_static/favicon.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to use this book" href="course-guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/04_ObjectsAndClasses.html">Objects and classes I · Introduction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Course home</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-course">Explore the course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome">Welcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-oop-for-data-science">Why OOP for Data Science?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-thinking">Object-Oriented Thinking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-oop-to-the-data-science-ecosystem">Connecting OOP to the Data Science Ecosystem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-python-programmer-to-software-designer">From Python Programmer to Software Designer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-through-practice">Learning Through Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goal">Learning Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-material">About This Material</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="course-home">
+<h1>Course home<a class="headerlink" href="#course-home" title="Link to this heading">#</a></h1>
+<section class="course-hero" aria-label="Welcome to DS212">
+  <div class="course-eyebrow">DS212 / The course companion</div>
+  <p class="hero-title">Think in objects.<br>Build with Python.</p>
+  <p>Object-Oriented Programming for Data Science. Explore the ideas, work through the examples, and turn your understanding into practice.</p>
+  <div class="hero-actions">
+    <a class="hero-button" href="notebooks/00_Introduction.html">Start learning <span aria-hidden="true">→</span></a>
+    <a class="hero-button secondary" href="course-guide.html">How to use this book</a>
+  </div>
+</section>
+<div class="course-meta">SECOND-YEAR DATA SCIENCE · USTP · COLLEGE OF INFORMATION TECHNOLOGY AND COMPUTING</div><section id="explore-the-course">
+<h2>Explore the course<a class="headerlink" href="#explore-the-course" title="Link to this heading">#</a></h2>
+<p>Choose a lesson below, or follow the course navigation from top to bottom. Practice activities appear beneath the lessons they support.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+OOP foundations</div>
+<p class="sd-card-text">Explore programming paradigms and the history of object-oriented thinking. Put the ideas to work in two guided activities.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Begin with programming paradigms →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/00_Introduction.html"><span class="doc">Introduction</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Python review</div>
+<p class="sd-card-text">Revisit Python fundamentals, then move through control flow, functions, and modules before the combined coding exercise.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Start Python review I →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/02_PythonReview1.html"><span class="doc">Python Review Part 1</span></a></div>
+</div>
+</div>
+</div>
+<p><a class="reference internal" href="syllabus.html"><span class="std std-doc">View the course syllabus</span></a> · <a class="reference internal" href="notebooks/exercises/02_Exercise.html"><span class="std std-doc">Go to the Python coding exercise</span></a></p>
+</section>
+<section id="welcome">
+<h2>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h2>
+<p>Welcome to <strong>Object-Oriented Programming for Data Science</strong>, an instructional resource designed to introduce Data Science students to the principles, techniques, and practical applications of <strong>Object-Oriented Programming (OOP) using Python</strong>.</p>
+<p>At this stage, you are already expected to be familiar with Python programming fundamentals such as variables, data types, conditional statements, loops, functions, collections, and basic problem solving. This material builds upon that foundation and introduces a different way of thinking about programs: not simply as sequences of instructions, but as systems composed of <strong>objects that contain data and behavior</strong>.</p>
+<p>Object-Oriented Programming provides a way of organizing increasingly complex programs into understandable and reusable components. Rather than placing all functionality into a single program or collection of unrelated functions, OOP allows us to model concepts as objects and define how those objects interact.</p>
+<p>Consider a simple Data Science workflow:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Dataset → Preprocessing → Model → Evaluation → Results
+</pre></div>
+</div>
+<p>Each component has its own data, responsibilities, and operations. Object-oriented design allows us to represent these components as cooperating objects rather than treating the entire workflow as one large program.</p>
+</section>
+<hr class="docutils" />
+<section id="why-oop-for-data-science">
+<h2>Why OOP for Data Science?<a class="headerlink" href="#why-oop-for-data-science" title="Link to this heading">#</a></h2>
+<p>Data Science is often introduced through individual scripts and notebooks. A typical program may load a dataset, clean the data, perform analysis, train a model, and generate visualizations.</p>
+<p>This works well for smaller problems. As projects become larger, however, code can become difficult to organize, reuse, test, and maintain.</p>
+<p>Object-Oriented Programming provides techniques for managing this complexity.</p>
+<p>Through OOP, we can represent Data Science concepts using classes and objects. A dataset can become an object responsible for managing data. A preprocessing component can encapsulate transformation procedures. A machine learning model can provide methods for training and prediction. An experiment can contain its configuration, model, results, and evaluation metrics.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s2">"students.csv"</span><span class="p">)</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ClassificationModel</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The goal is not simply to make programs longer or more sophisticated. The goal is to make programs <strong>organized, understandable, reusable, and easier to extend</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="object-oriented-thinking">
+<h2>Object-Oriented Thinking<a class="headerlink" href="#object-oriented-thinking" title="Link to this heading">#</a></h2>
+<p>Learning OOP involves more than learning Python syntax.</p>
+<p>Writing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>is easy.</p>
+<p>Determining <strong>what should become a class, what information an object should contain, what operations it should perform, and how different objects should interact</strong> requires a deeper understanding of software design.</p>
+<p>Throughout this material, you will learn to think about programs in terms of:</p>
+<ul class="simple">
+<li><p><strong>Objects</strong> — individual entities that contain state and behavior;</p></li>
+<li><p><strong>Classes</strong> — definitions used to describe and create objects;</p></li>
+<li><p><strong>Attributes</strong> — information maintained by an object;</p></li>
+<li><p><strong>Methods</strong> — operations that an object can perform;</p></li>
+<li><p><strong>Encapsulation</strong> — organizing and controlling access to an object’s internal state;</p></li>
+<li><p><strong>Inheritance</strong> — creating related classes that share or extend behavior;</p></li>
+<li><p><strong>Polymorphism</strong> — allowing different objects to respond to common operations in their own ways;</p></li>
+<li><p><strong>Abstraction</strong> — representing essential characteristics while managing unnecessary implementation details; and</p></li>
+<li><p><strong>Relationships between objects</strong> — designing programs as systems of cooperating components.</p></li>
+</ul>
+<p>These concepts will be explored through Python implementations, diagrams, examples, and programming exercises.</p>
+</section>
+<hr class="docutils" />
+<section id="connecting-oop-to-the-data-science-ecosystem">
+<h2>Connecting OOP to the Data Science Ecosystem<a class="headerlink" href="#connecting-oop-to-the-data-science-ecosystem" title="Link to this heading">#</a></h2>
+<p>Object-Oriented Programming is particularly relevant to Data Science because many of the Python libraries commonly used in the field are designed around objects.</p>
+<p>When working with <strong>NumPy</strong>, <strong>pandas</strong>, <strong>Matplotlib</strong>, <strong>scikit-learn</strong>, and other Data Science libraries, you are already interacting with classes and objects.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"Name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Ben"</span><span class="p">,</span> <span class="s2">"Carlo"</span><span class="p">],</span>
+    <span class="s2">"Score"</span><span class="p">:</span> <span class="p">[</span><span class="mi">89</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">85</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> is not simply a table. It is an object created from the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> class. It contains data and provides operations through methods such as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"Score"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The same idea appears in machine learning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">model</span></code> is an object. It maintains information about a trained model and provides behaviors such as <code class="docutils literal notranslate"><span class="pre">fit()</span></code> and <code class="docutils literal notranslate"><span class="pre">predict()</span></code>.</p>
+<p>Understanding OOP therefore helps us understand not only <strong>how to create our own software</strong>, but also <strong>how many of the tools used throughout the Python Data Science ecosystem are designed</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="from-python-programmer-to-software-designer">
+<h2>From Python Programmer to Software Designer<a class="headerlink" href="#from-python-programmer-to-software-designer" title="Link to this heading">#</a></h2>
+<p>A major objective of this material is to move beyond knowing <em>how to make Python execute a task</em>.</p>
+<p>As programs become larger, another question becomes increasingly important:</p>
+<blockquote>
+<div><p><strong>How should the program be designed?</strong></p>
+</div></blockquote>
+<p>Two programs may produce exactly the same output while having very different designs. One may be difficult to modify and reuse, while another may be organized into components that can easily be extended to solve related problems.</p>
+<p>Throughout this course, you will encounter problems that require you to make these design decisions.</p>
+<p>You will create classes, instantiate and manipulate objects, represent relationships using class diagrams, reuse behavior through inheritance, redefine behavior through method overriding, and gradually apply these ideas to problems related to Data Science.</p>
+<p>The emphasis is therefore not only on writing code that <strong>works</strong>, but on writing code whose structure has a clear purpose.</p>
+</section>
+<hr class="docutils" />
+<section id="learning-through-practice">
+<h2>Learning Through Practice<a class="headerlink" href="#learning-through-practice" title="Link to this heading">#</a></h2>
+<p>Object-Oriented Programming is best understood by designing and implementing programs.</p>
+<p>This instructional material therefore combines conceptual discussions with Python examples, visual representations, and programming exercises. You are encouraged to modify examples, experiment with implementations, observe program behavior, and develop alternative solutions.</p>
+<p>Some problems may have several valid designs.</p>
+<p>When this happens, consider questions such as:</p>
+<p><strong>What objects exist in the problem?</strong></p>
+<p><strong>What responsibilities should each object have?</strong></p>
+<p><strong>What data should an object maintain?</strong></p>
+<p><strong>Which operations belong to which class?</strong></p>
+<p><strong>How should the classes relate to one another?</strong></p>
+<p><strong>Can parts of the program be reused?</strong></p>
+<p><strong>Would this design remain understandable if the program became larger?</strong></p>
+<p>These questions are fundamental to object-oriented software development.</p>
+</section>
+<hr class="docutils" />
+<section id="learning-goal">
+<h2>Learning Goal<a class="headerlink" href="#learning-goal" title="Link to this heading">#</a></h2>
+<p>By the end of this material, students should be able to <strong>understand, design, and implement object-oriented Python programs and recognize how object-oriented principles are applied within the Data Science ecosystem</strong>.</p>
+<p>More importantly, students should be able to approach a programming problem not only by asking:</p>
+<blockquote>
+<div><p><em>“What code should I write?”</em></p>
+</div></blockquote>
+<p>but also:</p>
+<blockquote>
+<div><p><em>“How should I organize this program?”</em></p>
+</div></blockquote>
+<p>This shift in perspective is one of the central ideas of Object-Oriented Programming and an important step toward developing larger, reusable, and maintainable Data Science applications.</p>
+<hr class="docutils" />
+<div class="tip admonition">
+<p class="admonition-title">A Note to Learners</p>
+<p>Do not treat Object-Oriented Programming as a collection of Python keywords that need to be memorized. Focus on understanding <strong>why classes are designed in a particular way and how objects work together to solve a problem</strong>.</p>
+<p>Experiment with the examples, modify the code, make mistakes, and examine what happens. Programming is learned through practice.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="about-this-material">
+<h2>About This Material<a class="headerlink" href="#about-this-material" title="Link to this heading">#</a></h2>
+<p>This Jupyter Book is developed as an <strong>open instructional resource for Object-Oriented Programming in Data Science</strong>. It is intended primarily for undergraduate Data Science students who already possess foundational knowledge of Python programming.</p>
+<p>The material may also be used by other learners and educators interested in studying Object-Oriented Programming through Python, particularly within a Data Science context.</p>
+<p>Examples, discussions, diagrams, and exercises are provided to support both classroom instruction and independent study.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="course-guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">How to use this book</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-course">Explore the course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome">Welcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-oop-for-data-science">Why OOP for Data Science?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-thinking">Object-Oriented Thinking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-oop-to-the-data-science-ecosystem">Connecting OOP to the Data Science Ecosystem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-python-programmer-to-software-designer">From Python Programmer to Software Designer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-through-practice">Learning Through Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goal">Learning Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-material">About This Material</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

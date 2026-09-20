@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The WHY – Department of Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dfb324f25d9b1687192fa8be62ac8f9c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Department of Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../announcements/"> 
+<span class="menu-text">Announcements</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts/"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-data-science-matters" id="toc-why-data-science-matters" class="nav-link active" data-scroll-target="#why-data-science-matters"><strong>Why Data Science Matters?</strong></a></li>
+  <li><a href="#applications-of-data-science" id="toc-applications-of-data-science" class="nav-link" data-scroll-target="#applications-of-data-science"><strong>Applications of Data Science</strong></a></li>
+  <li><a href="#laboratory-activity" id="toc-laboratory-activity" class="nav-link" data-scroll-target="#laboratory-activity"><strong>Laboratory Activity</strong></a></li>
+  <li><a href="#how-does-data-science-really-work" id="toc-how-does-data-science-really-work" class="nav-link" data-scroll-target="#how-does-data-science-really-work"><strong>How does Data Science Really Work?</strong></a></li>
+  <li><a href="#group-activity" id="toc-group-activity" class="nav-link" data-scroll-target="#group-activity"><strong>Group Activity</strong></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong>The WHY</strong></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Instructors:</strong> Jhun Brian M. Andam | Timothy Jonah E. Borromeo</p>
+<p><strong>Course:</strong> Introduction to Data Science</p>
+<p><strong>Objectives</strong></p>
+<ul>
+<li>Understand the need and importance of Data Science in different aspects of society.</li>
+<li>Acquire foundational knowledge on how data science affects businesses and industries.</li>
+<li>Understand the need to have a data strategy in data science endeavors.</li>
+</ul>
+<section id="why-data-science-matters" class="level3">
+<h3 class="anchored" data-anchor-id="why-data-science-matters"><strong>Why Data Science Matters?</strong></h3>
+<p style="font-family:Times New Roman; font-size:20px">
+<i>Our world is now measured, mapped, and recorded in digital bits. </i> <sup><a href="#1">[1]</a></sup>
+</p>
+<p>Data science enables <strong>individuals</strong>, <strong>businesses</strong>, and <strong>organizations</strong> to make informed decisions based on data rather than intuition. By leveraging data science techniques—such as machine learning, predictive analytics, and data visualization—organizations can uncover hidden patterns, optimize processes, and drive innovation. Businesses use data science to improve customer experiences, detect fraud, and personalize recommendations, while industries like healthcare and agriculture rely on it for disease prediction and resource optimization. Moreover, governments and policymakers use data science to analyze trends, improve public services, and respond effectively to crises. Without data science, valuable insights would remain buried in raw data, limiting progress and efficiency across all sectors of society.</p>
+<div style="display: flex; justify-content: center; gap: 10px;">
+<pre><code>&lt;img src="https://www.mdpi.com/applsci/applsci-13-09158/article_deploy/html/images/applsci-13-09158-g006.png" alt="Image 1" style="width: 333px; height: auto;"&gt;
+&lt;img src="https://production-media.paperswithcode.com/tasks/Screenshot_2019-11-28_at_18.23.25_XBt0d7z.png" alt="Image 2" style="width: 333px; height: auto;"&gt;
+&lt;img src="https://cdnintech.com/media/chapter/82490/1512345123/media/F4.png" alt="Image 2" style="width: 333px; height: auto;"&gt;</code></pre>
+</div>
+</section>
+<section id="applications-of-data-science" class="level3">
+<h3 class="anchored" data-anchor-id="applications-of-data-science"><strong>Applications of Data Science</strong></h3>
+<section id="healthcare" class="level4">
+<h4 class="anchored" data-anchor-id="healthcare"><strong>Healthcare</strong></h4>
+<p>In 2008, Google staffers created Google Flu Trends, a tool that mapped flu outbreaks in real time by tracking location data on flu-related searches. But it didn’t work. In 2013, Google estimated about twice the flu cases that were actually observed (the Flu Trends algorithm relied too much on correlations between search term volume and flu cases). Even so, it demonstrated the potential and importance of data science in healthcare.</p>
+</section>
+<section id="transportation-and-logistics" class="level4">
+<h4 class="anchored" data-anchor-id="transportation-and-logistics"><strong>Transportation and Logistics</strong></h4>
+<p>While both biking and public transit can curb driving-related emissions, data science can do the same by optimizing road routes. And though data-driven route adjustments are often small, they can help save thousands of gallons of gas when spread across hundreds of trips and vehicles.</p>
+</section>
+<section id="sports" class="level4">
+<h4 class="anchored" data-anchor-id="sports"><strong>Sports</strong></h4>
+<p>In the early 2000s, the Oakland Athletics’ recruitment budget was so small the team couldn’t recruit quality players. So the general manager redefined quality, using in-game statistics other teams ignored to predict player potential, assemble a strong team and make the playoffs despite the team’s budget.</p>
+<p>Author Michael Lewis wrote a book about the phenomenon, Moneyball. Since then, the global market for sports analytics has thrived and is expected to reach 8.4 billion by 2026.</p>
+</section>
+<section id="government" class="level4">
+<h4 class="anchored" data-anchor-id="government"><strong>Government</strong></h4>
+<p>U.S. government agencies can access heaps of data. Not only do they maintain their own databases of ID photos, fingerprints and phone activity, but government agents can also get warrants to obtain data from any American data warehouse.</p>
+</section>
+<section id="gaming" class="level4">
+<h4 class="anchored" data-anchor-id="gaming"><strong>Gaming</strong></h4>
+<p>Data science and AI have been used in video games for decades. You see it in Pac-Man, where they were used in the game’s mazes and to give the ghosts distinct personalities. The video game industry continues to find creative ways to implement data science and AI to improve game play and entertain millions of people across the globe, swelling to over $244 billion in 2024.</p>
+</section>
+<section id="e-commerce" class="level4">
+<h4 class="anchored" data-anchor-id="e-commerce"><strong>E-Commerce</strong></h4>
+<p>Online retailers often automatically tailor their web storefronts based on viewers’ data profiles. That can mean tweaking page layouts and customizing spotlighted products, among other things. Some stores may also adjust prices based on what consumers seem able to pay, a practice called personalized pricing. Even websites that sell nothing feature targeted ads.</p>
+</section>
+<section id="social-platform" class="level4">
+<h4 class="anchored" data-anchor-id="social-platform"><strong>Social Platform</strong></h4>
+<p>The rise of social networks has completely altered how people socialize, with online data helping shape how relationships begin and develop in the digital age. Here are some examples of data science fostering human connection.</p>
+</section>
+<section id="fintech" class="level4">
+<h4 class="anchored" data-anchor-id="fintech"><strong>Fintech</strong></h4>
+<p>Fintech and data science go hand in hand, as financial companies typically use insights drawn from raw data to make lending decisions and create credit reports. Data science is also used to predict consumer behavior, run risk evaluations and optimize financial portfolios and assets.</p>
+</section>
+</section>
+<section id="laboratory-activity" class="level3">
+<h3 class="anchored" data-anchor-id="laboratory-activity"><strong>Laboratory Activity</strong></h3>
+<div class="alert alert-block alert-info">
+<p><b>Case Reading: </b> Reshaping Business With Artificial Intelligence (AI at Work)</p>
+<ul>
+<li><a href="https://sloanreview.mit.edu/projects/reshaping-business-with-artificial-intelligence/#chapter-2">Reshaping Business With Artificial Intelligence</a></li>
+</ul>
+</div>
+<ol type="1">
+<li>Why do you think traditional root-cause analysis was less efficient compared to AI?</li>
+<li>How does AI’s ability to detect patterns and learn from data improve decision-making in a manufacturing environment?</li>
+<li>What industries beyond aerospace could benefit from AI-powered disruption management? Can you give an example?</li>
+<li>The excerpt mentions that many companies have yet to get started with AI. What do you think are the main barriers preventing businesses from adopting AI?</li>
+<li>What ethical concerns might arise when using AI in critical business operations like manufacturing?</li>
+<li>Do you think AI will eventually replace human decision-makers in business processes? Why or why not?</li>
+</ol>
+</section>
+<section id="how-does-data-science-really-work" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-data-science-really-work"><strong>How does Data Science Really Work?</strong></h3>
+<center>
+<img src="figures/four_acts.png" width="600px">
+</center>
+**
+<center>
+The Four Key Activities of a Data Science Endeavor
+</center>
+<p>**</p>
+<section id="acquire" class="level4">
+<h4 class="anchored" data-anchor-id="acquire"><strong>Acquire</strong></h4>
+<p>This activity focuses on obtaining the data you need. Given the nature of data, the details of this activity depend heavily on who you are and what you do. As a result, we will not spend a lot of time on this activity other than to emphasize its importance and to encourage an expansive view on which data can and should be used.</p>
+</section>
+<section id="prepare" class="level4">
+<h4 class="anchored" data-anchor-id="prepare"><strong>Prepare</strong></h4>
+<p>Great outcomes don’t just happen by themselves. A lot depends on preparation, and in Data Science, that means manipulating the data to fit your analytic needs. This stage can consume a great deal of time, but it is an excellent investment. The benefits are immediate and long term.</p>
+</section>
+<section id="analyze" class="level4">
+<h4 class="anchored" data-anchor-id="analyze"><strong>Analyze</strong></h4>
+<p>This is the activity that consumes the lion’s share of the team’s attention. It is also the most challenging and exciting (you will see a lot of ‘aha moments’ occur in this space). As the most challenging and vexing of the four activities, this field guide focuses on helping you do this better and faster.</p>
+</section>
+<section id="act" class="level4">
+<h4 class="anchored" data-anchor-id="act"><strong>Act</strong></h4>
+<p>Every effective Data Science team analyzes its data with a purpose–that is, to turn data into actions. Actionable and impactful insights are the holy grail of Data Science. Converting insights into action can be a politically charged activity, however. This activity depends heavily on the culture and character of your organization, so we will leave you to figure out those details for yourself</p>
+</section>
+</section>
+<section id="group-activity" class="level3">
+<h3 class="anchored" data-anchor-id="group-activity"><strong>Group Activity</strong></h3>
+<div class="alert alert-block alert-info">
+<p><b>Case Study: The Role of Data Science in X-Event</b></p>
+<p>Students will identify a real-world issue in their local community, school, or city where data science could provide solutions. They will analyze the problem, explore what types of data might be useful, and propose how data science could improve the situation.</p>
+<p><strong>Instructions:</strong></p>
+<p><strong>1. Identify a Community Issue</strong><br>
+Choose a real-world problem in your local community, school, or city where data science could provide solutions. Examples include:<br>
+- Traffic &amp; Transportation: Can data science help optimize traffic flow or improve public transport schedules?<br>
+- Waste Management: Could data-driven solutions improve garbage collection efficiency?<br>
+- Public Safety: How can crime or accident data be used to make the community safer?<br>
+- Education: Can predictive analytics help identify students at risk of dropping out?<br>
+- Healthcare: How can data science assist in tracking disease outbreaks or improving hospital resource allocation?<br>
+- Environment: How can data science help monitor pollution, flooding, or natural disasters?</p>
+<p><strong>2. Research Similar Problems &amp; Solutions</strong><br>
+- Investigate how prevalent the problem is in your community. Provide background information.<br>
+- Use figures or statistics to highlight the impact of the issue.<br>
+- Find at least one article, research paper, or case study discussing a similar problem.<br>
+- Summarize the research findings: - What problem did they address?<br>
+- What solution did they propose?<br>
+- Did they use data science? If so, how?<br>
+- What was the outcome?</p>
+<p><strong>3. Analyze How Data Science Can Help in Your Community</strong><br>
+- Propose solutions for your local context. - You can derive ideas from the research you found or suggest new approaches.<br>
+- Explain how data science techniques (e.g., machine learning, data visualization, predictive analytics) could improve the situation.</p>
+<p><strong>4. Include References</strong><br>
+- Provide links or citations for the articles, research papers, or case studies you used.</p>
+<p><strong>5. Present Your Case Study</strong><br>
+- Prepare a PowerPoint presentation (maximum of 10 slides). - Keep text minimal—focus on key points and visuals. - Use graphs, images, or charts to support your findings. - Be ready to present next week.</p>
+</div>
+<section id="case-study-evaluation-criteria-total-50-points" class="level4">
+<h4 class="anchored" data-anchor-id="case-study-evaluation-criteria-total-50-points"><strong>Case Study Evaluation Criteria</strong> <em>(Total: 50 points)</em></h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 26%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criteria</strong></th>
+<th><strong>Excellent (10 pts)</strong></th>
+<th><strong>Good (8 pts)</strong></th>
+<th><strong>Satisfactory (6 pts)</strong></th>
+<th><strong>Needs Improvement (4 pts or below)</strong></th>
+<th><strong>Points Earned</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Problem Identification (10 pts)</strong></td>
+<td>Clearly defines a relevant community issue with strong background and significance.</td>
+<td>Identifies a problem with some background information but lacks depth.</td>
+<td>States a problem but lacks explanation of its relevance.</td>
+<td>Problem is unclear or not well-explained.</td>
+<td>/10</td>
+</tr>
+<tr class="even">
+<td><strong>Research &amp; Use of References (10 pts)</strong></td>
+<td>Cites multiple relevant sources, effectively summarizes findings, and includes supporting data/figures.</td>
+<td>Uses at least one source but lacks depth or supporting data.</td>
+<td>Research is minimal or lacks a clear connection to the problem.</td>
+<td>Little to no research cited, or sources are unreliable.</td>
+<td>/10</td>
+</tr>
+<tr class="odd">
+<td><strong>Application of Data Science (10 pts)</strong></td>
+<td>Clearly explains how data science can be applied, referencing real-world examples and techniques.</td>
+<td>Provides a good explanation of data science applications, but lacks specific techniques.</td>
+<td>Mentions data science but lacks clarity on how it applies to the problem.</td>
+<td>Data science connection is unclear or missing.</td>
+<td>/10</td>
+</tr>
+<tr class="even">
+<td><strong>Presentation Quality (10 pts)</strong></td>
+<td>Engaging, well-structured slides with minimal text, clear visuals, and smooth delivery.</td>
+<td>Well-structured presentation but contains too much text or lacks visuals.</td>
+<td>Presentation is somewhat disorganized, with excessive text or unclear visuals.</td>
+<td>Slides are cluttered, text-heavy, or presentation lacks coherence.</td>
+<td>/10</td>
+</tr>
+<tr class="odd">
+<td><strong>Clarity &amp; Critical Thinking (10 pts)</strong></td>
+<td>Demonstrates strong analytical skills, anticipates challenges, and proposes well-thought-out solutions.</td>
+<td>Shows good understanding but lacks deeper critical analysis.</td>
+<td>Some ideas are present but not fully developed.</td>
+<td>Lacks clear problem-solving or critical thinking.</td>
+<td>/10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Final Score:</strong> **__/50**</p>
+</section>
+<section id="peer-to-peer-evaluation-form" class="level4">
+<h4 class="anchored" data-anchor-id="peer-to-peer-evaluation-form"><strong>Peer-to-Peer Evaluation Form</strong></h4>
+<p><strong>Instructions:</strong> Rate each of your group members (excluding yourself) based on their contributions to the case study. Use the following scale:<br>
+- <strong>10 = Outstanding</strong><br>
+- <strong>8 = Good</strong><br>
+- <strong>6 = Satisfactory</strong><br>
+- <strong>4 or below = Needs Improvement</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 53%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criteria</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Score (1-10)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Contribution to Research (10 pts)</strong></td>
+<td>Helped find relevant sources, analyzed information, and provided insights.</td>
+<td>/10</td>
+</tr>
+<tr class="even">
+<td><strong>Effort &amp; Participation (10 pts)</strong></td>
+<td>Actively contributed ideas, attended meetings, and completed assigned tasks.</td>
+<td>/10</td>
+</tr>
+<tr class="odd">
+<td><strong>Teamwork &amp; Collaboration (10 pts)</strong></td>
+<td>Worked well with others, communicated effectively, and supported the team.</td>
+<td>/10</td>
+</tr>
+<tr class="even">
+<td><strong>Quality of Work (10 pts)</strong></td>
+<td>Provided high-quality inputs, whether in writing, analysis, or presentation.</td>
+<td>/10</td>
+</tr>
+<tr class="odd">
+<td><strong>Reliability &amp; Responsibility (10 pts)</strong></td>
+<td>Met deadlines, stayed committed to the project, and took ownership of tasks.</td>
+<td>/10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Score for [Member’s Name]:</strong> **__/50**</p>
+<p><span class="math display">\[\begin{equation}
+    \text{Individual Score} = (0.7 \times \text{Group Score}) + (0.3 \times \text{Individual Rating})
+\end{equation}\]</span></p>
+<p>References:</p>
+<ol type="1">
+<li><a name="1">https://argos.vu/wp-content/uploads/2016/06/2015-field-guide-to-data-science-160211215115.pdf</a></li><a name="1">
+<li>https://builtin.com/data-science/data-science-applications-examples</li>
+</a></ol><a name="1">
+</a></section><a name="1">
+</a><section id="groupings" class="level4"><a name="1">
+<h4 class="anchored" data-anchor-id="groupings"><strong>Groupings</strong></h4>
+</a><div id="69e0cad1-bfa1-4e70-9233-4bd4988fea6f" class="cell" data-execution_count="5"><a name="1">
+</a><div class="sourceCode cell-code" id="cb2"><a name="1"></a><pre class="sourceCode python code-with-copy"><a name="1"><code class="sourceCode python"><span id="cb2-1"></span></code></a><code class="sourceCode python"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> group_students(students):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    random.shuffle(students)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    groups <span class="op">=</span> {i: [] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">7</span>)}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, student <span class="kw">in</span> <span class="bu">enumerate</span>(students):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        group_num <span class="op">=</span> (i <span class="op">%</span> <span class="dv">6</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        groups[group_num].append(student)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> groups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
