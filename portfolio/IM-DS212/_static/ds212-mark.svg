@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="232" height="70" viewBox="0 0 232 70" role="img" aria-label="DS212, Python and Data Science">
-  <rect x="1" y="5" width="56" height="56" rx="15" fill="#183e51"/>
-  <path d="M24 20h-4v10l-5 3 5 3v10h4m10-26h4v10l5 3-5 3v10h-4" fill="none" stroke="#f5bf62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="70" y="34" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="750" fill="#23867d">DS212</text>
-  <text x="71" y="53" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="600" letter-spacing="1.4" fill="#788591">PYTHON / DATA SCIENCE</text>
-</svg>
