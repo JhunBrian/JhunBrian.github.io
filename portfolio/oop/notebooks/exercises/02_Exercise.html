@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Review I &amp; II — Coding Exercise &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/exercises/02_Exercise';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Python Review Part 2" href="../03_PythonReview2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Practice · Python review I &amp; II</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/exercises/02_Exercise.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Review I & II — Coding Exercise</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-student-performance-analyzer"><strong>Laboratory Exercise: Student Performance Analyzer</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario"><strong>Scenario</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-variables-and-expressions"><strong>Task 1 — Variables and Expressions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-user-input"><strong>Task 2 — User Input</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-inspect-your-data"><strong>Task 3 — Inspect Your Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-conditional-statements"><strong>Task 4 — Conditional Statements</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-convert-the-program-into-a-function"><strong>Task 5 — Convert the Program into a Function</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-process-multiple-students"><strong>Task 6 — Process Multiple Students</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-class-statistics"><strong>Task 7 — Class Statistics</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-8-input-validation"><strong>Task 8 — Input Validation</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-review-i-ii-coding-exercise">
+<h1><strong>Python Review I &amp; II — Coding Exercise</strong><a class="headerlink" href="#python-review-i-ii-coding-exercise" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objective</strong></p>
+<p>This exercise combines the two Python review weeks in the syllabus. Review I focuses on syntax, variables, data types, expressions, operators, and I/O, while Review II adds conditionals, loops, functions, and basic modules.</p>
+<section id="laboratory-exercise-student-performance-analyzer">
+<h2><strong>Laboratory Exercise: Student Performance Analyzer</strong><a class="headerlink" href="#laboratory-exercise-student-performance-analyzer" title="Link to this heading">#</a></h2>
+<section id="scenario">
+<h3><strong>Scenario</strong><a class="headerlink" href="#scenario" title="Link to this heading">#</a></h3>
+<p>You are asked to create a simple Python program that processes a student’s scores and determines their academic performance.</p>
+<p>For this exercise, a student has:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student_name</span> <span class="o">=</span> <span class="s2">"Maria Santos"</span>
+
+<span class="n">quiz_score</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="n">activity_score</span> <span class="o">=</span> <span class="mi">92</span>
+<span class="n">exam_score</span> <span class="o">=</span> <span class="mi">78</span>
+</pre></div>
+</div>
+<p>The weights are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head text-right"><p>Weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Quiz</p></td>
+<td class="text-right"><p>30%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Activity</p></td>
+<td class="text-right"><p>30%</p></td>
+</tr>
+<tr class="row-even"><td><p>Exam</p></td>
+<td class="text-right"><p>40%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A final grade of <strong>70 or higher</strong> is considered passing.</p>
+</section>
+<section id="task-1-variables-and-expressions">
+<h3><strong>Task 1 — Variables and Expressions</strong><a class="headerlink" href="#task-1-variables-and-expressions" title="Link to this heading">#</a></h3>
+<p>Create variables containing the student’s:</p>
+<ul class="simple">
+<li><p>name</p></li>
+<li><p>quiz score</p></li>
+<li><p>activity score</p></li>
+<li><p>exam score</p></li>
+</ul>
+<p>Calculate the weighted final grade using:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>final_grade = quiz × 0.30 + activity × 0.30 + exam × 0.40
+</pre></div>
+</div>
+<p>Store the result in a variable called:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">final_grade</span>
+</pre></div>
+</div>
+<p>Display:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Student: Maria Santos
+Final Grade: 83.50
+</pre></div>
+</div>
+<p>Use an <strong>f-string</strong> and format the grade to two decimal places.</p>
+</section>
+<section id="task-2-user-input">
+<h3><strong>Task 2 — User Input</strong><a class="headerlink" href="#task-2-user-input" title="Link to this heading">#</a></h3>
+<p>Replace the hard-coded values with <code class="docutils literal notranslate"><span class="pre">input()</span></code>.</p>
+<p>Example interaction:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Enter student name: Maria Santos
+Enter quiz score: 85
+Enter activity score: 92
+Enter exam score: 78
+</pre></div>
+</div>
+<p>Remember that <code class="docutils literal notranslate"><span class="pre">input()</span></code> returns a string, so the scores must be converted to an appropriate numeric type.</p>
+<p>Your program should still calculate and display the final grade.</p>
+</section>
+<section id="task-3-inspect-your-data">
+<h3><strong>Task 3 — Inspect Your Data</strong><a class="headerlink" href="#task-3-inspect-your-data" title="Link to this heading">#</a></h3>
+<p>Before continuing, use <code class="docutils literal notranslate"><span class="pre">type()</span></code> to inspect some of your variables.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">student_name</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">quiz_score</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">final_grade</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Answer in a Markdown cell:</p>
+<blockquote>
+<div><p>Why is <code class="docutils literal notranslate"><span class="pre">student_name</span></code> a different data type from the scores?</p>
+</div></blockquote>
+<blockquote>
+<div><p>Why do values entered using <code class="docutils literal notranslate"><span class="pre">input()</span></code> need to be converted before performing arithmetic?</p>
+</div></blockquote>
+<p>This completes the main concepts from <strong>Python Review I</strong>.</p>
+</section>
+<section id="task-4-conditional-statements">
+<h3><strong>Task 4 — Conditional Statements</strong><a class="headerlink" href="#task-4-conditional-statements" title="Link to this heading">#</a></h3>
+<p>Determine whether the student passed.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>final_grade &gt;= 70 → Passed
+final_grade &lt; 70  → Failed
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Student: Maria Santos
+Final Grade: 83.50
+Status: Passed
+</pre></div>
+</div>
+<p>Then add a performance classification:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Final Grade</p></th>
+<th class="head"><p>Classification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>90–100</p></td>
+<td><p>Excellent</p></td>
+</tr>
+<tr class="row-odd"><td><p>80–89.99</p></td>
+<td><p>Very Good</p></td>
+</tr>
+<tr class="row-even"><td><p>70–79.99</p></td>
+<td><p>Satisfactory</p></td>
+</tr>
+<tr class="row-odd"><td><p>Below 70</p></td>
+<td><p>Needs Improvement</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">elif</span></code>, and <code class="docutils literal notranslate"><span class="pre">else</span></code>.</p>
+</section>
+<section id="task-5-convert-the-program-into-a-function">
+<h3><strong>Task 5 — Convert the Program into a Function</strong><a class="headerlink" href="#task-5-convert-the-program-into-a-function" title="Link to this heading">#</a></h3>
+<p>Move your grade calculation into:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_grade</span><span class="p">(</span><span class="n">quiz</span><span class="p">,</span> <span class="n">activity</span><span class="p">,</span> <span class="n">exam</span><span class="p">):</span>
+    <span class="c1"># your code</span>
+</pre></div>
+</div>
+<p>The function must <strong>return</strong> the calculated grade rather than print it.</p>
+<p>Your main program should therefore be able to do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">final_grade</span> <span class="o">=</span> <span class="n">calculate_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">final_grade</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then create another function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">determine_status</span><span class="p">(</span><span class="n">final_grade</span><span class="p">):</span>
+    <span class="c1"># your code</span>
+</pre></div>
+</div>
+<p>It should return either:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Passed
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Failed
+</pre></div>
+</div>
+</section>
+<section id="task-6-process-multiple-students">
+<h3><strong>Task 6 — Process Multiple Students</strong><a class="headerlink" href="#task-6-process-multiple-students" title="Link to this heading">#</a></h3>
+<p>You are now given multiple students:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">88</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Ben"</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Carlo"</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Diana"</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">73</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Ella"</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">58</span><span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Each inner list follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[name, quiz, activity, exam]
+</pre></div>
+</div>
+<p>Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to process every student.</p>
+<p>Your existing function should be reused:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_grade</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do <strong>not</strong> manually calculate the grade separately for every student.</p>
+<p>Expected output should resemble:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Ana       87.70   Passed
+Ben       64.50   Failed
+Carlo     92.30   Passed
+Diana     72.70   Passed
+Ella      57.70   Failed
+</pre></div>
+</div>
+</section>
+<section id="task-7-class-statistics">
+<h3><strong>Task 7 — Class Statistics</strong><a class="headerlink" href="#task-7-class-statistics" title="Link to this heading">#</a></h3>
+<p>Using a loop, determine:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Number of students: 5
+Passed: 3
+Failed: 2
+Class Average: _____
+</pre></div>
+</div>
+<p>Do not hard-code these answers.</p>
+<p>Your program must calculate them from <code class="docutils literal notranslate"><span class="pre">students</span></code>.</p>
+<p>Then determine the <strong>highest final grade</strong> in the class.</p>
+</section>
+<section id="task-8-input-validation">
+<h3><strong>Task 8 — Input Validation</strong><a class="headerlink" href="#task-8-input-validation" title="Link to this heading">#</a></h3>
+<p>Modify the program so that a score outside the valid range is rejected.</p>
+<p>Valid scores are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>0 &lt;= score &lt;= 100
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Enter quiz score: 125
+Invalid score. Enter a value from 0 to 100.
+
+Enter quiz score: -20
+Invalid score. Enter a value from 0 to 100.
+
+Enter quiz score: 85
+</pre></div>
+</div>
+<p>Use a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop so that the program keeps asking until a valid score is entered.</p>
+<p>Create:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_valid_score</span><span class="p">(</span><span class="n">label</span><span class="p">):</span>
+    <span class="c1"># your code</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">quiz</span> <span class="o">=</span> <span class="n">get_valid_score</span><span class="p">(</span><span class="s2">"Quiz"</span><span class="p">)</span>
+<span class="n">activity</span> <span class="o">=</span> <span class="n">get_valid_score</span><span class="p">(</span><span class="s2">"Activity"</span><span class="p">)</span>
+<span class="n">exam</span> <span class="o">=</span> <span class="n">get_valid_score</span><span class="p">(</span><span class="s2">"Exam"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03_PythonReview2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Python Review Part 2</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-student-performance-analyzer"><strong>Laboratory Exercise: Student Performance Analyzer</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario"><strong>Scenario</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-variables-and-expressions"><strong>Task 1 — Variables and Expressions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-user-input"><strong>Task 2 — User Input</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-inspect-your-data"><strong>Task 3 — Inspect Your Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-conditional-statements"><strong>Task 4 — Conditional Statements</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-convert-the-program-into-a-function"><strong>Task 5 — Convert the Program into a Function</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-process-multiple-students"><strong>Task 6 — Process Multiple Students</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-class-statistics"><strong>Task 7 — Class Statistics</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-8-input-validation"><strong>Task 8 — Input Validation</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
