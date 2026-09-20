@@ -1,0 +1,1650 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Visualizing OOP &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/05_ClassDiagram';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise" href="exercises/04_Exercise.html" />
+    <link rel="prev" title="Objects and Classes" href="04_ObjectsAndClasses.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_ObjectsAndClasses.html">Objects and classes I · Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/05_ClassDiagram.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Visualizing OOP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-objects-to-classes"><strong>From Objects to Classes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-uml-class"><strong>Anatomy of a UML Class</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-name"><strong>Class Name</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods"><strong>Methods</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes-and-methods-in-uml"><strong>Attributes and Methods in UML</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visibility"><strong>Visibility</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-classes"><strong>Relationships Between Classes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#association-uses-knows-about"><strong>Association — “uses / knows about”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicity"><strong>Multiplicity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-is-a"><strong>Inheritance — “is-a”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-has-a"><strong>Composition — “has-a”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-vs-composition"><strong>Aggregation vs. Composition</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation"><strong>Aggregation</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition"><strong>Composition</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-temporarily-uses"><strong>Dependency — “temporarily uses”</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-complete-class-diagram"><strong>Reading a Complete Class Diagram</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-diagrams-before-coding"><strong>Class Diagrams Before Coding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-designing-a-data-science-application"><strong>Example: Designing a Data Science Application</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements"><strong>Requirements</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-diagrams-are-models-not-code"><strong>Class Diagrams Are Models, Not Code</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-design-mistakes"><strong>Common Design Mistakes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-1-treating-every-noun-as-a-class"><strong>Mistake 1: Treating every noun as a class</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-2-confusing-is-a-and-has-a"><strong>Mistake 2: Confusing “is-a” and “has-a”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-3-creating-one-giant-class"><strong>Mistake 3: Creating one giant class</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="visualizing-oop">
+<h1><strong>Visualizing OOP</strong><a class="headerlink" href="#visualizing-oop" title="Link to this heading">#</a></h1>
+<p><strong>DS212 — Object-Oriented Programming</strong></p>
+<p><strong>Week 6:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Define classes, instantiate objects, and use constructors, attributes, methods, and standard libraries.</p>
+<p>A <strong>class diagram</strong> is a visual representation of the structure of an object-oriented system. It shows the classes that make up a program, the data and behaviors contained in those classes, and the relationships among them.</p>
+<p>For this course, class diagrams are especially useful because the syllabus expects students to work with <strong>classes and objects, abstraction, encapsulation, inheritance, polymorphism, and composition</strong>. Later, during project planning, students are explicitly expected to perform <strong>class-responsibility modeling and UML</strong> before implementing their OOP project.</p>
+<p>A class diagram therefore acts as a <strong>bridge between an idea and its Python implementation</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Real-world problem
+       ↓
+Identify objects
+       ↓
+Identify classes
+       ↓
+Define responsibilities
+       ↓
+Define relationships
+       ↓
+Draw class diagram
+       ↓
+Implement Python classes
+</pre></div>
+</div>
+<section id="from-objects-to-classes">
+<h2><strong>From Objects to Classes</strong><a class="headerlink" href="#from-objects-to-classes" title="Link to this heading">#</a></h2>
+<p>Suppose we are developing a university enrollment system.</p>
+<p>In the real world, we might encounter:</p>
+<ul class="simple">
+<li><p>students,</p></li>
+<li><p>instructors,</p></li>
+<li><p>courses,</p></li>
+<li><p>departments.</p></li>
+</ul>
+<p>An individual student such as <code class="docutils literal notranslate"><span class="pre">&quot;Ana</span> <span class="pre">Cruz&quot;</span></code> is an <strong>object</strong>. The general description of what every student should contain and what every student can do is represented by a <strong>class</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> enrolled in </span><span class="si">{</span><span class="n">course</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can create an object from the class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ana Cruz"</span><span class="p">,</span> <span class="s2">"2026-001"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Conceptually:</p>
+<pre  class="mermaid">
+        flowchart LR
+    A[&quot;Student Class&lt;br/&gt;Blueprint&quot;] --&gt;|instantiate| B[&quot;student1&lt;br/&gt;Ana Cruz&quot;]
+    A --&gt;|instantiate| C[&quot;student2&lt;br/&gt;Juan Santos&quot;]
+    A --&gt;|instantiate| D[&quot;student3&lt;br/&gt;Maria Reyes&quot;]
+    </pre><p>A <strong>class diagram describes the blueprint</strong>, rather than listing every object created from it.</p>
+</section>
+<section id="anatomy-of-a-uml-class">
+<h2><strong>Anatomy of a UML Class</strong><a class="headerlink" href="#anatomy-of-a-uml-class" title="Link to this heading">#</a></h2>
+<p>In the <strong>Unified Modeling Language (UML)</strong>, a class is normally represented as a rectangle divided into three sections:</p>
+<pre  class="mermaid">
+        classDiagram
+class Student {
+    +String name
+    +String student_id
+    +enroll(course)
+    +display_info()
+}
+    </pre><p>The three conceptual sections are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────┐
+│          Student           │  ← Class name
+├────────────────────────────┤
+│ + name: String             │  ← Attributes
+│ + student_id: String       │
+├────────────────────────────┤
+│ + enroll(course)           │  ← Methods
+│ + display_info()           │
+└────────────────────────────┘
+</pre></div>
+</div>
+<section id="class-name">
+<h3><strong>Class Name</strong><a class="headerlink" href="#class-name" title="Link to this heading">#</a></h3>
+<p>The first section contains the name of the class.</p>
+<p>Examples include <code class="docutils literal notranslate"><span class="pre">Student</span></code>, <code class="docutils literal notranslate"><span class="pre">Course</span></code>, <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>, <code class="docutils literal notranslate"><span class="pre">BankAccount</span></code>, and <code class="docutils literal notranslate"><span class="pre">DataProcessor</span></code>.</p>
+<p>Class names normally describe a <strong>type of thing or concept</strong>, which is why nouns are commonly used.</p>
+</section>
+<section id="attributes">
+<h3><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Link to this heading">#</a></h3>
+<p>Attributes describe the <strong>state or information maintained by an object</strong>.</p>
+<p>For a <code class="docutils literal notranslate"><span class="pre">Student</span></code>, these might include:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>name
+student_id
+year_level
+</pre></div>
+</div>
+<p>In Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">year_level</span> <span class="o">=</span> <span class="n">year_level</span>
+</pre></div>
+</div>
+</section>
+<section id="methods">
+<h3><strong>Methods</strong><a class="headerlink" href="#methods" title="Link to this heading">#</a></h3>
+<p>Methods describe the <strong>behavior or responsibilities</strong> of objects belonging to the class.</p>
+<p>For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>enroll()
+drop_course()
+display_info()
+</pre></div>
+</div>
+<p>In Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">enroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">drop_course</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Thus, a useful way to remember a class diagram is:</p>
+<blockquote>
+<div><p><strong>Class = Identity + State + Behavior</strong></p>
+</div></blockquote>
+</section>
+</section>
+<section id="attributes-and-methods-in-uml">
+<h2><strong>Attributes and Methods in UML</strong><a class="headerlink" href="#attributes-and-methods-in-uml" title="Link to this heading">#</a></h2>
+<p>UML commonly writes attributes using:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>visibility attribute_name : data_type
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+ name : String
++ age : int
+- balance : float
+</pre></div>
+</div>
+<p>Methods can be written as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>visibility method_name(parameters) : return_type
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+ deposit(amount: float) : void
++ get_balance() : float
+</pre></div>
+</div>
+<p>Consider this diagram:</p>
+<pre  class="mermaid">
+        classDiagram
+class BankAccount {
+    -String account_number
+    -float balance
+    +deposit(amount)
+    +withdraw(amount)
+    +get_balance()
+}
+    </pre><p>A corresponding Python implementation could be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
+</pre></div>
+</div>
+<p>Notice that a class diagram does <strong>not</strong> attempt to reproduce the entire Python program. It communicates the <strong>design and structure</strong> of the class.</p>
+</section>
+<section id="visibility">
+<h2><strong>Visibility</strong><a class="headerlink" href="#visibility" title="Link to this heading">#</a></h2>
+<p>UML uses symbols to describe the intended accessibility of members.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Visibility</p></th>
+<th class="head"><p>General meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Public</p></td>
+<td><p>Accessible outside the class</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Private</p></td>
+<td><p>Intended for use inside the class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#</span></code></p></td>
+<td><p>Protected</p></td>
+<td><p>Intended for the class and subclasses</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example:</p>
+<pre  class="mermaid">
+        classDiagram
+class BankAccount {
+    -float balance
+    #String account_type
+    +deposit(amount)
+    +withdraw(amount)
+}
+    </pre><p>Python does not enforce access modifiers in exactly the same manner as languages such as Java or C++. Instead, Python commonly uses naming conventions and properties.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">balance</span>
+</pre></div>
+</div>
+<p>This connects class diagrams naturally with <strong>encapsulation and information hiding</strong>, which are explicit topics in the course syllabus.</p>
+</section>
+<section id="relationships-between-classes">
+<h2><strong>Relationships Between Classes</strong><a class="headerlink" href="#relationships-between-classes" title="Link to this heading">#</a></h2>
+<p>The real power of class diagrams becomes apparent when several classes interact.</p>
+<p>Consider a simple university system:</p>
+<pre  class="mermaid">
+        classDiagram
+class Student {
+    +String name
+    +String student_id
+    +enroll()
+}
+
+class Course {
+    +String code
+    +String title
+    +add_student()
+}
+    </pre><p>Knowing the individual classes is useful, but an important question remains:</p>
+<blockquote>
+<div><p><strong>How are <code class="docutils literal notranslate"><span class="pre">Student</span></code> and <code class="docutils literal notranslate"><span class="pre">Course</span></code> related?</strong></p>
+</div></blockquote>
+<p>Class diagrams allow us to represent these relationships explicitly.</p>
+<p>Some of the most important relationships in OOP are:</p>
+<ul class="simple">
+<li><p>association,</p></li>
+<li><p>inheritance,</p></li>
+<li><p>aggregation,</p></li>
+<li><p>composition,</p></li>
+<li><p>dependency.</p></li>
+</ul>
+<section id="association-uses-knows-about">
+<h3><strong>Association — “uses / knows about”</strong><a class="headerlink" href="#association-uses-knows-about" title="Link to this heading">#</a></h3>
+<p>An <strong>association</strong> indicates that objects from two classes are related to or interact with one another.</p>
+<p>For example:</p>
+<blockquote>
+<div><p>A student enrolls in a course.</p>
+</div></blockquote>
+<pre  class="mermaid">
+        classDiagram
+Student --&gt; Course : enrolls in
+
+class Student {
+    +String name
+    +enroll(course)
+}
+
+class Course {
+    +String code
+    +String title
+}
+    </pre><p>In Python, the relationship could appear as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">courses</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">courses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Student</span></code> object now knows about <code class="docutils literal notranslate"><span class="pre">Course</span></code> objects.</p>
+</section>
+<section id="multiplicity">
+<h3><strong>Multiplicity</strong><a class="headerlink" href="#multiplicity" title="Link to this heading">#</a></h3>
+<p>Sometimes the number of participating objects matters.</p>
+<p>Suppose:</p>
+<ul class="simple">
+<li><p>one course may contain many students;</p></li>
+<li><p>one student may enroll in many courses.</p></li>
+</ul>
+<p>We can express this with <strong>multiplicity</strong>.</p>
+<pre  class="mermaid">
+        classDiagram
+Student &quot;0..*&quot; -- &quot;0..*&quot; Course : enrolls in
+    </pre><p>Common multiplicities include:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Notation</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Exactly one</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0..1</span></code></p></td>
+<td><p>Zero or one</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Many</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0..*</span></code></p></td>
+<td><p>Zero or many</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1..*</span></code></p></td>
+<td><p>One or many</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Multiplicity forces us to think more carefully about our data model.</p>
+<p>For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Student 1 -------- 1 IDCard
+</pre></div>
+</div>
+<p>is fundamentally different from:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Student * -------- * Course
+</pre></div>
+</div>
+</section>
+<section id="inheritance-is-a">
+<h3><strong>Inheritance — “is-a”</strong><a class="headerlink" href="#inheritance-is-a" title="Link to this heading">#</a></h3>
+<p>Inheritance represents an <strong>is-a relationship</strong>.</p>
+<p>Consider:</p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">Student</span></code> is a <code class="docutils literal notranslate"><span class="pre">Person</span></code>.
+An <code class="docutils literal notranslate"><span class="pre">Instructor</span></code> is a <code class="docutils literal notranslate"><span class="pre">Person</span></code>.</p>
+</div></blockquote>
+<p>The diagram becomes:</p>
+<pre  class="mermaid">
+        classDiagram
+Person &lt;|-- Student
+Person &lt;|-- Instructor
+
+class Person {
+    +String name
+    +String email
+    +display_info()
+}
+
+class Student {
+    +String student_id
+    +enroll()
+}
+
+class Instructor {
+    +String employee_id
+    +teach()
+}
+    </pre><p>In Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Instructor</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">employee_id</span>
+</pre></div>
+</div>
+<p>The arrow points toward the <strong>parent/base class</strong>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>           Person
+          /      \
+         /        \
+    Student     Instructor
+</pre></div>
+</div>
+<p>This representation becomes particularly useful when designing inheritance hierarchies before writing them in Python. The course specifically covers base and derived classes, method overriding, <code class="docutils literal notranslate"><span class="pre">super()</span></code>, multiple inheritance, and inheritance design considerations.</p>
+</section>
+<section id="composition-has-a">
+<h3><strong>Composition — “has-a”</strong><a class="headerlink" href="#composition-has-a" title="Link to this heading">#</a></h3>
+<p>Not every relationship should be represented through inheritance.</p>
+<p>Consider a <code class="docutils literal notranslate"><span class="pre">Car</span></code> and an <code class="docutils literal notranslate"><span class="pre">Engine</span></code>.</p>
+<p>A car is <strong>not</strong> an engine.</p>
+<p>Instead:</p>
+<blockquote>
+<div><p>A car <strong>has an</strong> engine.</p>
+</div></blockquote>
+<p>This is a <strong>has-a relationship</strong>, which can be modeled using composition.</p>
+<pre  class="mermaid">
+        classDiagram
+Car *-- Engine
+
+class Car {
+    -Engine engine
+    +start()
+}
+
+class Engine {
+    +start()
+    +stop()
+}
+    </pre><p>A possible implementation is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Engine</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Engine started"</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Car</span></code> is built using another object.</p>
+<p>This leads to an important design question:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Is X a Y?  → Consider inheritance
+
+Does X have/use a Y? → Consider composition/association
+</pre></div>
+</div>
+<p>The distinction is important because the syllabus specifically asks students to examine <strong>composition versus inheritance</strong> when studying polymorphism and flexible OOP designs.</p>
+</section>
+<section id="aggregation-vs-composition">
+<h3><strong>Aggregation vs. Composition</strong><a class="headerlink" href="#aggregation-vs-composition" title="Link to this heading">#</a></h3>
+<p>Aggregation and composition both represent <strong>whole–part relationships</strong>, but they differ in ownership.</p>
+<section id="aggregation">
+<h4><strong>Aggregation</strong><a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h4>
+<p>Aggregation is a weaker relationship.</p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">Department</span></code> has <code class="docutils literal notranslate"><span class="pre">Instructor</span></code>s, but an instructor can exist independently of a particular department.</p>
+</div></blockquote>
+<pre  class="mermaid">
+        classDiagram
+Department o-- Instructor : has
+
+class Department {
+    +String name
+}
+
+class Instructor {
+    +String name
+}
+    </pre><p>The hollow diamond represents aggregation.</p>
+</section>
+<section id="composition">
+<h4><strong>Composition</strong><a class="headerlink" href="#composition" title="Link to this heading">#</a></h4>
+<p>Composition represents stronger ownership.</p>
+<p>For example, imagine an application where a <code class="docutils literal notranslate"><span class="pre">Survey</span></code> creates and owns its <code class="docutils literal notranslate"><span class="pre">Question</span></code> objects:</p>
+<pre  class="mermaid">
+        classDiagram
+Survey *-- Question : contains
+
+class Survey {
+    +String title
+    +add_question()
+}
+
+class Question {
+    +String text
+}
+    </pre><p>The filled diamond represents composition.</p>
+<p>Conceptually:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Association
+    ↓
+objects are related
+
+Aggregation
+    ↓
+weak whole–part relationship
+
+Composition
+    ↓
+strong whole–part ownership
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dependency-temporarily-uses">
+<h3><strong>Dependency — “temporarily uses”</strong><a class="headerlink" href="#dependency-temporarily-uses" title="Link to this heading">#</a></h3>
+<p>A <strong>dependency</strong> means that one class temporarily relies on another without necessarily storing it as part of its permanent state.</p>
+<p>For example, suppose <code class="docutils literal notranslate"><span class="pre">ReportGenerator</span></code> receives a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> only when generating a report:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ReportGenerator</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Generating report..."</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This can be represented as:</p>
+<pre  class="mermaid">
+        classDiagram
+ReportGenerator ..&gt; Dataset : uses
+
+class ReportGenerator {
+    +generate(dataset)
+}
+
+class Dataset {
+    +load()
+    +clean()
+}
+    </pre><p>The dashed arrow communicates that <code class="docutils literal notranslate"><span class="pre">ReportGenerator</span></code> <strong>depends on</strong> <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.</p>
+</section>
+</section>
+<section id="reading-a-complete-class-diagram">
+<h2><strong>Reading a Complete Class Diagram</strong><a class="headerlink" href="#reading-a-complete-class-diagram" title="Link to this heading">#</a></h2>
+<p>Consider a simplified learning-management system:</p>
+<pre  class="mermaid">
+        classDiagram
+Person &lt;|-- Student
+Person &lt;|-- Instructor
+
+Course &quot;0..*&quot; -- &quot;0..*&quot; Student : enrolls
+Instructor &quot;1&quot; -- &quot;0..*&quot; Course : teaches
+Course *-- Assignment : contains
+
+class Person {
+    +String name
+    +String email
+    +display_info()
+}
+
+class Student {
+    +String student_id
+    +enroll(course)
+    +submit(assignment)
+}
+
+class Instructor {
+    +String employee_id
+    +create_assignment()
+}
+
+class Course {
+    +String code
+    +String title
+    +add_student()
+}
+
+class Assignment {
+    +String title
+    +Date deadline
+    +submit()
+}
+    </pre><p>Instead of seeing this as a collection of boxes and arrows, read it as a description of the system:</p>
+<p><strong>Inheritance:</strong> <code class="docutils literal notranslate"><span class="pre">Student</span></code> and <code class="docutils literal notranslate"><span class="pre">Instructor</span></code> are specialized forms of <code class="docutils literal notranslate"><span class="pre">Person</span></code>.</p>
+<p><strong>Association:</strong> students enroll in courses, while instructors teach courses.</p>
+<p><strong>Multiplicity:</strong> multiple students can participate in multiple courses.</p>
+<p><strong>Composition:</strong> a course contains assignments in this particular design.</p>
+<p>The diagram therefore communicates considerably more information than a simple list of classes.</p>
+</section>
+<section id="class-diagrams-before-coding">
+<h2><strong>Class Diagrams Before Coding</strong><a class="headerlink" href="#class-diagrams-before-coding" title="Link to this heading">#</a></h2>
+<p>A common mistake is to immediately begin writing classes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>without first deciding what each class is responsible for.</p>
+<p>For small exercises this may work. For larger applications, it can result in classes with unclear responsibilities and unnecessary dependencies.</p>
+<p>A better workflow is:</p>
+<pre  class="mermaid">
+        flowchart LR
+    A[&quot;Problem&quot;] --&gt; B[&quot;Requirements&quot;]
+    B --&gt; C[&quot;Identify Objects&quot;]
+    C --&gt; D[&quot;Identify Classes&quot;]
+    D --&gt; E[&quot;Assign Responsibilities&quot;]
+    E --&gt; F[&quot;Define Relationships&quot;]
+    F --&gt; G[&quot;Class Diagram&quot;]
+    G --&gt; H[&quot;Python Implementation&quot;]
+    H --&gt; I[&quot;Test &amp; Refine&quot;]
+    </pre><p>This aligns particularly well with the final project portion of DS212. The syllabus progresses from <strong>problem definition and requirements</strong> to <strong>class-responsibility modeling and UML</strong>, then to project structure, implementation, class collaboration, exception handling, testing, debugging, and version control.</p>
+</section>
+<section id="example-designing-a-data-science-application">
+<h2><strong>Example: Designing a Data Science Application</strong><a class="headerlink" href="#example-designing-a-data-science-application" title="Link to this heading">#</a></h2>
+<p>Because DS212 is an OOP course for Data Science students, consider a small dataset-processing application.</p>
+<section id="requirements">
+<h3><strong>Requirements</strong><a class="headerlink" href="#requirements" title="Link to this heading">#</a></h3>
+<p>The application should:</p>
+<ol class="arabic simple">
+<li><p>load a dataset;</p></li>
+<li><p>clean the dataset;</p></li>
+<li><p>analyze it;</p></li>
+<li><p>generate a report.</p></li>
+</ol>
+<p>We could identify the following responsibilities:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Dataset
+    stores and loads data
+
+DataCleaner
+    performs cleaning operations
+
+Analyzer
+    performs analysis
+
+Report
+    represents analysis results
+</pre></div>
+</div>
+<p>A preliminary design might be:</p>
+<pre  class="mermaid">
+        classDiagram
+Dataset --&gt; DataCleaner : processed by
+Analyzer --&gt; Dataset : analyzes
+Analyzer --&gt; Report : creates
+
+class Dataset {
+    -String filepath
+    -data
+    +load()
+    +get_data()
+}
+
+class DataCleaner {
+    +remove_missing()
+    +remove_duplicates()
+}
+
+class Analyzer {
+    +calculate_summary()
+    +analyze(dataset)
+}
+
+class Report {
+    -results
+    +display()
+    +save()
+}
+    </pre><p>Notice that we have not written the implementation yet.</p>
+<p>The diagram allows us to ask important questions first:</p>
+<ul class="simple">
+<li><p>Should <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> clean itself?</p></li>
+<li><p>Should cleaning be handled by <code class="docutils literal notranslate"><span class="pre">DataCleaner</span></code>?</p></li>
+<li><p>Should <code class="docutils literal notranslate"><span class="pre">Analyzer</span></code> create the report?</p></li>
+<li><p>Should <code class="docutils literal notranslate"><span class="pre">Report</span></code> know about the original dataset?</p></li>
+<li><p>Which attributes should be hidden?</p></li>
+<li><p>Which objects should own other objects?</p></li>
+</ul>
+<p>These are <strong>design questions</strong>, not merely syntax questions.</p>
+</section>
+</section>
+<section id="class-diagrams-are-models-not-code">
+<h2><strong>Class Diagrams Are Models, Not Code</strong><a class="headerlink" href="#class-diagrams-are-models-not-code" title="Link to this heading">#</a></h2>
+<p>A class diagram should not be treated as a perfect translation of source code.</p>
+<p>Its purpose is to <strong>communicate a design</strong>.</p>
+<p>Therefore, you do not necessarily need to include every:</p>
+<ul class="simple">
+<li><p>variable,</p></li>
+<li><p>helper method,</p></li>
+<li><p>implementation detail,</p></li>
+<li><p>temporary value,</p></li>
+<li><p>imported function.</p></li>
+</ul>
+<p>Suppose a class contains fifteen internal helper methods. A high-level design diagram might show only the four methods important to understanding how the system works.</p>
+<p>The appropriate amount of detail depends on the purpose of the diagram.</p>
+<blockquote>
+<div><p><strong>A useful class diagram communicates the important structure of the system without becoming a graphical copy of the source code.</strong></p>
+</div></blockquote>
+<p>This becomes particularly relevant to the course project because the syllabus assesses whether class responsibilities and relationships are organized and understandable, and whether the resulting application is maintainable and reproducible.</p>
+</section>
+<section id="common-design-mistakes">
+<h2><strong>Common Design Mistakes</strong><a class="headerlink" href="#common-design-mistakes" title="Link to this heading">#</a></h2>
+<section id="mistake-1-treating-every-noun-as-a-class">
+<h3><strong>Mistake 1: Treating every noun as a class</strong><a class="headerlink" href="#mistake-1-treating-every-noun-as-a-class" title="Link to this heading">#</a></h3>
+<p>Finding nouns in requirements is a useful starting technique, but not every noun deserves its own class.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>"The student enters a name."
+
+Possible concepts:
+Student
+Name
+</pre></div>
+</div>
+<p>Usually, <code class="docutils literal notranslate"><span class="pre">Student</span></code> should be a class while <code class="docutils literal notranslate"><span class="pre">name</span></code> should simply be an attribute.</p>
+<pre  class="mermaid">
+        classDiagram
+class Student {
+    +String name
+}
+    </pre></section>
+<section id="mistake-2-confusing-is-a-and-has-a">
+<h3><strong>Mistake 2: Confusing “is-a” and “has-a”</strong><a class="headerlink" href="#mistake-2-confusing-is-a-and-has-a" title="Link to this heading">#</a></h3>
+<p>This would be questionable:</p>
+<pre  class="mermaid">
+        classDiagram
+Engine &lt;|-- Car
+    </pre><p>because it means:</p>
+<blockquote>
+<div><p>Car <strong>is an</strong> Engine.</p>
+</div></blockquote>
+<p>Instead:</p>
+<pre  class="mermaid">
+        classDiagram
+Car *-- Engine
+    </pre><p>which expresses:</p>
+<blockquote>
+<div><p>Car <strong>has an</strong> Engine.</p>
+</div></blockquote>
+</section>
+<section id="mistake-3-creating-one-giant-class">
+<h3><strong>Mistake 3: Creating one giant class</strong><a class="headerlink" href="#mistake-3-creating-one-giant-class" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UniversitySystem
+ ├── students
+ ├── courses
+ ├── instructors
+ ├── enrollment
+ ├── grades
+ ├── reports
+ ├── authentication
+ └── everything else
+</pre></div>
+</div>
+<p>OOP encourages assigning <strong>cohesive responsibilities</strong> to appropriate classes.</p>
+<p>A better design might distribute them:</p>
+<pre  class="mermaid">
+        classDiagram
+UniversitySystem --&gt; Student
+UniversitySystem --&gt; Course
+UniversitySystem --&gt; Enrollment
+Course --&gt; Instructor
+Enrollment --&gt; Student
+Enrollment --&gt; Course
+    </pre></section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_ObjectsAndClasses.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Objects and Classes</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/04_Exercise.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Exercise</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-objects-to-classes"><strong>From Objects to Classes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-uml-class"><strong>Anatomy of a UML Class</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-name"><strong>Class Name</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods"><strong>Methods</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes-and-methods-in-uml"><strong>Attributes and Methods in UML</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visibility"><strong>Visibility</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-classes"><strong>Relationships Between Classes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#association-uses-knows-about"><strong>Association — “uses / knows about”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicity"><strong>Multiplicity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-is-a"><strong>Inheritance — “is-a”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-has-a"><strong>Composition — “has-a”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-vs-composition"><strong>Aggregation vs. Composition</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation"><strong>Aggregation</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition"><strong>Composition</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-temporarily-uses"><strong>Dependency — “temporarily uses”</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-complete-class-diagram"><strong>Reading a Complete Class Diagram</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-diagrams-before-coding"><strong>Class Diagrams Before Coding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-designing-a-data-science-application"><strong>Example: Designing a Data Science Application</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements"><strong>Requirements</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-diagrams-are-models-not-code"><strong>Class Diagrams Are Models, Not Code</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-design-mistakes"><strong>Common Design Mistakes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-1-treating-every-noun-as-a-class"><strong>Mistake 1: Treating every noun as a class</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-2-confusing-is-a-and-has-a"><strong>Mistake 2: Confusing “is-a” and “has-a”</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-3-creating-one-giant-class"><strong>Mistake 3: Creating one giant class</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

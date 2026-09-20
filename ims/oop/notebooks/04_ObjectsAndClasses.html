@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/ds212.css?v=e9cb5814" />
@@ -62,6 +62,7 @@
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Visualizing OOP" href="05_ClassDiagram.html" />
     <link rel="prev" title="Python Review I &amp; II — Coding Exercise" href="exercises/02_Exercise.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -208,7 +209,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Objects and classes I · Introduction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Objects and classes I · Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
 </ul>
 </details></li>
 </ul>
@@ -364,6 +367,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-built-in-classes-data-types"><strong>Python Built-in Classes (Data Types)</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors"><strong>Constructors</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-creation-and-initialization"><strong>Object Creation and Initialization</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-init-method"><strong>The <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> Method</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-self"><strong>Understanding <code class="docutils literal notranslate"><span class="pre">self</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-constructors"><strong>Default Constructors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameterized-constructors"><strong>Parameterized Constructors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors-with-default-parameter-values"><strong>Constructors with Default Parameter Values</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-constructors-are-important"><strong>Why Constructors Are Important</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -393,20 +406,10 @@ document.write(`
 <p>In Python, objects and classes are fundamental concepts of object-oriented programming (OOP), which allows developers to structure their code in a modular, reusable, and scalable way. <strong>A class serves as a blueprint for creating objects, encapsulating data (attributes) and behaviors (methods) associated with a specific entity. An object, on the other hand, is an instance of a class, containing its own unique data while sharing the class’s structure and behavior.</strong></p>
 <section id="the-house-analogy">
 <h3><strong>The House Analogy</strong><a class="headerlink" href="#the-house-analogy" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p></p></th>
-<th class="head text-center"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p><img alt="Image 1" src="https://java-programming.mooc.fi/static/3e3cb88f5c67f695e09cb1f2a87ea64a/47e4b/rintamamiestalo-rakennuspiirrustus.webp" /></p></td>
-<td class="text-center"><p><img alt="Image 2" src="https://java-programming.mooc.fi/static/9203de59c88f6e5453d577ea2dda7ac2/4b190/rintamamiestalo.jpg" /></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ol class="arabic simple">
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="https://java-programming.mooc.fi/static/3e3cb88f5c67f695e09cb1f2a87ea64a/47e4b/rintamamiestalo-rakennuspiirrustus.webp" alt="Image 1" style="width: 350px; height: auto;">
+    <img src="https://java-programming.mooc.fi/static/9203de59c88f6e5453d577ea2dda7ac2/4b190/rintamamiestalo.jpg" alt="Image 2" style="width: 350px; height: auto;">
+</div><ol class="arabic simple">
 <li><p><strong>The Blueprint (Class)</strong> – This represents the class because it defines the structure of the house. It specifies the number of rooms, dimensions, and layout, but it doesn’t decide the exact materials, colors, or furniture.</p></li>
 <li><p><strong>The Realized House (Object)</strong> – This is an object created from the blueprint. It follows the defined structure (same number of rooms and dimensions), but specific details like wall colors, flooring material, and decorations can vary.</p></li>
 </ol>
@@ -517,8 +520,7 @@ True
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> is crying because they are born to be wild'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> is crying.'</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">somn</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is eating </span><span class="si">{</span><span class="n">somn</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -528,15 +530,6 @@ True
 
     <span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">where</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is walking towards </span><span class="si">{</span><span class="n">where</span><span class="si">}</span><span class="s2"> direction"</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">backflip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'Eve'</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'ayaw'</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> backflipped'</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_dead</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead</span>
 </pre></div>
 </div>
 </div>
@@ -545,22 +538,268 @@ True
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eve</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s1">'Eve'</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s1">'Female'</span><span class="p">)</span>
 <span class="n">adam</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s1">'Adam'</span><span class="p">,</span> <span class="mi">1928</span><span class="p">,</span> <span class="s1">'Male'</span><span class="p">)</span>
-<span class="n">george</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s1">'George'</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">'Fridge'</span><span class="p">)</span>
+<span class="n">george</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s1">'George'</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">'Male'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eve is crying because they are born to be wild
-Adam is crying because they are born to be wild
-George is crying because they are born to be wild
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eve is crying.
+Adam is crying.
+George is crying.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<div class="toctree-wrapper compound">
+<section id="constructors">
+<h2><strong>Constructors</strong><a class="headerlink" href="#constructors" title="Link to this heading">#</a></h2>
+<p>When working with <strong>Object-Oriented Programming (OOP)</strong>, creating an object often involves giving that object an initial state. For example, when creating a <code class="docutils literal notranslate"><span class="pre">Student</span></code> object, we may want to immediately provide information such as the student’s name, age, and program.</p>
+<p>A <strong>constructor</strong> is associated with this initialization process. It allows an object to be prepared with the necessary attribute values when an instance of a class is created.</p>
+<p>Consider the following class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">program</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">program</span>
+</pre></div>
 </div>
+<p>An object can then be created as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Data Science"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When Python evaluates this statement, a new <code class="docutils literal notranslate"><span class="pre">Student</span></code> object is created and its attributes are initialized using the values <code class="docutils literal notranslate"><span class="pre">&quot;Ana&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;Data</span> <span class="pre">Science&quot;</span></code>.</p>
+<p>The resulting object can be thought of as containing the following state:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>student1
+├── name    → "Ana"
+└── program → "Data Science"
+</pre></div>
+</div>
+<section id="object-creation-and-initialization">
+<h3><strong>Object Creation and Initialization</strong><a class="headerlink" href="#object-creation-and-initialization" title="Link to this heading">#</a></h3>
+<p>Although <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> is commonly referred to as the <strong>constructor</strong> in introductory Python programming, Python actually separates <strong>object creation</strong> from <strong>object initialization</strong>.</p>
+<p>Two special methods are involved:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__new__()</span></code> is responsible for creating the new object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code> is responsible for initializing the object after it has been created.</p></li>
+</ul>
+<p>Conceptually, the process can be represented as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Student("Ana", "Data Science")
+        │
+        ▼
+    __new__()
+        │
+        │ creates the object
+        ▼
+   Student object
+        │
+        ▼
+    __init__()
+        │
+        │ initializes attributes
+        ▼
+ Object ready for use
+</pre></div>
+</div>
+<p>In most ordinary Python programs, programmers rarely need to modify <code class="docutils literal notranslate"><span class="pre">__new__()</span></code>. Instead, <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> is the method commonly defined when designing classes.</p>
+</section>
+<section id="the-init-method">
+<h3><strong>The <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> Method</strong><a class="headerlink" href="#the-init-method" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method is a special method that Python automatically calls after a new instance has been created. Its primary purpose is to establish the <strong>initial state of an object</strong>.</p>
+<p>The general structure is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassName</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="n">parameters</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dataset</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="n">rows</span>
+</pre></div>
+</div>
+<p>We can create several objects from this class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s2">"Titanic"</span><span class="p">,</span> <span class="mi">891</span><span class="p">)</span>
+<span class="n">dataset2</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s2">"Iris"</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Although both objects belong to the same <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> class, they maintain their own attribute values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dataset1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset1</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset2</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Titanic
+891
+Iris
+150
+</pre></div>
+</div>
+<p>Therefore, a constructor makes it possible to create objects from the same class while giving each object a different initial state.</p>
+</section>
+<section id="understanding-self">
+<h3><strong>Understanding <code class="docutils literal notranslate"><span class="pre">self</span></code></strong><a class="headerlink" href="#understanding-self" title="Link to this heading">#</a></h3>
+<p>The first parameter of <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> is normally named <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">self</span></code> represents the <strong>current instance of the class</strong> being initialized.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s2">"Titanic"</span><span class="p">,</span> <span class="mi">891</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>During the initialization of <code class="docutils literal notranslate"><span class="pre">dataset1</span></code>, <code class="docutils literal notranslate"><span class="pre">self</span></code> refers to <code class="docutils literal notranslate"><span class="pre">dataset1</span></code>. Therefore:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p>essentially means:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Store the value of `name` as an attribute belonging
+to this particular Dataset object.
+</pre></div>
+</div>
+<p>This distinction is important because constructor parameters and object attributes are not necessarily the same thing.</p>
+<p>Consider:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p>In the statement:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p>the two uses of <code class="docutils literal notranslate"><span class="pre">name</span></code> have different roles:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>self.name     =     name
+    ↑                 ↑
+attribute          parameter
+stored inside      received by
+the object         __init__()
+</pre></div>
+</div>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">name</span></code> temporarily receives a value, while <code class="docutils literal notranslate"><span class="pre">self.name</span></code> becomes part of the object’s state.</p>
+</section>
+<section id="default-constructors">
+<h3><strong>Default Constructors</strong><a class="headerlink" href="#default-constructors" title="Link to this heading">#</a></h3>
+<p>A constructor may initialize objects using predefined values rather than requiring values from the programmer.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Unnamed Model"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trained</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Creating an object requires no additional arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">trained</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Unnamed Model
+False
+</pre></div>
+</div>
+<p>Every newly created <code class="docutils literal notranslate"><span class="pre">Model</span></code> begins with the same initial state unless its attributes are changed later.</p>
+<p>A constructor of this form is often described as a <strong>default or non-parameterized constructor</strong> because no additional initialization arguments are required.</p>
+</section>
+<section id="parameterized-constructors">
+<h3><strong>Parameterized Constructors</strong><a class="headerlink" href="#parameterized-constructors" title="Link to this heading">#</a></h3>
+<p>A <strong>parameterized constructor</strong> accepts values when an object is created. These values are then used to establish the object’s initial attributes.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DataScientist</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">specialization</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">specialization</span> <span class="o">=</span> <span class="n">specialization</span>
+</pre></div>
+</div>
+<p>Objects can then be initialized differently:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds1</span> <span class="o">=</span> <span class="n">DataScientist</span><span class="p">(</span><span class="s2">"Maria"</span><span class="p">,</span> <span class="s2">"Machine Learning"</span><span class="p">)</span>
+<span class="n">ds2</span> <span class="o">=</span> <span class="n">DataScientist</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span> <span class="s2">"Data Visualization"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The objects belong to the same class but contain different data:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DataScientist
+│
+├── ds1
+│   ├── name → "Maria"
+│   └── specialization → "Machine Learning"
+│
+└── ds2
+    ├── name → "John"
+    └── specialization → "Data Visualization"
+</pre></div>
+</div>
+<p>Parameterized constructors are particularly useful because objects often represent different entities that share the same structure but contain different information.</p>
+</section>
+<section id="constructors-with-default-parameter-values">
+<h3><strong>Constructors with Default Parameter Values</strong><a class="headerlink" href="#constructors-with-default-parameter-values" title="Link to this heading">#</a></h3>
+<p>Python also allows constructor parameters to have default values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Experiment</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"Not Started"</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>We can create an object using the default value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exp1</span> <span class="o">=</span> <span class="n">Experiment</span><span class="p">(</span><span class="s2">"Image Classification"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or provide a different value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exp2</span> <span class="o">=</span> <span class="n">Experiment</span><span class="p">(</span><span class="s2">"Object Detection"</span><span class="p">,</span> <span class="s2">"Completed"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Therefore:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">exp1</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exp2</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Not Started
+Completed
+</pre></div>
+</div>
+<p>This approach makes constructors more flexible because some information can be required while other information can remain optional.</p>
+</section>
+<section id="why-constructors-are-important">
+<h3><strong>Why Constructors Are Important</strong><a class="headerlink" href="#why-constructors-are-important" title="Link to this heading">#</a></h3>
+<p>Constructors help ensure that an object begins its life in a meaningful and usable state.</p>
+<p>Without a constructor, attributes may need to be assigned manually:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+
+<span class="n">student1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Ana"</span>
+<span class="n">student1</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="s2">"Data Science"</span>
+<span class="n">student1</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Although this works, it is easy to forget an attribute:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+<span class="n">student2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Mark"</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">student2</span></code> does not have the same initialized information as <code class="docutils literal notranslate"><span class="pre">student1</span></code>.</p>
+<p>Using a constructor provides a more consistent structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">program</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">program</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+</pre></div>
+</div>
+<p>Objects must now provide the required information when they are created:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Data Science"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">student2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Mark"</span><span class="p">,</span> <span class="s2">"Data Science"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this way, constructors contribute to <strong>consistency, readability, and reliability</strong> when working with objects.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -602,6 +841,15 @@ George is crying because they are born to be wild
         <p class="prev-next-title"><strong>Python Review I &amp; II — Coding Exercise</strong></p>
       </div>
     </a>
+    <a class="right-next"
+       href="05_ClassDiagram.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Visualizing OOP</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -621,6 +869,16 @@ George is crying because they are born to be wild
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-in-python-is-an-object"><strong>“Everything” in Python is an Object</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-house-analogy"><strong>The House Analogy</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-built-in-classes-data-types"><strong>Python Built-in Classes (Data Types)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors"><strong>Constructors</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-creation-and-initialization"><strong>Object Creation and Initialization</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-init-method"><strong>The <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> Method</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-self"><strong>Understanding <code class="docutils literal notranslate"><span class="pre">self</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-constructors"><strong>Default Constructors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameterized-constructors"><strong>Parameterized Constructors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors-with-default-parameter-values"><strong>Constructors with Default Parameter Values</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-constructors-are-important"><strong>Why Constructors Are Important</strong></a></li>
 </ul>
 </li>
 </ul>
