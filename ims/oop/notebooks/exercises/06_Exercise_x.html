@@ -1,0 +1,1233 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Four Core Concepts — Coding Exercise &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/exercises/06_Exercise';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Four Core Concepts of OOP" href="../06_CoreConcepts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Exercise.html">Practice · Python review I &amp; II</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_ObjectsAndClasses.html">Objects and classes I</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../06_CoreConcepts.html">Four Core Concepts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Practice · Campus Sensor Monitor</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/exercises/06_Exercise.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Four Core Concepts — Coding Exercise</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-campus-sensor-monitor"><strong>Laboratory Exercise: Campus Sensor Monitor</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario"><strong>Scenario</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-abstraction-the-sensor-base-class"><strong>Task 1 — Abstraction: The <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> Base Class</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-encapsulation-protecting-the-readings"><strong>Task 2 — Encapsulation: Protecting the Readings</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-inheritance-concrete-sensors"><strong>Task 3 — Inheritance: Concrete Sensors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-a-shared-describe-method"><strong>Task 4 — A Shared <code class="docutils literal notranslate"><span class="pre">describe()</span></code> Method</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-method-overriding-and-super"><strong>Task 5 — Method Overriding and <code class="docutils literal notranslate"><span class="pre">super()</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-polymorphism-and-duck-typing"><strong>Task 6 — Polymorphism and Duck Typing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-composition-the-building-class"><strong>Task 7 — Composition: The <code class="docutils literal notranslate"><span class="pre">Building</span></code> Class</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-8-reflection"><strong>Task 8 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="four-core-concepts-coding-exercise">
+<h1><strong>Four Core Concepts — Coding Exercise</strong><a class="headerlink" href="#four-core-concepts-coding-exercise" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objective</strong></p>
+<p>This exercise practices the four core concepts from the lesson: <strong>abstraction</strong>, <strong>encapsulation</strong>, <strong>inheritance</strong>, and <strong>polymorphism</strong> (including composition). Each task builds on the previous one, so complete them in order and keep all your classes in the same notebook.</p>
+<section id="laboratory-exercise-campus-sensor-monitor">
+<h2><strong>Laboratory Exercise: Campus Sensor Monitor</strong><a class="headerlink" href="#laboratory-exercise-campus-sensor-monitor" title="Link to this heading">#</a></h2>
+<section id="scenario">
+<h3><strong>Scenario</strong><a class="headerlink" href="#scenario" title="Link to this heading">#</a></h3>
+<p>The university is installing sensors in campus buildings to monitor the environment. Each sensor has an <strong>ID</strong> and a <strong>location</strong>, and it stores a list of <strong>readings</strong>.</p>
+<p>There are different kinds of sensors:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sensor type</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Valid readings</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Temperature</p></td>
+<td><p>°C</p></td>
+<td><p>−40 to 60</p></td>
+</tr>
+<tr class="row-odd"><td><p>Humidity</p></td>
+<td><p>%</p></td>
+<td><p>0 to 100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You will build the classes for this system step by step. By the end, your design should look like this:</p>
+<pre  class="mermaid">
+        classDiagram
+class Sensor {
+    &lt;&lt;abstract&gt;&gt;
+    -String _sensor_id
+    -String _location
+    -list _readings
+    +sensor_id
+    +readings
+    +unit()* str
+    +is_valid(value)* bool
+    +record(value)
+    +average() float
+    +describe() str
+}
+class TemperatureSensor {
+    +unit() str
+    +is_valid(value) bool
+}
+class HumiditySensor {
+    +unit() str
+    +is_valid(value) bool
+}
+class SmartTemperatureSensor {
+    +float alert_level
+    +describe() str
+}
+class Building {
+    +String name
+    -list _sensors
+    +add_sensor(sensor)
+    +report()
+}
+Sensor &lt;|-- TemperatureSensor
+Sensor &lt;|-- HumiditySensor
+TemperatureSensor &lt;|-- SmartTemperatureSensor
+Building o-- Sensor : monitors
+    </pre></section>
+<section id="task-1-abstraction-the-sensor-base-class">
+<h3><strong>Task 1 — Abstraction: The <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> Base Class</strong><a class="headerlink" href="#task-1-abstraction-the-sensor-base-class" title="Link to this heading">#</a></h3>
+<p>Create an <strong>abstract base class</strong> named <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> using the <code class="docutils literal notranslate"><span class="pre">abc</span></code> module.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</pre></div>
+</div>
+<p>The constructor should accept:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sensor_id</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code></p></li>
+</ul>
+<p>and start with an <strong>empty list</strong> of readings.</p>
+<p>Declare two <strong>abstract methods</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unit()</span></code></p></td>
+<td><p>returns the unit of measurement as a string</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_valid(value)</span></code></p></td>
+<td><p>returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value is an acceptable reading</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then try to create a <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> object directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">Sensor</span><span class="p">(</span><span class="s2">"X-01"</span><span class="p">,</span> <span class="s2">"Lobby"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">try</span></code> / <code class="docutils literal notranslate"><span class="pre">except</span></code> to catch the error and print it.</p>
+<p>Answer in a Markdown cell:</p>
+<blockquote>
+<div><p>Why does Python refuse to create a <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> object?</p>
+</div></blockquote>
+</section>
+<section id="task-2-encapsulation-protecting-the-readings">
+<h3><strong>Task 2 — Encapsulation: Protecting the Readings</strong><a class="headerlink" href="#task-2-encapsulation-protecting-the-readings" title="Link to this heading">#</a></h3>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, store the data in <strong>protected attributes</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_sensor_id</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_location</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_readings</span>
+</pre></div>
+</div>
+<p>Add the following members to <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member</p></th>
+<th class="head"><p>Kind</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sensor_id</span></code></p></td>
+<td><p>read-only property</p></td>
+<td><p>returns the sensor’s ID</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">location</span></code></p></td>
+<td><p>read-only property</p></td>
+<td><p>returns the sensor’s location</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">readings</span></code></p></td>
+<td><p>read-only property</p></td>
+<td><p>returns the readings as a <strong>tuple</strong> (so the caller cannot modify the list)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">record(value)</span></code></p></td>
+<td><p>method</p></td>
+<td><p>adds the value <strong>only if</strong> <code class="docutils literal notranslate"><span class="pre">self.is_valid(value)</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>; otherwise raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">average()</span></code></p></td>
+<td><p>method</p></td>
+<td><p>returns the mean of the readings, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there are no readings</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The error message for an invalid reading should look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ValueError: 75 is not a valid reading for TEMP-01
+</pre></div>
+</div>
+<p>Answer in a Markdown cell:</p>
+<blockquote>
+<div><p>Why does <code class="docutils literal notranslate"><span class="pre">readings</span></code> return a <strong>tuple</strong> instead of the list itself?</p>
+</div></blockquote>
+</section>
+<section id="task-3-inheritance-concrete-sensors">
+<h3><strong>Task 3 — Inheritance: Concrete Sensors</strong><a class="headerlink" href="#task-3-inheritance-concrete-sensors" title="Link to this heading">#</a></h3>
+<p>Create two subclasses of <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TemperatureSensor</span><span class="p">(</span><span class="n">Sensor</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HumiditySensor</span><span class="p">(</span><span class="n">Sensor</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Each subclass must implement <code class="docutils literal notranslate"><span class="pre">unit()</span></code> and <code class="docutils literal notranslate"><span class="pre">is_valid(value)</span></code> using the table in the scenario.</p>
+<p>Test your classes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">TemperatureSensor</span><span class="p">(</span><span class="s2">"TEMP-01"</span><span class="p">,</span> <span class="s2">"Library"</span><span class="p">)</span>
+<span class="n">temp</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mf">28.5</span><span class="p">)</span>
+<span class="n">temp</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="n">temp</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mf">31.5</span><span class="p">)</span>
+
+<span class="n">hum</span> <span class="o">=</span> <span class="n">HumiditySensor</span><span class="p">(</span><span class="s2">"HUM-01"</span><span class="p">,</span> <span class="s2">"Library"</span><span class="p">)</span>
+<span class="n">hum</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+<span class="n">hum</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">hum</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mi">72</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">average</span><span class="p">(),</span> <span class="n">temp</span><span class="o">.</span><span class="n">unit</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hum</span><span class="o">.</span><span class="n">average</span><span class="p">(),</span> <span class="n">hum</span><span class="o">.</span><span class="n">unit</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">readings</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>30.0 °C
+69.0 %
+(28.5, 30.0, 31.5)
+</pre></div>
+</div>
+<p>Then show that validation works:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mi">75</span><span class="p">)</span>    <span class="c1"># should raise ValueError</span>
+<span class="n">hum</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>     <span class="c1"># should raise ValueError</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">try</span></code> / <code class="docutils literal notranslate"><span class="pre">except</span></code> so your notebook continues running.</p>
+</section>
+<section id="task-4-a-shared-describe-method">
+<h3><strong>Task 4 — A Shared <code class="docutils literal notranslate"><span class="pre">describe()</span></code> Method</strong><a class="headerlink" href="#task-4-a-shared-describe-method" title="Link to this heading">#</a></h3>
+<p>Add a <strong>concrete</strong> method <code class="docutils literal notranslate"><span class="pre">describe()</span></code> to the <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> base class. Because it is defined in the parent, <strong>both</strong> subclasses inherit it automatically.</p>
+<p>It should return a string in this format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TEMP-01 @ Library: avg 30.00 °C (3 readings)
+HUM-01 @ Library: avg 69.00 % (3 readings)
+</pre></div>
+</div>
+<p>If the sensor has no readings yet, it should return:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TEMP-03 @ Canteen: no readings yet
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">describe()</span></code> calls <code class="docutils literal notranslate"><span class="pre">self.unit()</span></code>, which is different for each subclass — this is your first taste of polymorphism.</p>
+</section>
+<section id="task-5-method-overriding-and-super">
+<h3><strong>Task 5 — Method Overriding and <code class="docutils literal notranslate"><span class="pre">super()</span></code></strong><a class="headerlink" href="#task-5-method-overriding-and-super" title="Link to this heading">#</a></h3>
+<p>The server room needs a temperature sensor that raises an alert when the average temperature is too high.</p>
+<p>Create:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SmartTemperatureSensor</span><span class="p">(</span><span class="n">TemperatureSensor</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">alert_level</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Requirements:</p>
+<ol class="arabic simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">super().__init__(...)</span></code> to reuse the parent constructor.</p></li>
+<li><p>Store <code class="docutils literal notranslate"><span class="pre">alert_level</span></code> as an attribute.</p></li>
+<li><p><strong>Override</strong> <code class="docutils literal notranslate"><span class="pre">describe()</span></code>. Call <code class="docutils literal notranslate"><span class="pre">super().describe()</span></code> and, if the average is <strong>above</strong> <code class="docutils literal notranslate"><span class="pre">alert_level</span></code>, append an alert message.</p></li>
+</ol>
+<p>Test:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smart</span> <span class="o">=</span> <span class="n">SmartTemperatureSensor</span><span class="p">(</span><span class="s2">"TEMP-02"</span><span class="p">,</span> <span class="s2">"Server Room"</span><span class="p">,</span> <span class="n">alert_level</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">smart</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mf">26.0</span><span class="p">)</span>
+<span class="n">smart</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mf">28.0</span><span class="p">)</span>
+<span class="n">smart</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="mf">29.0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TEMP-02 @ Server Room: avg 27.67 °C (3 readings) | ALERT: above 27 °C
+</pre></div>
+</div>
+<p>Finally, print:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">smart</span><span class="p">,</span> <span class="n">TemperatureSensor</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">smart</span><span class="p">,</span> <span class="n">Sensor</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">SmartTemperatureSensor</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="task-6-polymorphism-and-duck-typing">
+<h3><strong>Task 6 — Polymorphism and Duck Typing</strong><a class="headerlink" href="#task-6-polymorphism-and-duck-typing" title="Link to this heading">#</a></h3>
+<p>Put all your sensors in one list and display them with a <strong>single loop</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">temp</span><span class="p">,</span> <span class="n">hum</span><span class="p">,</span> <span class="n">smart</span><span class="p">,</span> <span class="n">TemperatureSensor</span><span class="p">(</span><span class="s2">"TEMP-03"</span><span class="p">,</span> <span class="s2">"Canteen"</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">sensor</span> <span class="ow">in</span> <span class="n">sensors</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sensor</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TEMP-01 @ Library: avg 30.00 °C (3 readings)
+HUM-01 @ Library: avg 69.00 % (3 readings)
+TEMP-02 @ Server Room: avg 27.67 °C (3 readings) | ALERT: above 27 °C
+TEMP-03 @ Canteen: no readings yet
+</pre></div>
+</div>
+<p>Do <strong>not</strong> use <code class="docutils literal notranslate"><span class="pre">isinstance()</span></code> or <code class="docutils literal notranslate"><span class="pre">type()</span></code> inside the loop.</p>
+<p>Next, create a class <code class="docutils literal notranslate"><span class="pre">ManualLog</span></code> that does <strong>not</strong> inherit from <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, but has its own <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="o">=</span> <span class="n">ManualLog</span><span class="p">(</span><span class="s2">"Guard checked the server room at 9 PM"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Manual log: Guard checked the server room at 9 PM
+</pre></div>
+</div>
+<p>Add <code class="docutils literal notranslate"><span class="pre">log</span></code> to the <code class="docutils literal notranslate"><span class="pre">sensors</span></code> list and run the loop again.</p>
+<p>Answer in a Markdown cell:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ManualLog</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, yet the loop still works. What is this behavior called, and why does it work?</p>
+</div></blockquote>
+</section>
+<section id="task-7-composition-the-building-class">
+<h3><strong>Task 7 — Composition: The <code class="docutils literal notranslate"><span class="pre">Building</span></code> Class</strong><a class="headerlink" href="#task-7-composition-the-building-class" title="Link to this heading">#</a></h3>
+<p>A building <strong>has</strong> sensors; it is <strong>not</strong> a sensor. Model this using composition.</p>
+<p>Create a class <code class="docutils literal notranslate"><span class="pre">Building</span></code> with:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>the building’s name</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_sensors</span></code></p></td>
+<td><p>a protected list of monitored objects</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">add_sensor(sensor)</span></code></p></td>
+<td><p>adds a sensor (or any object with <code class="docutils literal notranslate"><span class="pre">describe()</span></code>) to the list</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">report()</span></code></p></td>
+<td><p>prints a header and then the <code class="docutils literal notranslate"><span class="pre">describe()</span></code> of every sensor</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Test:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ict</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="s2">"ICT Building"</span><span class="p">)</span>
+<span class="n">ict</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<span class="n">ict</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="n">hum</span><span class="p">)</span>
+<span class="n">ict</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="n">smart</span><span class="p">)</span>
+<span class="n">ict</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=== ICT Building (3 sensors) ===
+TEMP-01 @ Library: avg 30.00 °C (3 readings)
+HUM-01 @ Library: avg 69.00 % (3 readings)
+TEMP-02 @ Server Room: avg 27.67 °C (3 readings) | ALERT: above 27 °C
+</pre></div>
+</div>
+<p>Answer in a Markdown cell:</p>
+<blockquote>
+<div><p>Why is <code class="docutils literal notranslate"><span class="pre">Building</span></code> designed using <strong>composition</strong> instead of making <code class="docutils literal notranslate"><span class="pre">Building</span></code> a subclass of <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>?</p>
+</div></blockquote>
+</section>
+<section id="task-8-reflection">
+<h3><strong>Task 8 — Reflection</strong><a class="headerlink" href="#task-8-reflection" title="Link to this heading">#</a></h3>
+<p>In a Markdown cell, identify <strong>where</strong> each core concept appears in your solution. Complete the table:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Where it appears in your code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Abstraction</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Encapsulation</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Inheritance</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Polymorphism</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Composition</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Challenge (optional):</strong> Add a third sensor type, such as <code class="docutils literal notranslate"><span class="pre">AirQualitySensor</span></code> (unit <code class="docutils literal notranslate"><span class="pre">AQI</span></code>, valid readings 0 to 500). How many lines of the <code class="docutils literal notranslate"><span class="pre">Building</span></code> class or the Task 6 loop did you need to change? Explain why.</p>
+</section>
+</section>
+<section id="submission-requirements">
+<h2><strong>Submission Requirements</strong><a class="headerlink" href="#submission-requirements" title="Link to this heading">#</a></h2>
+<p>Submit <strong>one Jupyter Notebook</strong> containing all tasks in order. Each task should have:</p>
+<ul class="simple">
+<li><p>the code that solves it;</p></li>
+<li><p>the output produced by running the code; and</p></li>
+<li><p>the Markdown answers to the questions asked.</p></li>
+</ul>
+<p>Make sure the notebook runs from top to bottom without errors (<strong>Kernel → Restart &amp; Run All</strong>) before submitting.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../06_CoreConcepts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Four Core Concepts of OOP</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-campus-sensor-monitor"><strong>Laboratory Exercise: Campus Sensor Monitor</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario"><strong>Scenario</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-abstraction-the-sensor-base-class"><strong>Task 1 — Abstraction: The <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> Base Class</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-encapsulation-protecting-the-readings"><strong>Task 2 — Encapsulation: Protecting the Readings</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-inheritance-concrete-sensors"><strong>Task 3 — Inheritance: Concrete Sensors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-a-shared-describe-method"><strong>Task 4 — A Shared <code class="docutils literal notranslate"><span class="pre">describe()</span></code> Method</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-method-overriding-and-super"><strong>Task 5 — Method Overriding and <code class="docutils literal notranslate"><span class="pre">super()</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-polymorphism-and-duck-typing"><strong>Task 6 — Polymorphism and Duck Typing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-composition-the-building-class"><strong>Task 7 — Composition: The <code class="docutils literal notranslate"><span class="pre">Building</span></code> Class</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-8-reflection"><strong>Task 8 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
