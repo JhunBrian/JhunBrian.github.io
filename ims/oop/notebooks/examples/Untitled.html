@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/examples/Untitled';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_ObjectsAndClasses.html">Objects and classes I</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_CoreConcepts.html">Four Core Concepts</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/examples/Untitled.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>
+classDiagram
+    direction TB
+
+    class Element {
+        +str name
+        +str symbol
+        +int atomic_number
+        +float atomic_mass
+        +__repr__()
+    }
+
+    class Atom {
+        +Element element
+        +symbol
+        +name
+        +atomic_number
+        +mass
+        +__repr__()
+    }
+
+    class Bond {
+        +Atom atom1
+        +Atom atom2
+        +str bond_type
+        +order
+        +contains(atom)
+        +other(atom)
+        +__repr__()
+    }
+
+    class Molecule {
+        +list atoms
+        +list bonds
+        +mass
+        +formula
+        -_validate()
+        +neighbors(atom)
+        +degree(atom)
+        +describe()
+        +__repr__()
+    }
+
+    Element "1" &lt;-- "0..*" Atom : describes
+
+    Molecule "1" *-- "1..*" Atom : contains
+    Molecule "1" *-- "0..*" Bond : contains
+
+    Bond "0..*" --&gt; "2" Atom : connects
+
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="c1"># =========================================================</span>
+<span class="c1"># ELEMENT</span>
+<span class="c1"># =========================================================</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Element</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Describes a chemical element.</span>
+
+<span class="sd">    An Element is a definition/type rather than an individual atom.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">atomic_number</span><span class="p">,</span> <span class="n">atomic_mass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">symbol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atomic_number</span> <span class="o">=</span> <span class="n">atomic_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atomic_mass</span> <span class="o">=</span> <span class="n">atomic_mass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span>
+
+
+<span class="c1"># =========================================================</span>
+<span class="c1"># ATOM</span>
+<span class="c1"># =========================================================</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Atom</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents an individual atom belonging to an Element.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">element</span> <span class="o">=</span> <span class="n">element</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">symbol</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">atomic_number</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">atomic_mass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span>
+
+
+<span class="c1"># =========================================================</span>
+<span class="c1"># BOND</span>
+<span class="c1"># =========================================================</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Bond</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents a bond connecting two Atom objects.</span>
+<span class="sd">    """</span>
+
+    <span class="n">BOND_SYMBOLS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"single"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+        <span class="s2">"double"</span><span class="p">:</span> <span class="s2">"="</span><span class="p">,</span>
+        <span class="s2">"triple"</span><span class="p">:</span> <span class="s2">"≡"</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">bond_type</span><span class="o">=</span><span class="s2">"single"</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">Atom</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"atom1 must be an Atom."</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atom2</span><span class="p">,</span> <span class="n">Atom</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"atom2 must be an Atom."</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">atom1</span> <span class="ow">is</span> <span class="n">atom2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An atom cannot be bonded to itself."</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bond_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">BOND_SYMBOLS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"bond_type must be 'single', 'double', or 'triple'."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">atom1</span> <span class="o">=</span> <span class="n">atom1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atom2</span> <span class="o">=</span> <span class="n">atom2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span> <span class="o">=</span> <span class="n">bond_type</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">orders</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"single"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"double"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"triple"</span><span class="p">:</span> <span class="mi">3</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">orders</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">atom</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom1</span> <span class="ow">or</span> <span class="n">atom</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">other</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">atom</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom2</span>
+
+        <span class="k">if</span> <span class="n">atom</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom1</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The atom is not part of this bond."</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">connector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BOND_SYMBOLS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atom1</span><span class="si">}{</span><span class="n">connector</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">atom2</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="c1"># =========================================================</span>
+<span class="c1"># MOLECULE</span>
+<span class="c1"># =========================================================</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Molecule</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents a molecule composed of atoms and bonds.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bonds</span><span class="p">)</span> <span class="k">if</span> <span class="n">bonds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+
+    <span class="c1"># -----------------------------------------------------</span>
+    <span class="c1"># Validation</span>
+    <span class="c1"># -----------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">Atom</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">"Every item in atoms must be an Atom."</span>
+                <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bond</span><span class="p">,</span> <span class="n">Bond</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">"Every item in bonds must be a Bond."</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">bond</span><span class="o">.</span><span class="n">atom1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span>
+                <span class="ow">or</span> <span class="n">bond</span><span class="o">.</span><span class="n">atom2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"Bond contains an atom that is not "</span>
+                    <span class="s2">"part of the molecule."</span>
+                <span class="p">)</span>
+
+    <span class="c1"># -----------------------------------------------------</span>
+    <span class="c1"># Molecular mass</span>
+    <span class="c1"># -----------------------------------------------------</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">atom</span><span class="o">.</span><span class="n">mass</span>
+            <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span>
+        <span class="p">)</span>
+
+    <span class="c1"># -----------------------------------------------------</span>
+    <span class="c1"># Formula</span>
+    <span class="c1"># -----------------------------------------------------</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span>
+            <span class="n">atom</span><span class="o">.</span><span class="n">symbol</span>
+            <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span>
+        <span class="p">)</span>
+
+        <span class="n">formula</span> <span class="o">=</span> <span class="s2">""</span>
+
+        <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="n">formula</span> <span class="o">+=</span> <span class="n">symbol</span>
+
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">formula</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">formula</span>
+
+    <span class="c1"># -----------------------------------------------------</span>
+    <span class="c1"># Graph operations</span>
+    <span class="c1"># -----------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">atom</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"Atom does not belong to this molecule."</span>
+            <span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">bond</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">bond</span><span class="o">.</span><span class="n">other</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="c1"># -----------------------------------------------------</span>
+    <span class="c1"># Display information</span>
+    <span class="c1"># -----------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Molecule: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mass: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Atoms: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bonds: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hydrogen</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Hydrogen"</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">"H"</span><span class="p">,</span>
+    <span class="n">atomic_number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">atomic_mass</span><span class="o">=</span><span class="mf">1.008</span>
+<span class="p">)</span>
+
+<span class="n">carbon</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Carbon"</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">"C"</span><span class="p">,</span>
+    <span class="n">atomic_number</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">atomic_mass</span><span class="o">=</span><span class="mf">12.011</span>
+<span class="p">)</span>
+
+<span class="n">nitrogen</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Nitrogen"</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">"N"</span><span class="p">,</span>
+    <span class="n">atomic_number</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">atomic_mass</span><span class="o">=</span><span class="mf">14.007</span>
+<span class="p">)</span>
+
+<span class="n">oxygen</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Oxygen"</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">"O"</span><span class="p">,</span>
+    <span class="n">atomic_number</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">atomic_mass</span><span class="o">=</span><span class="mf">15.999</span>
+<span class="p">)</span>
+
+<span class="n">sodium</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Sodium"</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">"Na"</span><span class="p">,</span>
+    <span class="n">atomic_number</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+    <span class="n">atomic_mass</span><span class="o">=</span><span class="mf">22.99</span>
+<span class="p">)</span>
+
+<span class="n">chlorine</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Chlorine"</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">"Cl"</span><span class="p">,</span>
+    <span class="n">atomic_number</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span>
+    <span class="n">atomic_mass</span><span class="o">=</span><span class="mf">35.45</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H1</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">hydrogen</span><span class="p">)</span>
+<span class="n">H2</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">hydrogen</span><span class="p">)</span>
+<span class="n">O1</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">oxygen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OH1</span> <span class="o">=</span> <span class="n">Bond</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">H1</span><span class="p">)</span>
+<span class="n">OH2</span> <span class="o">=</span> <span class="n">Bond</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">H2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">atoms</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">H1</span><span class="p">,</span>
+        <span class="n">H2</span><span class="p">,</span>
+        <span class="n">O1</span>
+    <span class="p">],</span>
+    <span class="n">bonds</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">OH1</span><span class="p">,</span>
+        <span class="n">OH2</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H2O
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Na1</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">sodium</span><span class="p">)</span>
+<span class="n">Cl1</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">chlorine</span><span class="p">)</span>
+
+<span class="n">NaCl</span> <span class="o">=</span> <span class="n">Bond</span><span class="p">(</span><span class="n">Na1</span><span class="p">,</span> <span class="n">Cl1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">salt</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">atoms</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Na1</span><span class="p">,</span> <span class="n">Cl1</span>
+    <span class="p">],</span>
+    <span class="n">bonds</span><span class="o">=</span><span class="p">[</span><span class="n">NaCl</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">salt</span><span class="o">.</span><span class="n">formula</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'NaCl'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NaCl</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Na-Cl
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

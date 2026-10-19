@@ -1,0 +1,1925 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Four Core Concepts of OOP &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/06_CoreConcepts';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Four Core Concepts — Coding Exercise" href="exercises/06_Exercise.html" />
+    <link rel="prev" title="Exercise" href="exercises/04_Exercise.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_ObjectsAndClasses.html">Objects and classes I</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Four Core Concepts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Exercise.html">Practice · Campus Sensor Monitor</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/06_CoreConcepts.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Four Core Concepts of OOP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-show-what-hide-how"><strong>Abstraction — “show what, hide how”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-through-a-simple-interface"><strong>Abstraction Through a Simple Interface</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-base-classes"><strong>Abstract Base Classes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encapsulation-protect-the-state"><strong>Encapsulation — “protect the state”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-conventions-in-python"><strong>Access Conventions in Python</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-access-and-validation"><strong>Properties, Access, and Validation</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-is-a"><strong>Inheritance — “is-a”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-and-derived-classes"><strong>Base and Derived Classes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overriding-and-super"><strong>Method Overriding and <code class="docutils literal notranslate"><span class="pre">super()</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-inheritance-and-method-resolution-order"><strong>Multiple Inheritance and Method Resolution Order</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-design-considerations"><strong>Inheritance Design Considerations</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism-one-interface-many-forms"><strong>Polymorphism — “one interface, many forms”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphic-variables-and-methods"><strong>Polymorphic Variables and Methods</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duck-typing-and-interface-consistency"><strong>Duck Typing and Interface Consistency</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-versus-inheritance"><strong>Composition versus Inheritance</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-concepts-working-together"><strong>The Four Concepts Working Together</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-design-mistakes"><strong>Common Design Mistakes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-1-exposing-everything"><strong>Mistake 1: Exposing everything</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-2-getters-and-setters-for-everything"><strong>Mistake 2: Getters and setters for everything</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-3-inheriting-just-to-reuse-code"><strong>Mistake 3: Inheriting just to reuse code</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-4-type-checking-instead-of-polymorphism"><strong>Mistake 4: Type-checking instead of polymorphism</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="four-core-concepts-of-oop">
+<h1><strong>Four Core Concepts of OOP</strong><a class="headerlink" href="#four-core-concepts-of-oop" title="Link to this heading">#</a></h1>
+<p><strong>DS212 — Object-Oriented Programming</strong></p>
+<p><strong>Week 7:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong></p>
+<ul class="simple">
+<li><p><strong>Abstraction and Encapsulation</strong> — Apply abstraction and encapsulation to design cohesive classes with controlled access to state and behavior.</p></li>
+<li><p><strong>Inheritance and Method Overriding</strong> — Implement inheritance hierarchies, method overriding, and <code class="docutils literal notranslate"><span class="pre">super()</span></code> to reuse and extend class behavior.</p></li>
+<li><p><strong>Polymorphism and Composition</strong> — Apply polymorphism, duck typing, and composition to produce flexible object-oriented designs.</p></li>
+</ul>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/core_concepts.jpg"><img alt="../_images/core_concepts.jpg" src="../_images/core_concepts.jpg" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Object-Oriented Programming Core Concepts</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the previous lessons we learned how to <strong>define classes and create objects</strong>, and how to <strong>visualize</strong> a design using a class diagram. Knowing how to write a class, however, does not automatically produce a <em>good</em> object-oriented program.</p>
+<p>Object-oriented programming rests on four ideas that guide <strong>how</strong> we design classes and <strong>how</strong> classes relate to one another. These are commonly called the <strong>four core concepts</strong> (or <em>four pillars</em>) of OOP:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Guiding question</p></th>
+<th class="head"><p>Key Python tools</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Abstraction</strong></p></td>
+<td><p><em>What</em> should the user of this class need to know?</p></td>
+<td><p>methods, <code class="docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;abstractmethod</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Encapsulation</strong></p></td>
+<td><p><em>Who</em> is allowed to read or change the object’s state?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">_name</span></code>, <code class="docutils literal notranslate"><span class="pre">__name</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>, validation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Inheritance</strong></p></td>
+<td><p>Is this class a <em>specialized kind</em> of another class?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Child(Parent)</span></code>, overriding, <code class="docutils literal notranslate"><span class="pre">super()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Polymorphism</strong></p></td>
+<td><p>Can different objects be used <em>through the same interface</em>?</p></td>
+<td><p>method overriding, duck typing, composition</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre  class="mermaid">
+        flowchart TB
+    OOP[&quot;Object-Oriented Design&quot;]
+    OOP --&gt; A[&quot;Abstraction&lt;br/&gt;hide complexity&quot;]
+    OOP --&gt; E[&quot;Encapsulation&lt;br/&gt;protect state&quot;]
+    OOP --&gt; I[&quot;Inheritance&lt;br/&gt;reuse &amp; specialize&quot;]
+    OOP --&gt; P[&quot;Polymorphism&lt;br/&gt;one interface, many forms&quot;]
+    </pre><p>The concepts are not independent topics to be memorized separately. As we will see at the end of this lesson, <strong>they work together</strong>: abstraction decides the interface, encapsulation protects what is behind it, inheritance shares and specializes it, and polymorphism lets the rest of the program use it without caring about the specific class.</p>
+<section id="abstraction-show-what-hide-how">
+<h2><strong>Abstraction — “show what, hide how”</strong><a class="headerlink" href="#abstraction-show-what-hide-how" title="Link to this heading">#</a></h2>
+<p><strong>Abstraction</strong> means exposing only the <strong>essential features</strong> of an object while hiding the details of <em>how</em> those features are carried out.</p>
+<p>You already rely on abstraction every day:</p>
+<ul class="simple">
+<li><p>you drive a car through a steering wheel and pedals without managing fuel injection;</p></li>
+<li><p>you call <code class="docutils literal notranslate"><span class="pre">df.mean()</span></code> in pandas without writing the loop that computes it;</p></li>
+<li><p>you call <code class="docutils literal notranslate"><span class="pre">sorted(data)</span></code> without knowing which sorting algorithm Python uses.</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        What the user sees                What is hidden
+   ┌───────────────────────────┐    ┌───────────────────────────┐
+   │ dataset.load()            │    │ open file, detect encoding│
+   │ dataset.summary()         │ →  │ parse rows, convert types │
+   │                           │    │ compute statistics        │
+   └───────────────────────────┘    └───────────────────────────┘
+</pre></div>
+</div>
+<p>In OOP, abstraction appears as the <strong>public interface</strong> of a class — the set of methods other code is expected to call.</p>
+<section id="abstraction-through-a-simple-interface">
+<h3><strong>Abstraction Through a Simple Interface</strong><a class="headerlink" href="#abstraction-through-a-simple-interface" title="Link to this heading">#</a></h3>
+<p>Consider a class that summarizes a list of numeric values. The user of the class only needs <code class="docutils literal notranslate"><span class="pre">summary()</span></code>; the helper calculations are internal details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NumericColumn</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="c1"># ---- public interface -------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"column"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">"count"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
+            <span class="s2">"mean"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s2">"std"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_std</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">}</span>
+
+    <span class="c1"># ---- internal details --------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_std</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">NumericColumn</span><span class="p">(</span><span class="s2">"exam_score"</span><span class="p">,</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">88</span><span class="p">])</span>
+<span class="n">scores</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'column': 'exam_score', 'count': 5, 'mean': 81.8, 'std': 9.13}
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we later decide to compute the standard deviation with <code class="docutils literal notranslate"><span class="pre">statistics.pstdev()</span></code> or with NumPy, <strong>code that calls <code class="docutils literal notranslate"><span class="pre">summary()</span></code> does not change</strong>. That is the practical benefit of abstraction: the interface stays stable while the implementation is free to improve.</p>
+</section>
+<section id="abstract-base-classes">
+<h3><strong>Abstract Base Classes</strong><a class="headerlink" href="#abstract-base-classes" title="Link to this heading">#</a></h3>
+<p>Sometimes we want to define an interface <strong>before</strong> any concrete implementation exists. Python’s <code class="docutils literal notranslate"><span class="pre">abc</span></code> module lets us declare an <strong>abstract base class (ABC)</strong>: a class that describes <em>what</em> methods must exist but cannot be instantiated by itself.</p>
+<pre  class="mermaid">
+        classDiagram
+class DataSource {
+    &lt;&lt;abstract&gt;&gt;
+    +read()* list
+    +describe() str
+}
+class CSVSource {
+    +String path
+    +read() list
+}
+class APISource {
+    +String url
+    +read() list
+}
+DataSource &lt;|-- CSVSource
+DataSource &lt;|-- APISource
+    </pre><p>In UML, an abstract class is marked with <code class="docutils literal notranslate"><span class="pre">&lt;&lt;abstract&gt;&gt;</span></code> and abstract methods are written in italics (shown here with <code class="docutils literal notranslate"><span class="pre">*</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DataSource</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">'''Return the records as a list of dictionaries.'''</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">records</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span><span class="si">}</span><span class="s2"> records"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CSVSource</span><span class="p">(</span><span class="n">DataSource</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># A real implementation would use the csv module or pandas.</span>
+        <span class="k">return</span> <span class="p">[{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">:</span> <span class="mi">90</span><span class="p">},</span> <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">:</span> <span class="mi">75</span><span class="p">}]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">APISource</span><span class="p">(</span><span class="n">DataSource</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># A real implementation would send an HTTP request.</span>
+        <span class="k">return</span> <span class="p">[{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">:</span> <span class="mi">88</span><span class="p">}]</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">CSVSource</span><span class="p">(</span><span class="s2">"grades.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">APISource</span><span class="p">(</span><span class="s2">"https://example.org/grades"</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CSVSource: 2 records
+APISource: 1 records
+</pre></div>
+</div>
+</div>
+</div>
+<p>An abstract class <strong>cannot</strong> be instantiated, because part of its behavior is intentionally missing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">DataSource</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"TypeError:"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeError: Can't instantiate abstract class DataSource without an implementation for abstract method 'read'
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same error appears if a subclass <strong>forgets</strong> to implement an abstract method. The abstract base class therefore acts as a <strong>contract</strong>: every data source must know how to <code class="docutils literal notranslate"><span class="pre">read()</span></code>.</p>
+<blockquote>
+<div><p><strong>Design tip:</strong> Good abstraction starts by asking <em>“What does the caller need?”</em> rather than <em>“What data do I have?”</em> Name methods after the caller’s goal (<code class="docutils literal notranslate"><span class="pre">load()</span></code>, <code class="docutils literal notranslate"><span class="pre">summary()</span></code>, <code class="docutils literal notranslate"><span class="pre">predict()</span></code>), not after the internal steps.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="encapsulation-protect-the-state">
+<h2><strong>Encapsulation — “protect the state”</strong><a class="headerlink" href="#encapsulation-protect-the-state" title="Link to this heading">#</a></h2>
+<p><strong>Encapsulation</strong> means bundling an object’s data together with the methods that operate on it, and <strong>controlling access</strong> to that data so the object cannot be placed in an invalid state.</p>
+<p>Abstraction and encapsulation are closely related but answer different questions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Abstraction</p></th>
+<th class="head"><p>Encapsulation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Focuses on the <strong>outside view</strong></p></td>
+<td><p>Focuses on the <strong>inside protection</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Decides <em>what</em> is exposed</p></td>
+<td><p>Decides <em>how</em> access is controlled</p></td>
+</tr>
+<tr class="row-even"><td><p>Achieved through interfaces and ABCs</p></td>
+<td><p>Achieved through naming conventions and properties</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Recall the <code class="docutils literal notranslate"><span class="pre">BankAccount</span></code> diagram from the class-diagram lesson:</p>
+<pre  class="mermaid">
+        classDiagram
+class BankAccount {
+    -String account_number
+    -float balance
+    +deposit(amount)
+    +withdraw(amount)
+    +get_balance()
+}
+    </pre><p>The <code class="docutils literal notranslate"><span class="pre">-</span></code> marks mean the balance is <strong>private</strong>: other code should not modify it directly. Without encapsulation, nothing prevents this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1_000_000</span>   <span class="c1"># invalid state, no error raised</span>
+</pre></div>
+</div>
+<section id="access-conventions-in-python">
+<h3><strong>Access Conventions in Python</strong><a class="headerlink" href="#access-conventions-in-python" title="Link to this heading">#</a></h3>
+<p>Python does not have <code class="docutils literal notranslate"><span class="pre">private</span></code> or <code class="docutils literal notranslate"><span class="pre">protected</span></code> keywords like Java or C++. Instead, it relies on <strong>naming conventions</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Convention</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">balance</span></code></p></td>
+<td><p>public</p></td>
+<td><p>Part of the interface; safe to use from outside</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_balance</span></code></p></td>
+<td><p>protected (by convention)</p></td>
+<td><p>Internal; “please do not touch” — still accessible</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__balance</span></code></p></td>
+<td><p>private (name-mangled)</p></td>
+<td><p>Python renames it to <code class="docutils literal notranslate"><span class="pre">_ClassName__balance</span></code> to prevent accidental access</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><em>“We are all consenting adults here.”</em> — Python trusts programmers to respect conventions rather than enforcing strict access rules.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Account</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>          <span class="c1"># public</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_currency</span> <span class="o">=</span> <span class="s2">"PHP"</span>      <span class="c1"># protected by convention</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">=</span> <span class="n">balance</span>    <span class="c1"># private (name-mangled)</span>
+
+
+<span class="n">acct</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acct</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acct</span><span class="o">.</span><span class="n">_currency</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">acct</span><span class="o">.</span><span class="n">__balance</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"AttributeError:"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+<span class="c1"># Name mangling only renames the attribute; it is not true security.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acct</span><span class="o">.</span><span class="n">_Account__balance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ana
+PHP
+AttributeError: 'Account' object has no attribute '__balance'
+5000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="properties-access-and-validation">
+<h3><strong>Properties, Access, and Validation</strong><a class="headerlink" href="#properties-access-and-validation" title="Link to this heading">#</a></h3>
+<p>The Pythonic way to control access is the <strong><code class="docutils literal notranslate"><span class="pre">&#64;property</span></code></strong> decorator. A property looks like a normal attribute to the caller, but it runs a method behind the scenes, which lets us <strong>validate</strong> values before they are stored.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_account_number</span> <span class="o">=</span> <span class="n">account_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">account_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          <span class="c1"># read-only: no setter defined</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_account_number</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                 <span class="c1"># read-only from outside</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Deposit amount must be non-negative."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Withdrawal amount must be positive."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Insufficient funds."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">-=</span> <span class="n">amount</span>
+
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">"2026-0001"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Balance:"</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">5000</span><span class="p">),</span>
+               <span class="k">lambda</span><span class="p">:</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">account</span><span class="p">,</span> <span class="s2">"balance"</span><span class="p">,</span> <span class="mi">999999</span><span class="p">)):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">action</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">":"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Balance: 750.0
+ValueError: Insufficient funds.
+AttributeError: property 'balance' of 'BankAccount' object has no setter
+</pre></div>
+</div>
+</div>
+</div>
+<p>A property can also have a <strong>setter</strong> when outside code <em>should</em> be allowed to change a value — but only to a valid one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">gwa</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gwa</span> <span class="o">=</span> <span class="n">gwa</span>                 <span class="c1"># goes through the setter below</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gwa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gwa</span>
+
+    <span class="nd">@gwa</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gwa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mf">1.0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"GWA must be between 1.0 and 5.0."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gwa</span> <span class="o">=</span> <span class="n">value</span>
+
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Juan"</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">gwa</span> <span class="o">=</span> <span class="mf">1.50</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">gwa</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">gwa</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ValueError:"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Juan 1.5
+ValueError: GWA must be between 1.0 and 5.0.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Encapsulation gives us <strong>cohesive classes</strong>: the object is responsible for keeping its own data valid, so every other part of the program can trust it.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Without encapsulation               With encapsulation
+─────────────────────               ──────────────────
+every caller must validate   →      the class validates once
+bugs spread across files     →      bugs are contained in one class
+state can become invalid     →      invalid state is rejected early
+</pre></div>
+</div>
+</section>
+</section>
+<section id="inheritance-is-a">
+<h2><strong>Inheritance — “is-a”</strong><a class="headerlink" href="#inheritance-is-a" title="Link to this heading">#</a></h2>
+<p><strong>Inheritance</strong> allows a new class (the <strong>derived</strong>, <strong>child</strong>, or <strong>subclass</strong>) to acquire the attributes and methods of an existing class (the <strong>base</strong>, <strong>parent</strong>, or <strong>superclass</strong>). The child can then <strong>add</strong> new behavior or <strong>override</strong> inherited behavior.</p>
+<p>We already saw inheritance in a class diagram:</p>
+<pre  class="mermaid">
+        classDiagram
+Person &lt;|-- Student
+Person &lt;|-- Instructor
+
+class Person {
+    +String name
+    +String email
+    +display_info()
+}
+class Student {
+    +String student_id
+    +enroll(course)
+    +display_info()
+}
+class Instructor {
+    +String employee_id
+    +teach(course)
+}
+    </pre><p>The test for inheritance is the <strong>is-a</strong> question: <em>a student <strong>is a</strong> person</em>, <em>an instructor <strong>is a</strong> person</em>.</p>
+<section id="base-and-derived-classes">
+<h3><strong>Base and Derived Classes</strong><a class="headerlink" href="#base-and-derived-classes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">display_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">&gt;"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>      <span class="c1"># reuse the parent's constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> enrolled in </span><span class="si">{</span><span class="n">course</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Instructor</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">employee_id</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">teach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> teaches </span><span class="si">{</span><span class="n">course</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="n">ana</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ana Cruz"</span><span class="p">,</span> <span class="s2">"ana@ustp.edu.ph"</span><span class="p">,</span> <span class="s2">"2026-001"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">display_info</span><span class="p">())</span>          <span class="c1"># inherited from Person</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">enroll</span><span class="p">(</span><span class="s2">"DS212"</span><span class="p">))</span>         <span class="c1"># defined in Student</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ana</span><span class="p">,</span> <span class="n">Person</span><span class="p">),</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">Instructor</span><span class="p">,</span> <span class="n">Person</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ana Cruz &lt;ana@ustp.edu.ph&gt;
+Ana Cruz enrolled in DS212
+True True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-overriding-and-super">
+<h3><strong>Method Overriding and <code class="docutils literal notranslate"><span class="pre">super()</span></code></strong><a class="headerlink" href="#method-overriding-and-super" title="Link to this heading">#</a></h3>
+<p>A child class <strong>overrides</strong> a method by defining a method with the same name. Inside the override, <code class="docutils literal notranslate"><span class="pre">super()</span></code> gives access to the parent’s version, so the child can <strong>extend</strong> rather than completely replace the behavior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">display_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                       <span class="c1"># override</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">display_info</span><span class="p">()</span>             <span class="c1"># extend the parent version</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2"> | Student ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">student_id</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">"Maria Reyes"</span><span class="p">,</span> <span class="s2">"maria@ustp.edu.ph"</span><span class="p">)</span><span class="o">.</span><span class="n">display_info</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Student</span><span class="p">(</span><span class="s2">"Ana Cruz"</span><span class="p">,</span> <span class="s2">"ana@ustp.edu.ph"</span><span class="p">,</span> <span class="s2">"2026-001"</span><span class="p">)</span><span class="o">.</span><span class="n">display_info</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maria Reyes &lt;maria@ustp.edu.ph&gt;
+Ana Cruz &lt;ana@ustp.edu.ph&gt; | Student ID: 2026-001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Student("Ana Cruz", ...).display_info()
+        │
+        ├── super().display_info()  →  "Ana Cruz &lt;ana@ustp.edu.ph&gt;"     (Person)
+        └── + " | Student ID: 2026-001"                                 (Student)
+</pre></div>
+</div>
+<p>Forgetting to call <code class="docutils literal notranslate"><span class="pre">super().__init__()</span></code> is a common bug: the child object would never receive the attributes the parent constructor creates.</p>
+</section>
+<section id="multiple-inheritance-and-method-resolution-order">
+<h3><strong>Multiple Inheritance and Method Resolution Order</strong><a class="headerlink" href="#multiple-inheritance-and-method-resolution-order" title="Link to this heading">#</a></h3>
+<p>Python allows a class to inherit from <strong>more than one</strong> parent. When several parents define the same method, Python decides which one to use by following the <strong>Method Resolution Order (MRO)</strong>.</p>
+<pre  class="mermaid">
+        classDiagram
+Person &lt;|-- Student
+Person &lt;|-- Employee
+Student &lt;|-- TeachingAssistant
+Employee &lt;|-- TeachingAssistant
+    </pre><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"person"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"student"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"employee"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TeachingAssistant</span><span class="p">(</span><span class="n">Student</span><span class="p">,</span> <span class="n">Employee</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="n">ta</span> <span class="o">=</span> <span class="n">TeachingAssistant</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ta</span><span class="o">.</span><span class="n">role</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">([</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">TeachingAssistant</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>student
+['TeachingAssistant', 'Student', 'Employee', 'Person', 'object']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Python searches the classes <strong>from left to right</strong> in the order shown by <code class="docutils literal notranslate"><span class="pre">__mro__</span></code>, so <code class="docutils literal notranslate"><span class="pre">TeachingAssistant</span></code> uses <code class="docutils literal notranslate"><span class="pre">Student.role()</span></code>. Multiple inheritance is powerful but can quickly make designs hard to follow, which leads to the next point.</p>
+</section>
+<section id="inheritance-design-considerations">
+<h3><strong>Inheritance Design Considerations</strong><a class="headerlink" href="#inheritance-design-considerations" title="Link to this heading">#</a></h3>
+<p>Inheritance creates a <strong>strong coupling</strong> between parent and child: a change in the parent affects every child. Before using it, ask:</p>
+<ol class="arabic simple">
+<li><p><strong>Is it truly an is-a relationship?</strong> A <code class="docutils literal notranslate"><span class="pre">Car</span></code> is not an <code class="docutils literal notranslate"><span class="pre">Engine</span></code>; a <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is not really a <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p></li>
+<li><p><strong>Would every method of the parent make sense for the child?</strong> If you find yourself overriding a method only to raise an error, the hierarchy is probably wrong.</p></li>
+<li><p><strong>Is the hierarchy shallow?</strong> Deep chains (<code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">→</span> <span class="pre">B</span> <span class="pre">→</span> <span class="pre">C</span> <span class="pre">→</span> <span class="pre">D</span> <span class="pre">→</span> <span class="pre">E</span></code>) are hard to read and debug.</p></li>
+<li><p><strong>Am I inheriting only to reuse code?</strong> If so, <strong>composition</strong> (next section) is often the better choice.</p></li>
+</ol>
+</section>
+</section>
+<section id="polymorphism-one-interface-many-forms">
+<h2><strong>Polymorphism — “one interface, many forms”</strong><a class="headerlink" href="#polymorphism-one-interface-many-forms" title="Link to this heading">#</a></h2>
+<p><strong>Polymorphism</strong> (from Greek <em>poly</em> = many, <em>morph</em> = form) means that <strong>the same operation can behave differently depending on the object</strong> it is applied to.</p>
+<p>Python’s built-in functions are already polymorphic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s2">"DS212"</span><span class="p">))</span>           <span class="c1"># characters in a string</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>         <span class="c1"># items in a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}))</span>  <span class="c1"># keys in a dictionary</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"3"</span> <span class="o">+</span> <span class="s2">"4"</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+3
+2
+7 34 [3, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="polymorphic-variables-and-methods">
+<h3><strong>Polymorphic Variables and Methods</strong><a class="headerlink" href="#polymorphic-variables-and-methods" title="Link to this heading">#</a></h3>
+<p>With inheritance and overriding, one variable can refer to objects of <strong>different classes</strong>, and the correct method is chosen <strong>at run time</strong>.</p>
+<pre  class="mermaid">
+        classDiagram
+class Shape {
+    &lt;&lt;abstract&gt;&gt;
+    +area()* float
+}
+Shape &lt;|-- Circle
+Shape &lt;|-- Rectangle
+Shape &lt;|-- Triangle
+    </pre><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(area=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Triangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">h</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span>
+
+
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Circle</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>              <span class="c1"># 'shape' takes many forms</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Total area:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">area</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Circle(area=3.14)
+Rectangle(area=6.00)
+Triangle(area=10.00)
+Total area: 19.14
+</pre></div>
+</div>
+</div>
+</div>
+<p>The loop never checks <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">isinstance(shape,</span> <span class="pre">Circle):</span> <span class="pre">...</span></code>. Each object <strong>knows how to compute its own area</strong>, so adding a new <code class="docutils literal notranslate"><span class="pre">Hexagon</span></code> class requires <strong>no change</strong> to the loop.</p>
+</section>
+<section id="duck-typing-and-interface-consistency">
+<h3><strong>Duck Typing and Interface Consistency</strong><a class="headerlink" href="#duck-typing-and-interface-consistency" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“If it walks like a duck and quacks like a duck, then it is a duck.”</em></p>
+</div></blockquote>
+<p>In Python, polymorphism does <strong>not</strong> require a common parent class. What matters is that objects provide the <strong>same methods</strong> — the same <em>interface</em>. This is called <strong>duck typing</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CSVReport</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MarkdownReport</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"| "</span> <span class="o">+</span> <span class="s2">" | "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="o">+</span> <span class="s2">" |"</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">JSONReport</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_report</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="c1"># works with ANY object that has an export(data) method</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"--- </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">report</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> ---"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+
+<span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="mi">92</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Juan"</span><span class="p">,</span> <span class="mi">85</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="p">(</span><span class="n">CSVReport</span><span class="p">(),</span> <span class="n">MarkdownReport</span><span class="p">(),</span> <span class="n">JSONReport</span><span class="p">()):</span>
+    <span class="n">save_report</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- CSVReport ---
+name,score
+Ana,92
+Juan,85
+--- MarkdownReport ---
+| name | score |
+| Ana | 92 |
+| Juan | 85 |
+--- JSONReport ---
+[["name", "score"], ["Ana", 92], ["Juan", 85]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>None of the three report classes inherit from each other, yet <code class="docutils literal notranslate"><span class="pre">save_report()</span></code> can use all of them. Duck typing is everywhere in data science libraries: scikit-learn works with <strong>any</strong> estimator that provides <code class="docutils literal notranslate"><span class="pre">fit()</span></code> and <code class="docutils literal notranslate"><span class="pre">predict()</span></code>, and pandas can read from <strong>any</strong> object that behaves like a file.</p>
+<p><strong>Interface consistency</strong> is what makes duck typing safe. If one report used <code class="docutils literal notranslate"><span class="pre">export(data)</span></code> and another used <code class="docutils literal notranslate"><span class="pre">to_text(rows)</span></code>, polymorphism would break. Abstract base classes are one way to <em>enforce</em> a consistent interface; duck typing relies on <em>discipline and documentation</em>.</p>
+</section>
+<section id="composition-versus-inheritance">
+<h3><strong>Composition versus Inheritance</strong><a class="headerlink" href="#composition-versus-inheritance" title="Link to this heading">#</a></h3>
+<p><strong>Composition</strong> builds complex objects by <strong>combining</strong> simpler ones (a <strong>has-a</strong> relationship) instead of extending a parent class (an <strong>is-a</strong> relationship). Combined with polymorphism, composition produces very flexible designs.</p>
+<p>Suppose we need a data-cleaning pipeline. An inheritance-only design quickly explodes:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Cleaner
+ ├── MissingValueCleaner
+ ├── DuplicateCleaner
+ ├── MissingAndDuplicateCleaner          ← combinations multiply
+ ├── MissingAndOutlierCleaner
+ └── MissingDuplicateAndOutlierCleaner   ← ...
+</pre></div>
+</div>
+<p>With composition, a <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> <strong>has</strong> a list of steps, and each step follows the same interface:</p>
+<pre  class="mermaid">
+        classDiagram
+Pipeline o-- Step : has many
+Step &lt;|.. DropMissing
+Step &lt;|.. DropDuplicates
+Step &lt;|.. ClipOutliers
+
+class Pipeline {
+    -list steps
+    +add(step)
+    +run(data)
+}
+class Step {
+    &lt;&lt;interface&gt;&gt;
+    +apply(data) list
+}
+    </pre><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DropMissing</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DropDuplicates</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClipOutliers</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">low</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">high</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Pipeline</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">steps</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>          <span class="c1"># composition: Pipeline HAS steps</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span><span class="p">:</span>           <span class="c1"># polymorphism: each step applies itself</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="n">raw</span> <span class="o">=</span> <span class="p">[</span><span class="mi">72</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="n">basic</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">DropMissing</span><span class="p">(),</span> <span class="n">DropDuplicates</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"basic:"</span><span class="p">,</span> <span class="n">basic</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
+
+<span class="n">full</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">DropMissing</span><span class="p">())</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">DropDuplicates</span><span class="p">())</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ClipOutliers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"full: "</span><span class="p">,</span> <span class="n">full</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>basic: [72, 85, 300, 64, -10]
+full:  [72, 85, 100, 64, 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>New cleaning behavior is added by writing <strong>one small class</strong>, and any combination of steps is possible without creating new subclasses. This design idea is exactly how <code class="docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code> works.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Prefer <strong>inheritance</strong> when…</p></th>
+<th class="head"><p>Prefer <strong>composition</strong> when…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>there is a clear, stable <strong>is-a</strong> relationship</p></td>
+<td><p>the relationship is <strong>has-a</strong> or <strong>uses-a</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>the child should support <strong>all</strong> parent behavior</p></td>
+<td><p>you only need <strong>part</strong> of another class’s behavior</p></td>
+</tr>
+<tr class="row-even"><td><p>the hierarchy is small and shallow</p></td>
+<td><p>behaviors must be <strong>mixed and swapped</strong> at run time</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Rule of thumb:</strong> <em>Favor composition over inheritance</em> — use inheritance when the is-a relationship is genuine, and composition everywhere else.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="the-four-concepts-working-together">
+<h2><strong>The Four Concepts Working Together</strong><a class="headerlink" href="#the-four-concepts-working-together" title="Link to this heading">#</a></h2>
+<p>Real designs use all four concepts at once. Consider a small model-evaluation component of a data science application:</p>
+<pre  class="mermaid">
+        classDiagram
+class Model {
+    &lt;&lt;abstract&gt;&gt;
+    -String _name
+    +name
+    +fit(X, y)*
+    +predict(X)* list
+}
+class MeanModel {
+    -float _mean
+    +fit(X, y)
+    +predict(X) list
+}
+class ThresholdModel {
+    -float _threshold
+    +fit(X, y)
+    +predict(X) list
+}
+class Evaluator {
+    +evaluate(model, X, y) float
+}
+Model &lt;|-- MeanModel
+Model &lt;|-- ThresholdModel
+Evaluator ..&gt; Model : uses
+    </pre><ul class="simple">
+<li><p><strong>Abstraction</strong> — <code class="docutils literal notranslate"><span class="pre">Model</span></code> defines <em>what</em> every model must do: <code class="docutils literal notranslate"><span class="pre">fit()</span></code> and <code class="docutils literal notranslate"><span class="pre">predict()</span></code>.</p></li>
+<li><p><strong>Encapsulation</strong> — learned values such as <code class="docutils literal notranslate"><span class="pre">_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">_threshold</span></code> are internal; the name is exposed read-only.</p></li>
+<li><p><strong>Inheritance</strong> — <code class="docutils literal notranslate"><span class="pre">MeanModel</span></code> and <code class="docutils literal notranslate"><span class="pre">ThresholdModel</span></code> <em>are</em> models and reuse the shared <code class="docutils literal notranslate"><span class="pre">name</span></code> property.</p></li>
+<li><p><strong>Polymorphism</strong> — <code class="docutils literal notranslate"><span class="pre">Evaluator</span></code> works with <em>any</em> model without knowing its concrete class.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MeanModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">'''Predicts the average target value for every input.'''</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">"Mean baseline"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_mean</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ThresholdModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">'''Predicts 100 if the study hours exceed a learned threshold, else 60.'''</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">"Threshold rule"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">100</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span> <span class="k">else</span> <span class="mi">60</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Evaluator</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">hours</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">grades</span> <span class="o">=</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">98</span><span class="p">]</span>
+
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MeanModel</span><span class="p">(),</span> <span class="n">ThresholdModel</span><span class="p">()):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">grades</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> MAE = </span><span class="si">{</span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">hours</span><span class="p">,</span><span class="w"> </span><span class="n">grades</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean baseline   MAE = 16.67
+Threshold rule  MAE = 5.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="common-design-mistakes">
+<h2><strong>Common Design Mistakes</strong><a class="headerlink" href="#common-design-mistakes" title="Link to this heading">#</a></h2>
+<section id="mistake-1-exposing-everything">
+<h3><strong>Mistake 1: Exposing everything</strong><a class="headerlink" href="#mistake-1-exposing-everything" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Thermometer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">celsius</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># anyone can set celsius = -9999</span>
+</pre></div>
+</div>
+<p>If a value has rules (valid ranges, types, units), protect it with a property and validate it.</p>
+</section>
+<section id="mistake-2-getters-and-setters-for-everything">
+<h3><strong>Mistake 2: Getters and setters for everything</strong><a class="headerlink" href="#mistake-2-getters-and-setters-for-everything" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>Writing Java-style getters and setters for every attribute adds noise without adding protection. In Python, start with a plain public attribute and switch to a <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> <strong>only when</strong> validation or computation is needed — the caller’s code does not change.</p>
+</section>
+<section id="mistake-3-inheriting-just-to-reuse-code">
+<h3><strong>Mistake 3: Inheriting just to reuse code</strong><a class="headerlink" href="#mistake-3-inheriting-just-to-reuse-code" title="Link to this heading">#</a></h3>
+<pre  class="mermaid">
+        classDiagram
+list &lt;|-- Stack
+    </pre><p>A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> that inherits from <code class="docutils literal notranslate"><span class="pre">list</span></code> also inherits <code class="docutils literal notranslate"><span class="pre">insert()</span></code>, <code class="docutils literal notranslate"><span class="pre">sort()</span></code>, and <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code> — operations that break the meaning of a stack. A stack <strong>has</strong> a list; it is not one.</p>
+</section>
+<section id="mistake-4-type-checking-instead-of-polymorphism">
+<h3><strong>Mistake 4: Type-checking instead of polymorphism</strong><a class="headerlink" href="#mistake-4-type-checking-instead-of-polymorphism" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">Circle</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">Rectangle</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Every new shape forces you to edit this function. Move the behavior into each class (<code class="docutils literal notranslate"><span class="pre">shape.area()</span></code>) and let polymorphism choose the right version.</p>
+</section>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Core idea</p></th>
+<th class="head"><p>In Python</p></th>
+<th class="head"><p>In a class diagram</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Abstraction</strong></p></td>
+<td><p>Expose <em>what</em>, hide <em>how</em></p></td>
+<td><p>public methods, <code class="docutils literal notranslate"><span class="pre">ABC</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;abstractmethod</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;abstract&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;interface&gt;&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Encapsulation</strong></p></td>
+<td><p>Protect and validate state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">_attr</span></code>, <code class="docutils literal notranslate"><span class="pre">__attr</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>, setters</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code> private, <code class="docutils literal notranslate"><span class="pre">#</span></code> protected</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Inheritance</strong></p></td>
+<td><p>Reuse and specialize (is-a)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">B(A)</span></code>, overriding, <code class="docutils literal notranslate"><span class="pre">super()</span></code>, MRO</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&lt;|--</span> <span class="pre">B</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Polymorphism</strong></p></td>
+<td><p>One interface, many forms</p></td>
+<td><p>overriding, duck typing, composition</p></td>
+<td><p>shared methods, <code class="docutils literal notranslate"><span class="pre">*--</span></code>, <code class="docutils literal notranslate"><span class="pre">o--</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Abstraction    → decide the interface
+Encapsulation  → protect what is behind it
+Inheritance    → share and specialize it
+Polymorphism   → use it without caring about the concrete class
+</pre></div>
+</div>
+<p>These concepts will be revisited throughout the course: special methods (<code class="docutils literal notranslate"><span class="pre">__str__</span></code>, <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>, <code class="docutils literal notranslate"><span class="pre">__add__</span></code>) are another form of polymorphism, exceptions strengthen encapsulation through validation, and the final OOP project will be assessed on how well your classes apply all four.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/04_Exercise.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Exercise</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/06_Exercise.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Four Core Concepts — Coding Exercise</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-show-what-hide-how"><strong>Abstraction — “show what, hide how”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-through-a-simple-interface"><strong>Abstraction Through a Simple Interface</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-base-classes"><strong>Abstract Base Classes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encapsulation-protect-the-state"><strong>Encapsulation — “protect the state”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-conventions-in-python"><strong>Access Conventions in Python</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-access-and-validation"><strong>Properties, Access, and Validation</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-is-a"><strong>Inheritance — “is-a”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-and-derived-classes"><strong>Base and Derived Classes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overriding-and-super"><strong>Method Overriding and <code class="docutils literal notranslate"><span class="pre">super()</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-inheritance-and-method-resolution-order"><strong>Multiple Inheritance and Method Resolution Order</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-design-considerations"><strong>Inheritance Design Considerations</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism-one-interface-many-forms"><strong>Polymorphism — “one interface, many forms”</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphic-variables-and-methods"><strong>Polymorphic Variables and Methods</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duck-typing-and-interface-consistency"><strong>Duck Typing and Interface Consistency</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-versus-inheritance"><strong>Composition versus Inheritance</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-concepts-working-together"><strong>The Four Concepts Working Together</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-design-mistakes"><strong>Common Design Mistakes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-1-exposing-everything"><strong>Mistake 1: Exposing everything</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-2-getters-and-setters-for-everything"><strong>Mistake 2: Getters and setters for everything</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-3-inheriting-just-to-reuse-code"><strong>Mistake 3: Inheriting just to reuse code</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistake-4-type-checking-instead-of-polymorphism"><strong>Mistake 4: Type-checking instead of polymorphism</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
