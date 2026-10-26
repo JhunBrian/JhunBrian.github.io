@@ -15,35 +15,101 @@
 
 ## Explore the course
 
-Choose a lesson below, or follow the course navigation from top to bottom. Practice activities appear beneath the lessons they support.
+Choose a module below, or follow the course navigation from top to bottom. **Practice** exercises and graded **activities** appear beneath the lessons they support.
 
 ::::{grid} 1 1 2 2
 :gutter: 3
 
-:::{grid-item-card} OOP foundations
+:::{grid-item-card} 01 · OOP foundations
 :link: notebooks/00_Introduction
 :link-type: doc
 
 ^^^
-Explore programming paradigms and the history of object-oriented thinking. Put the ideas to work in two guided activities.
+Explore programming paradigms, the history and principles of object-oriented thinking, environment setup, and responsible computing. *Week 1*
 
 +++
 Begin with programming paradigms →
 :::
 
-:::{grid-item-card} Python review
+:::{grid-item-card} 02 · Python review
 :link: notebooks/02_PythonReview1
 :link-type: doc
 
 ^^^
-Revisit Python fundamentals, then move through control flow, functions, and modules before the combined coding exercise.
+Revisit variables, data types, operators, I/O, and the notebook workflow, then control flow, functions, and modules. *Weeks 2–3*
 
 +++
 Start Python review I →
 :::
+
+:::{grid-item-card} 03 · Objects and classes
+:link: notebooks/04_ObjectsAndClasses
+:link-type: doc
+
+^^^
+Define classes, create objects, use constructors, attributes, methods, and standard libraries, and visualize designs with UML class diagrams. *Week 4*
+
++++
+Start objects and classes →
+:::
+
+:::{grid-item-card} 04 · Core concepts
+:link: notebooks/06_CoreConcepts
+:link-type: doc
+
+^^^
+Abstraction, encapsulation, inheritance, polymorphism, and composition — the four pillars of object-oriented design. *Weeks 5–7*
+
++++
+Explore the four core concepts →
+:::
+
+:::{grid-item-card} 05 · Packages and design
+:link: notebooks/07_PackagesAndDesign
+:link-type: doc
+
+^^^
+Organize code into modules and packages, assign responsibilities with CRC cards, and model real-world systems. *Week 8*
+
++++
+Start packages and design →
+:::
+
+:::{grid-item-card} 06 · Advanced OOP
+:link: notebooks/08_SpecialMethods
+:link-type: doc
+
+^^^
+Special methods and operator overloading, exception handling, decorators, class and static methods, and metaclasses. *Weeks 10–12*
+
++++
+Start special methods →
+:::
+
+:::{grid-item-card} 07 · Packaging, testing & distribution
+:link: notebooks/11_Packaging
+:link-type: doc
+
+^^^
+Structure distributable packages, write unit tests, and rehearse a release with GitHub and TestPyPI. *Weeks 13–14*
+
++++
+Start packaging →
+:::
+
+:::{grid-item-card} 08 · OOP project
+:link: notebooks/13_ProjectPlanning
+:link-type: doc
+
+^^^
+Plan, implement, test, document, package, and present a complete object-oriented application. *Weeks 15–17*
+
++++
+Start project planning →
+:::
 ::::
 
-[View the course syllabus](syllabus.md) · [Go to the Python coding exercise](notebooks/exercises/02_Exercise.ipynb)
+[View the course syllabus](syllabus.md) · [How to use this book](course-guide.md) · [Midterm review guide](notebooks/MidtermReview.ipynb)
 
 ## Welcome
 

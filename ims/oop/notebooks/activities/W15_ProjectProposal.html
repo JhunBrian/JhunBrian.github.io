@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project Proposal and Class Design &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/activities/W15_ProjectProposal';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OOP Project Implementation" href="../14_ProjectImplementation.html" />
+    <link rel="prev" title="OOP Project Planning and Design" href="../13_ProjectPlanning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W03_PW1_PythonReview.html">Activity · Practical Workshop 1</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04_ObjectsAndClasses.html">Objects and classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/04b_Exercise.html">Practice · Course gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06_CoreConcepts.html">Four Core Concepts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/06_Exercise.html">Practice · Campus Sensor Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W05_PW2_Encapsulation.html">Activity · Practical Workshop 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W06_InheritanceLab.html">Activity · Inheritance laboratory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W07_PolymorphismComposition.html">Activity · Polymorphism &amp; composition</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Packages and Design</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07_PackagesAndDesign.html">Packages &amp; real-world OOP design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/07_Exercise.html">Practice · Health center scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W08_Portfolio1_OOPDesignPackage.html">Activity · Portfolio 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 · Advanced OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08_SpecialMethods.html">Special methods &amp; operator overloading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/08_Exercise.html">Practice · Money and wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W10_Portfolio2A_SpecialMethods.html">Activity · Portfolio 2A</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09_ExceptionHandling.html">Exception handling in OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/09_Exercise.html">Practice · Campus wallet accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W11_CustomExceptionProblemSet.html">Activity · Custom-exception problem set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_AdvancedOOP.html">Decorators, class methods &amp; metaclasses</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/10_Exercise.html">Practice · Weather station toolkit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W12_PW3_DecoratorsMetaclasses.html">Activity · Practical Workshop 3</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 · Packaging, Testing &amp; Distribution</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_Packaging.html">Packaging &amp; project structure</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/11_Exercise.html">Practice · The tempconv package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W13_Portfolio2_StructuredPackage.html">Activity · Portfolio 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12_TestingAndDistribution.html">Testing &amp; distribution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/12_Exercise.html">Practice · Testing a shopping cart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W14_PackageTestingDistribution.html">Activity · Testing &amp; distribution</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">08 · OOP Project</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../13_ProjectPlanning.html">Project planning &amp; design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Activity · Project proposal</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14_ProjectImplementation.html">Project implementation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="W16_IntegratedImplementation.html">Activity · Integrated implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_ProjectCompletion.html">Project completion &amp; presentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="W17_FinalProjectPresentation.html">Activity · Final project &amp; presentation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/activities/W15_ProjectProposal.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project Proposal and Class Design</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><strong>Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-contents"><strong>Required Contents</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment-rubric-written-project-document-25-points"><strong>Assessment Rubric — Written Project Document (25 points)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission"><strong>Submission</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="project-proposal-and-class-design">
+<h1><strong>Project Proposal and Class Design</strong><a class="headerlink" href="#project-proposal-and-class-design" title="Link to this heading">#</a></h1>
+<p><strong>DS212 — Object-Oriented Programming</strong></p>
+<p><strong>Assessment:</strong> Final project milestone 1 · <strong>Week 15</strong> · <strong>CO3</strong></p>
+<p><strong>ILO :</strong> Define a real-world problem, identify objects and responsibilities, and create an OOP project design.</p>
+<section id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Your team will propose an <strong>object-oriented Python application</strong> that addresses a defined real-world problem. The proposal is reviewed before implementation begins; use the feedback to refine your design.</p>
+<ul class="simple">
+<li><p><strong>Team size:</strong> as assigned by your instructor.</p></li>
+<li><p><strong>Scope:</strong> realistic for two weeks of implementation — small and working beats large and broken.</p></li>
+</ul>
+</section>
+<section id="required-contents">
+<h2><strong>Required Contents</strong><a class="headerlink" href="#required-contents" title="Link to this heading">#</a></h2>
+<p>Follow the structure presented in the lesson <em>OOP project planning and design</em>.</p>
+<ol class="arabic simple">
+<li><p><strong>Title, team members, and roles</strong> (project lead, design lead, quality lead, documentation lead).</p></li>
+<li><p><strong>Problem definition</strong> — problem statement, stakeholders, and scope (<em>in</em> and <em>out</em> of scope).</p></li>
+<li><p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><p>at least <strong>six</strong> user stories, each with acceptance criteria;</p></li>
+<li><p>at least <strong>three</strong> non-functional requirements (robustness, testing, reproducibility, privacy).</p></li>
+</ul>
+</li>
+<li><p><strong>Class-responsibility modeling</strong></p>
+<ul class="simple">
+<li><p>noun/verb analysis of the requirements;</p></li>
+<li><p>CRC cards for <strong>every</strong> class (at least <strong>six</strong> classes).</p></li>
+</ul>
+</li>
+<li><p><strong>UML design</strong></p>
+<ul class="simple">
+<li><p>a complete class diagram (attributes, methods, visibility, relationships, multiplicity);</p></li>
+<li><p>at least <strong>two</strong> sequence diagrams for the main scenarios;</p></li>
+<li><p>a table mapping the <strong>four core concepts</strong> and <strong>composition</strong> to specific parts of the design.</p></li>
+</ul>
+</li>
+<li><p><strong>Project structure</strong> — planned package layout and repository structure.</p></li>
+<li><p><strong>Plan</strong> — milestones (Gantt chart or table) and task assignments per member.</p></li>
+<li><p><strong>Risks</strong> — at least three risks and how you will handle them.</p></li>
+<li><p><strong>Prototype</strong> — a short notebook that implements and demonstrates the <strong>two or three most important classes</strong>.</p></li>
+<li><p><strong>References</strong> and an <strong>AI acknowledgement</strong>, if applicable.</p></li>
+</ol>
+</section>
+<section id="assessment-rubric-written-project-document-25-points">
+<h2><strong>Assessment Rubric — Written Project Document (25 points)</strong><a class="headerlink" href="#assessment-rubric-written-project-document-25-points" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Organization</strong></p></td>
+<td><p>Information is very organized in well-constructed sections and paragraphs.</p></td>
+<td><p>Information is organized in well-constructed sections and paragraphs.</p></td>
+<td><p>Information is organized, but sections or paragraphs are not well constructed.</p></td>
+<td><p>The information appears to be disorganized.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Amount of Information</strong></p></td>
+<td><p>All required parts are addressed, each with sufficient detail.</p></td>
+<td><p>All required parts are addressed; most have sufficient detail.</p></td>
+<td><p>All required parts are addressed, but some only briefly.</p></td>
+<td><p>One or more required parts were not addressed.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Quality of Information</strong></p></td>
+<td><p>Information clearly relates to the project and includes specific details and examples.</p></td>
+<td><p>Information relates to the project and provides some supporting details or examples.</p></td>
+<td><p>Information partially relates to the project; few details or examples.</p></td>
+<td><p>Information has little or nothing to do with the project.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Application of Learning</strong></p></td>
+<td><p>Shows a clear understanding and application of OOP design concepts.</p></td>
+<td><p>Shows understanding and application of OOP design concepts.</p></td>
+<td><p>Shows partial understanding and application of OOP design concepts.</p></td>
+<td><p>Shows little or no understanding or application of OOP design concepts.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Mechanics</strong></p></td>
+<td><p>No grammatical, spelling, or punctuation errors.</p></td>
+<td><p>Almost no grammatical, spelling, or punctuation errors.</p></td>
+<td><p>A few grammatical, spelling, or punctuation errors.</p></td>
+<td><p>Many grammatical, spelling, or punctuation errors.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="submission">
+<h2><strong>Submission</strong><a class="headerlink" href="#submission" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Submit through <strong>USTeP</strong> before the deadline.</p></li>
+<li><p>File name: <code class="docutils literal notranslate"><span class="pre">&lt;Section&gt;_&lt;Surname&gt;_Proposal</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">DS2A_Cruz_Proposal.ipynb</span></code>, or <code class="docutils literal notranslate"><span class="pre">.zip</span></code> when several files are required).</p></li>
+<li><p>The notebook must run from top to bottom without errors (<strong>Kernel → Restart &amp; Run All</strong>).</p></li>
+<li><p>Submit the proposal as a PDF or Markdown document plus the prototype notebook (one submission per team).</p></li>
+<li><p><strong>AI use:</strong> AI tools may be used only as assistive technologies (for brainstorming or improving clarity). Disclose any use in a short <strong>AI Acknowledgement</strong> at the end of your submission. You remain responsible for the correctness and originality of your work.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Beck, K., &amp; Cunningham, W. (1989). A laboratory for teaching object-oriented thinking. <em>ACM SIGPLAN Notices, 24</em>(10), 1–6. <a class="reference external" href="https://doi.org/10.1145/74878.74879">https://doi.org/10.1145/74878.74879</a></p>
+<p>Fowler, M. (2003). <em>UML distilled: A brief guide to the standard object modeling language</em> (3rd ed.). Addison-Wesley.</p>
+<p>Martin, R. C. (2008). <em>Clean code: A handbook of agile software craftsmanship</em>. Prentice Hall.</p>
+<p>Object Management Group. (2017). <em>OMG Unified Modeling Language (UML), version 2.5.1</em>. <a class="reference external" href="https://www.omg.org/spec/UML/2.5.1">https://www.omg.org/spec/UML/2.5.1</a></p>
+<p>Republic of the Philippines. (2012). <em>Republic Act No. 10173: Data Privacy Act of 2012</em>. National Privacy Commission. <a class="reference external" href="https://privacy.gov.ph/data-privacy-act/">https://privacy.gov.ph/data-privacy-act/</a></p>
+<p>Thomas, D., &amp; Hunt, A. (2019). <em>The pragmatic programmer: Your journey to mastery</em> (20th anniversary ed.). Addison-Wesley.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\activities"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../13_ProjectPlanning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>OOP Project Planning and Design</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../14_ProjectImplementation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>OOP Project Implementation</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><strong>Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-contents"><strong>Required Contents</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment-rubric-written-project-document-25-points"><strong>Assessment Rubric — Written Project Document (25 points)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission"><strong>Submission</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

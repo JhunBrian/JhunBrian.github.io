@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Packages and Real-World Design — Exercise &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/exercises/07_Exercise';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Portfolio 1: OOP Design and Package" href="../activities/W08_Portfolio1_OOPDesignPackage.html" />
+    <link rel="prev" title="Packages and Real-World OOP Design" href="../07_PackagesAndDesign.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Exercise.html">Practice · Python review I &amp; II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W03_PW1_PythonReview.html">Activity · Practical Workshop 1</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04_ObjectsAndClasses.html">Objects and classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04b_Exercise.html">Practice · Course gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06_CoreConcepts.html">Four Core Concepts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="06_Exercise.html">Practice · Campus Sensor Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W05_PW2_Encapsulation.html">Activity · Practical Workshop 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W06_InheritanceLab.html">Activity · Inheritance laboratory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W07_PolymorphismComposition.html">Activity · Polymorphism &amp; composition</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Packages and Design</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../07_PackagesAndDesign.html">Packages &amp; real-world OOP design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Practice · Health center scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W08_Portfolio1_OOPDesignPackage.html">Activity · Portfolio 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 · Advanced OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08_SpecialMethods.html">Special methods &amp; operator overloading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Exercise.html">Practice · Money and wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W10_Portfolio2A_SpecialMethods.html">Activity · Portfolio 2A</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09_ExceptionHandling.html">Exception handling in OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="09_Exercise.html">Practice · Campus wallet accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W11_CustomExceptionProblemSet.html">Activity · Custom-exception problem set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_AdvancedOOP.html">Decorators, class methods &amp; metaclasses</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Exercise.html">Practice · Weather station toolkit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W12_PW3_DecoratorsMetaclasses.html">Activity · Practical Workshop 3</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 · Packaging, Testing &amp; Distribution</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_Packaging.html">Packaging &amp; project structure</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="11_Exercise.html">Practice · The tempconv package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W13_Portfolio2_StructuredPackage.html">Activity · Portfolio 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12_TestingAndDistribution.html">Testing &amp; distribution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="12_Exercise.html">Practice · Testing a shopping cart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W14_PackageTestingDistribution.html">Activity · Testing &amp; distribution</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">08 · OOP Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13_ProjectPlanning.html">Project planning &amp; design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W15_ProjectProposal.html">Activity · Project proposal</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14_ProjectImplementation.html">Project implementation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W16_IntegratedImplementation.html">Activity · Integrated implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_ProjectCompletion.html">Project completion &amp; presentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W17_FinalProjectPresentation.html">Activity · Final project &amp; presentation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/exercises/07_Exercise.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Packages and Real-World Design — Exercise</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-barangay-health-center-scheduler"><strong>Laboratory Exercise: Barangay Health Center Scheduler</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario"><strong>Scenario</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-crc-cards"><strong>Task 1 — CRC Cards</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-class-diagram"><strong>Task 2 — Class Diagram</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-create-the-package"><strong>Task 3 — Create the Package</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-use-the-package"><strong>Task 4 — Use the Package</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-reflection"><strong>Task 5 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="packages-and-real-world-design-exercise">
+<h1><strong>Packages and Real-World Design — Exercise</strong><a class="headerlink" href="#packages-and-real-world-design-exercise" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objective</strong></p>
+<p>This exercise practices <strong>assigning responsibilities</strong> to collaborating classes using CRC cards and <strong>organizing</strong> those classes into a Python <strong>package</strong> with modules and a public interface.</p>
+<section id="laboratory-exercise-barangay-health-center-scheduler">
+<h2><strong>Laboratory Exercise: Barangay Health Center Scheduler</strong><a class="headerlink" href="#laboratory-exercise-barangay-health-center-scheduler" title="Link to this heading">#</a></h2>
+<section id="scenario">
+<h3><strong>Scenario</strong><a class="headerlink" href="#scenario" title="Link to this heading">#</a></h3>
+<p>A barangay health center wants a simple scheduling program.</p>
+<ul class="simple">
+<li><p>A <strong>patient</strong> has a name and an age.</p></li>
+<li><p>A <strong>doctor</strong> has a name and a specialty, and can see at most <strong>3 patients per day</strong>.</p></li>
+<li><p>An <strong>appointment</strong> connects one patient with one doctor on a specific <strong>date</strong>.</p></li>
+<li><p>The <strong>schedule</strong> books appointments and can list the patients a doctor will see on a given day.</p></li>
+</ul>
+</section>
+<section id="task-1-crc-cards">
+<h3><strong>Task 1 — CRC Cards</strong><a class="headerlink" href="#task-1-crc-cards" title="Link to this heading">#</a></h3>
+<p>In a Markdown cell, write a CRC card (as a table) for each of the four classes: <code class="docutils literal notranslate"><span class="pre">Patient</span></code>, <code class="docutils literal notranslate"><span class="pre">Doctor</span></code>, <code class="docutils literal notranslate"><span class="pre">Appointment</span></code>, and <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class</p></th>
+<th class="head"><p>Responsibilities</p></th>
+<th class="head"><p>Collaborators</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then answer:</p>
+<blockquote>
+<div><p>Which class should decide whether a doctor is <strong>fully booked</strong> on a given day? Justify your answer using the <em>information expert</em> guideline.</p>
+</div></blockquote>
+</section>
+<section id="task-2-class-diagram">
+<h3><strong>Task 2 — Class Diagram</strong><a class="headerlink" href="#task-2-class-diagram" title="Link to this heading">#</a></h3>
+<p>Draw a class diagram for your design using a Mermaid code block in a Markdown cell. Show attributes, methods, and relationships (with multiplicity where useful).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>```{mermaid}
+classDiagram
+...
+```
+</pre></div>
+</div>
+<blockquote>
+<div><p>In a plain Jupyter notebook, Mermaid diagrams may not render. You may instead paste an image of a diagram drawn with <a class="reference external" href="http://draw.io">draw.io</a> or mermaid.live.</p>
+</div></blockquote>
+</section>
+<section id="task-3-create-the-package">
+<h3><strong>Task 3 — Create the Package</strong><a class="headerlink" href="#task-3-create-the-package" title="Link to this heading">#</a></h3>
+<p>Create a package named <code class="docutils literal notranslate"><span class="pre">clinic</span></code> with the following structure. In Jupyter, you can create each file with the <code class="docutils literal notranslate"><span class="pre">%%writefile</span></code> cell magic, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">clinic</span><span class="o">/</span><span class="n">people</span><span class="o">.</span><span class="n">py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Patient</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>(Create the folder first with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">os;</span> <span class="pre">os.makedirs(&quot;clinic&quot;,</span> <span class="pre">exist_ok=True)</span></code>.)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>clinic/
+├── __init__.py        exposes Patient, Doctor, Schedule
+├── people.py          Patient, Doctor
+└── scheduling.py      Appointment, Schedule
+</pre></div>
+</div>
+<p>Requirements:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scheduling.py</span></code> imports the classes it needs from <code class="docutils literal notranslate"><span class="pre">people.py</span></code> using a <strong>relative import</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> re-exports <code class="docutils literal notranslate"><span class="pre">Patient</span></code>, <code class="docutils literal notranslate"><span class="pre">Doctor</span></code>, and <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>, and defines <code class="docutils literal notranslate"><span class="pre">__all__</span></code> and <code class="docutils literal notranslate"><span class="pre">__version__</span> <span class="pre">=</span> <span class="pre">&quot;0.1.0&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Schedule.book(patient,</span> <span class="pre">doctor,</span> <span class="pre">day)</span></code> returns an <code class="docutils literal notranslate"><span class="pre">Appointment</span></code> and prints a confirmation, or prints a message and returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if the doctor is fully booked.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Schedule.patients_of(doctor,</span> <span class="pre">day)</span></code> returns the list of patient names for that doctor and day.</p></li>
+</ul>
+</section>
+<section id="task-4-use-the-package">
+<h3><strong>Task 4 — Use the Package</strong><a class="headerlink" href="#task-4-use-the-package" title="Link to this heading">#</a></h3>
+<p>In a <strong>new code cell</strong>, import from your package and run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">clinic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Doctor</span><span class="p">,</span> <span class="n">Patient</span><span class="p">,</span> <span class="n">Schedule</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">clinic</span>
+
+<span class="n">cruz</span> <span class="o">=</span> <span class="n">Doctor</span><span class="p">(</span><span class="s2">"Dr. Cruz"</span><span class="p">,</span> <span class="s2">"Pediatrics"</span><span class="p">)</span>
+<span class="n">schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">()</span>
+<span class="n">day</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Ben"</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Carlo"</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Diana"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]:</span>
+    <span class="n">schedule</span><span class="o">.</span><span class="n">book</span><span class="p">(</span><span class="n">Patient</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">),</span> <span class="n">cruz</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cruz</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">schedule</span><span class="o">.</span><span class="n">patients_of</span><span class="p">(</span><span class="n">cruz</span><span class="p">,</span><span class="w"> </span><span class="n">day</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clinic</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">clinic</span><span class="o">.</span><span class="n">__all__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Booked: Ana with Dr. Cruz on 2026-10-05
+Booked: Ben with Dr. Cruz on 2026-10-05
+Booked: Carlo with Dr. Cruz on 2026-10-05
+Dr. Cruz is fully booked on 2026-10-05
+Dr. Cruz, 2026-10-05: Ana, Ben, Carlo
+0.1.0 ['Patient', 'Doctor', 'Schedule']
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Tip:</strong> if you edit a module after importing it, restart the kernel before importing again — Python caches imported modules.</p>
+</div></blockquote>
+</section>
+<section id="task-5-reflection">
+<h3><strong>Task 5 — Reflection</strong><a class="headerlink" href="#task-5-reflection" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Why is it better for <code class="docutils literal notranslate"><span class="pre">scheduling.py</span></code> to import from <code class="docutils literal notranslate"><span class="pre">people.py</span></code> than to define <code class="docutils literal notranslate"><span class="pre">Patient</span></code> and <code class="docutils literal notranslate"><span class="pre">Doctor</span></code> again?</p></li>
+<li><p>What would go wrong if you named one of your modules <code class="docutils literal notranslate"><span class="pre">datetime.py</span></code>?</p></li>
+<li><p>Draw (or describe) the <strong>sequence of method calls</strong> that happens when <code class="docutils literal notranslate"><span class="pre">schedule.book(...)</span></code> is called.</p></li>
+</ol>
+</section>
+</section>
+<section id="submission-requirements">
+<h2><strong>Submission Requirements</strong><a class="headerlink" href="#submission-requirements" title="Link to this heading">#</a></h2>
+<p>Submit <strong>one Jupyter Notebook</strong> containing all tasks in order. Each task should have:</p>
+<ul class="simple">
+<li><p>the code that solves it;</p></li>
+<li><p>the output produced by running the code; and</p></li>
+<li><p>the Markdown answers to the questions asked.</p></li>
+</ul>
+<p>Make sure the notebook runs from top to bottom without errors (<strong>Kernel → Restart &amp; Run All</strong>) before submitting.</p>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Beck, K., &amp; Cunningham, W. (1989). A laboratory for teaching object-oriented thinking. <em>ACM SIGPLAN Notices, 24</em>(10), 1–6. <a class="reference external" href="https://doi.org/10.1145/74878.74879">https://doi.org/10.1145/74878.74879</a></p>
+<p>Fowler, M. (2003). <em>UML distilled: A brief guide to the standard object modeling language</em> (3rd ed.). Addison-Wesley.</p>
+<p>Lott, S. F., &amp; Phillips, D. (2021). <em>Python object-oriented programming</em> (4th ed.). Packt Publishing.</p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 6. Modules</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">https://docs.python.org/3/tutorial/modules.html</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../07_PackagesAndDesign.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Packages and Real-World OOP Design</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../activities/W08_Portfolio1_OOPDesignPackage.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Portfolio 1: OOP Design and Package</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-barangay-health-center-scheduler"><strong>Laboratory Exercise: Barangay Health Center Scheduler</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario"><strong>Scenario</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-crc-cards"><strong>Task 1 — CRC Cards</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-class-diagram"><strong>Task 2 — Class Diagram</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-create-the-package"><strong>Task 3 — Create the Package</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-use-the-package"><strong>Task 4 — Use the Package</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-reflection"><strong>Task 5 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -58,12 +58,370 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04_ObjectsAndClasses';</script>
     <link rel="icon" href="../_static/favicon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Visualizing OOP" href="05_ClassDiagram.html" />
-    <link rel="prev" title="Python Review I &amp; II — Coding Exercise" href="exercises/02_Exercise.html" />
+    <link rel="next" title="Objects and Classes — Coding Exercise" href="exercises/04b_Exercise.html" />
+    <link rel="prev" title="Practical Workshop 1: Python Review" href="activities/W03_PW1_PythonReview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -204,12 +562,16 @@
 <li class="toctree-l1"><a class="reference internal" href="02_PythonReview1.html">Python review I · Fundamentals</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_PW1_PythonReview.html">Activity · Practical Workshop 1</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Objects and classes I</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Objects and classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04b_Exercise.html">Practice · Course gradebook</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
 </ul>
@@ -217,7 +579,68 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="06_CoreConcepts.html">Four Core Concepts</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_CoreConcepts.html">Four Core Concepts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Exercise.html">Practice · Campus Sensor Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_PW2_Encapsulation.html">Activity · Practical Workshop 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W06_InheritanceLab.html">Activity · Inheritance laboratory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_PolymorphismComposition.html">Activity · Polymorphism &amp; composition</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Packages and Design</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_PackagesAndDesign.html">Packages &amp; real-world OOP design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Exercise.html">Practice · Health center scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Portfolio1_OOPDesignPackage.html">Activity · Portfolio 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 · Advanced OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_SpecialMethods.html">Special methods &amp; operator overloading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Exercise.html">Practice · Money and wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W10_Portfolio2A_SpecialMethods.html">Activity · Portfolio 2A</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_ExceptionHandling.html">Exception handling in OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Exercise.html">Practice · Campus wallet accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W11_CustomExceptionProblemSet.html">Activity · Custom-exception problem set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_AdvancedOOP.html">Decorators, class methods &amp; metaclasses</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Exercise.html">Practice · Weather station toolkit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_PW3_DecoratorsMetaclasses.html">Activity · Practical Workshop 3</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 · Packaging, Testing &amp; Distribution</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_Packaging.html">Packaging &amp; project structure</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Exercise.html">Practice · The tempconv package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W13_Portfolio2_StructuredPackage.html">Activity · Portfolio 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_TestingAndDistribution.html">Testing &amp; distribution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Exercise.html">Practice · Testing a shopping cart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W14_PackageTestingDistribution.html">Activity · Testing &amp; distribution</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">08 · OOP Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_ProjectPlanning.html">Project planning &amp; design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W15_ProjectProposal.html">Activity · Project proposal</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_ProjectImplementation.html">Project implementation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_IntegratedImplementation.html">Activity · Integrated implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_ProjectCompletion.html">Project completion &amp; presentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_FinalProjectPresentation.html">Activity · Final project &amp; presentation</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -381,6 +804,18 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-constructors-are-important"><strong>Why Constructors Are Important</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes"><strong>Attributes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-common-mistake-mutable-class-attributes"><strong>A common mistake: mutable class attributes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods"><strong>Methods</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-identity-and-references"><strong>Objects, Identity, and References</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-standard-libraries-and-packages"><strong>Using Standard Libraries and Packages</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-your-classes-with-library-classes"><strong>Combining your classes with library classes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -804,6 +1239,401 @@ Completed
 <p>In this way, constructors contribute to <strong>consistency, readability, and reliability</strong> when working with objects.</p>
 </section>
 </section>
+<section id="attributes">
+<h2><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Link to this heading">#</a></h2>
+<p><strong>Attributes</strong> store an object’s <strong>state</strong>. Python distinguishes two kinds:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kind</p></th>
+<th class="head"><p>Defined…</p></th>
+<th class="head"><p>Shared?</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Instance attribute</strong></p></td>
+<td><p>inside methods, using <code class="docutils literal notranslate"><span class="pre">self.</span></code></p></td>
+<td><p>each object has its own copy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Class attribute</strong></p></td>
+<td><p>directly in the class body</p></td>
+<td><p>shared by all objects of the class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">university</span> <span class="pre">=</span> <span class="pre">&quot;USTP&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre  class="mermaid">
+        classDiagram
+class Student {
+    +String university$
+    +String name
+    +String program
+    +list scores
+}
+    </pre><p>In UML, a class (static) attribute is underlined; Mermaid shows it with a trailing <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="n">university</span> <span class="o">=</span> <span class="s2">"USTP"</span>                 <span class="c1"># class attribute: shared</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">program</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>                <span class="c1"># instance attributes: per object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">program</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="n">ana</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"BSDS"</span><span class="p">)</span>
+<span class="n">ben</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ben"</span><span class="p">,</span> <span class="s2">"BSIT"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">ana</span><span class="o">.</span><span class="n">university</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ben</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">ben</span><span class="o">.</span><span class="n">university</span><span class="p">)</span>
+
+<span class="n">Student</span><span class="o">.</span><span class="n">university</span> <span class="o">=</span> <span class="s2">"USTP-CDO"</span>         <span class="c1"># changing the class attribute...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">university</span><span class="p">,</span> <span class="n">ben</span><span class="o">.</span><span class="n">university</span><span class="p">)</span>   <span class="c1"># ...is seen by every object</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">ana</span><span class="p">))</span>                        <span class="c1"># instance attributes live in the object</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ana USTP
+Ben USTP
+USTP-CDO USTP-CDO
+{'name': 'Ana', 'program': 'BSDS', 'scores': []}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instance attributes can be read and changed using <strong>dot notation</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ana</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="s2">"BS Data Science"</span>
+<span class="n">ana</span><span class="o">.</span><span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">92</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">program</span><span class="p">,</span> <span class="n">ana</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ben</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>       <span class="c1"># Ben's list is separate from Ana's</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BS Data Science [92]
+[]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-common-mistake-mutable-class-attributes">
+<h3><strong>A common mistake: mutable class attributes</strong><a class="headerlink" href="#a-common-mistake-mutable-class-attributes" title="Link to this heading">#</a></h3>
+<p>If a <strong>list</strong> is created as a class attribute, all objects share the <strong>same</strong> list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BadStudent</span><span class="p">:</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>                         <span class="c1"># shared by ALL objects!</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">BadStudent</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">BadStudent</span><span class="p">(</span><span class="s2">"Ben"</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>                         <span class="c1"># Ben "has" Ana's score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[95]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Rule:</strong> values that belong to <strong>each object</strong> — especially lists and dictionaries — must be created in <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> with <code class="docutils literal notranslate"><span class="pre">self.</span></code>.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="methods">
+<h2><strong>Methods</strong><a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<p><strong>Methods</strong> define an object’s <strong>behavior</strong>. A method is a function defined inside a class; its first parameter, <code class="docutils literal notranslate"><span class="pre">self</span></code>, is the object the method is called on.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ana.add_score(92)      is translated by Python into      Student.add_score(ana, 92)
+</pre></div>
+</div>
+<p>Methods generally fall into two groups:</p>
+<ul class="simple">
+<li><p><strong>Commands</strong> change the object’s state (<code class="docutils literal notranslate"><span class="pre">add_score()</span></code>, <code class="docutils literal notranslate"><span class="pre">enroll()</span></code>).</p></li>
+<li><p><strong>Queries</strong> compute and return information without changing state (<code class="docutils literal notranslate"><span class="pre">average()</span></code>, <code class="docutils literal notranslate"><span class="pre">is_passing()</span></code>).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="n">passing_grade</span> <span class="o">=</span> <span class="mi">75</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>                     <span class="c1"># command</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                              <span class="c1"># query</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_passing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                           <span class="c1"># a method calling another method</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">average</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">passing_grade</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">"Passed"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_passing</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"Failed"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">average</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">)"</span>
+
+
+<span class="n">ana</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">):</span>
+    <span class="n">ana</span><span class="o">.</span><span class="n">add_score</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">add_score</span><span class="p">)</span>        <span class="c1"># a function stored in the class</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ana</span><span class="o">.</span><span class="n">add_score</span><span class="p">)</span>            <span class="c1"># a "bound method": already tied to ana</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ana: 86.33 (Passed)
+&lt;function Student.add_score at 0x000001BE583302C0&gt;
+&lt;bound method Student.add_score of &lt;__main__.Student object at 0x000001BE5834AB70&gt;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="objects-identity-and-references">
+<h2><strong>Objects, Identity, and References</strong><a class="headerlink" href="#objects-identity-and-references" title="Link to this heading">#</a></h2>
+<p>Each object has an <strong>identity</strong> (<code class="docutils literal notranslate"><span class="pre">id()</span></code>), a <strong>type</strong> (<code class="docutils literal notranslate"><span class="pre">type()</span></code>), and a <strong>value</strong> (its attributes). Assigning an object to another variable does <strong>not</strong> copy it — both names refer to the same object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Carlo"</span><span class="p">)</span>
+<span class="n">alias</span> <span class="o">=</span> <span class="n">first</span>                    <span class="c1"># same object, second name</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Carlo"</span><span class="p">)</span>         <span class="c1"># a different object with the same data</span>
+
+<span class="n">alias</span><span class="o">.</span><span class="n">add_score</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>              <span class="c1"># changed through 'alias'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first</span> <span class="ow">is</span> <span class="n">alias</span><span class="p">,</span> <span class="n">first</span> <span class="ow">is</span> <span class="n">other</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">first</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">Student</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[90]
+True False
+Student True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-standard-libraries-and-packages">
+<h2><strong>Using Standard Libraries and Packages</strong><a class="headerlink" href="#using-standard-libraries-and-packages" title="Link to this heading">#</a></h2>
+<p>You rarely need to build everything yourself. Python’s <strong>standard library</strong> and third-party <strong>packages</strong> provide many ready-made classes. Using them is the same as using your own classes: <strong>import</strong>, <strong>instantiate</strong>, then call <strong>methods</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">namedtuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+<span class="c1"># datetime: date objects with methods and arithmetic</span>
+<span class="n">deadline</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deadline</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span> <span class="n">deadline</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%A"</span><span class="p">))</span>
+
+<span class="c1"># collections.Counter: an object that counts things</span>
+<span class="n">grades</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]</span>
+<span class="n">tally</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tally</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># collections.namedtuple: a quick, lightweight class</span>
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"Point"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"lat"</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">])</span>
+<span class="n">ustp</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">8.4859</span><span class="p">,</span> <span class="mf">124.6567</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ustp</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ustp</span><span class="p">)</span>
+
+<span class="c1"># random: a Random object with its own reproducible state</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># pathlib: path objects instead of plain strings</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"data"</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"raw"</span> <span class="o">/</span> <span class="s2">"grades.csv"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">data_file</span><span class="o">.</span><span class="n">suffix</span><span class="p">,</span> <span class="n">data_file</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-09-21 Monday
+[('A', 3), ('B', 2)]
+8.4859 Point(lat=8.4859, lon=124.6567)
+[41, 8, 2, 48, 18]
+grades.csv .csv data\raw
+86.33333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<p>Third-party packages are installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code> and used in the same way. For example, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> provides a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> <strong>class</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Ben"</span><span class="p">,</span> <span class="s2">"Carlo"</span><span class="p">],</span> <span class="s2">"score"</span><span class="p">:</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">78</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"score"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"score"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class 'pandas.DataFrame'&gt;
+85.0
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Carlo</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ben</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Ana</td>
+      <td>92</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="combining-your-classes-with-library-classes">
+<h3><strong>Combining your classes with library classes</strong><a class="headerlink" href="#combining-your-classes-with-library-classes" title="Link to this heading">#</a></h3>
+<p>Your own classes can use library objects as attributes. Here, a <code class="docutils literal notranslate"><span class="pre">Course</span></code> uses <code class="docutils literal notranslate"><span class="pre">date</span></code> and <code class="docutils literal notranslate"><span class="pre">statistics</span></code> internally:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Course</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>                      <span class="c1"># a date object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span> <span class="o">=</span> <span class="p">[]</span>                      <span class="c1"># Student objects</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">class_average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">average</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">week_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">day</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">day</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">//</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="n">ds212</span> <span class="o">=</span> <span class="n">Course</span><span class="p">(</span><span class="s2">"DS212"</span><span class="p">,</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">scores</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">]),</span> <span class="p">(</span><span class="s2">"Ben"</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">74</span><span class="p">]),</span> <span class="p">(</span><span class="s2">"Carlo"</span><span class="p">,</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">])]:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">add_score</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+    <span class="n">ds212</span><span class="o">.</span><span class="n">enroll</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ds212</span><span class="o">.</span><span class="n">code</span><span class="si">}</span><span class="s2"> average: </span><span class="si">{</span><span class="n">ds212</span><span class="o">.</span><span class="n">class_average</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sept 14 is week"</span><span class="p">,</span> <span class="n">ds212</span><span class="o">.</span><span class="n">week_of</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DS212 average: 83.17
+Sept 14 is week 6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Class</strong></p></td>
+<td><p>a blueprint describing attributes and methods</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Object / instance</strong></p></td>
+<td><p>a concrete value created from a class</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Constructor</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code>, which sets an object’s initial state</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Instance attribute</strong></p></td>
+<td><p>data belonging to one object (<code class="docutils literal notranslate"><span class="pre">self.name</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Class attribute</strong></p></td>
+<td><p>data shared by all objects of a class</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Method</strong></p></td>
+<td><p>a function defined in a class; receives the object as <code class="docutils literal notranslate"><span class="pre">self</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Standard library</strong></p></td>
+<td><p>modules bundled with Python (<code class="docutils literal notranslate"><span class="pre">datetime</span></code>, <code class="docutils literal notranslate"><span class="pre">collections</span></code>, …)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Package</strong></p></td>
+<td><p>installable collection of modules (<code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Downey, A. B. (2024). <em>Think Python: How to think like a computer scientist</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://allendowney.github.io/ThinkPython/">https://allendowney.github.io/ThinkPython/</a></p>
+<p>Liang, Y. D. (2013). <em>Introduction to programming using Python</em>. Pearson.</p>
+<p>Lott, S. F., &amp; Phillips, D. (2021). <em>Python object-oriented programming</em> (4th ed.). Packt Publishing.</p>
+<p>Python Software Foundation. (2026). <em>The Python language reference: 3. Data model</em>. <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html">https://docs.python.org/3/reference/datamodel.html</a></p>
+<p>Python Software Foundation. (2026). <em>The Python standard library</em>. <a class="reference external" href="https://docs.python.org/3/library/index.html">https://docs.python.org/3/library/index.html</a></p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 9. Classes</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">https://docs.python.org/3/tutorial/classes.html</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -837,20 +1667,20 @@ Completed
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="exercises/02_Exercise.html"
+       href="activities/W03_PW1_PythonReview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Python Review I &amp; II — Coding Exercise</strong></p>
+        <p class="prev-next-title"><strong>Practical Workshop 1: Python Review</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="05_ClassDiagram.html"
+       href="exercises/04b_Exercise.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Visualizing OOP</strong></p>
+        <p class="prev-next-title"><strong>Objects and Classes — Coding Exercise</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -885,6 +1715,18 @@ Completed
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-constructors-are-important"><strong>Why Constructors Are Important</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes"><strong>Attributes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-common-mistake-mutable-class-attributes"><strong>A common mistake: mutable class attributes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods"><strong>Methods</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-identity-and-references"><strong>Objects, Identity, and References</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-standard-libraries-and-packages"><strong>Using Standard Libraries and Packages</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-your-classes-with-library-classes"><strong>Combining your classes with library classes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
 </ul>
   </nav></div>
 

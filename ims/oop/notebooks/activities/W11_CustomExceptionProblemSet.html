@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Custom-Exception Problem Set &#8212; DS212 · Object-Oriented Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds212.css?v=e9cb5814" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/activities/W11_CustomExceptionProblemSet';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced OOP Concepts" href="../10_AdvancedOOP.html" />
+    <link rel="prev" title="Exception Handling — Coding Exercise" href="../exercises/09_Exercise.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds212-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds212-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Object-Oriented Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · OOP foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_Introduction.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/00_Exercise.html">Practice · Identify the paradigm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_History.html">History &amp; principles of OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/01_Exercise.html">Case study · Thinking in objects</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python review</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_PythonReview1.html">Python review I · Fundamentals</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_PythonReview2.html">Python review II · Control flow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/02_Exercise.html">Practice · Python review I &amp; II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W03_PW1_PythonReview.html">Activity · Practical Workshop 1</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · Objects and Classes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04_ObjectsAndClasses.html">Objects and classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/04b_Exercise.html">Practice · Course gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ClassDiagram.html">UML · Class Diagram</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/04_Exercise.html">Practice · From a Real-World Scenario to an OOP Design</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · Core Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06_CoreConcepts.html">Four Core Concepts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/06_Exercise.html">Practice · Campus Sensor Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W05_PW2_Encapsulation.html">Activity · Practical Workshop 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W06_InheritanceLab.html">Activity · Inheritance laboratory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W07_PolymorphismComposition.html">Activity · Polymorphism &amp; composition</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Packages and Design</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07_PackagesAndDesign.html">Packages &amp; real-world OOP design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/07_Exercise.html">Practice · Health center scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W08_Portfolio1_OOPDesignPackage.html">Activity · Portfolio 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 · Advanced OOP</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08_SpecialMethods.html">Special methods &amp; operator overloading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/08_Exercise.html">Practice · Money and wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W10_Portfolio2A_SpecialMethods.html">Activity · Portfolio 2A</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../09_ExceptionHandling.html">Exception handling in OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../exercises/09_Exercise.html">Practice · Campus wallet accounts</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Activity · Custom-exception problem set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_AdvancedOOP.html">Decorators, class methods &amp; metaclasses</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/10_Exercise.html">Practice · Weather station toolkit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W12_PW3_DecoratorsMetaclasses.html">Activity · Practical Workshop 3</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 · Packaging, Testing &amp; Distribution</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_Packaging.html">Packaging &amp; project structure</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/11_Exercise.html">Practice · The tempconv package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W13_Portfolio2_StructuredPackage.html">Activity · Portfolio 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12_TestingAndDistribution.html">Testing &amp; distribution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/12_Exercise.html">Practice · Testing a shopping cart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="W14_PackageTestingDistribution.html">Activity · Testing &amp; distribution</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">08 · OOP Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13_ProjectPlanning.html">Project planning &amp; design</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="W15_ProjectProposal.html">Activity · Project proposal</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14_ProjectImplementation.html">Project implementation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="W16_IntegratedImplementation.html">Activity · Integrated implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_ProjectCompletion.html">Project completion &amp; presentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="W17_FinalProjectPresentation.html">Activity · Final project &amp; presentation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/activities/W11_CustomExceptionProblemSet.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Custom-Exception Problem Set</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><strong>Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-designing-an-exception-hierarchy"><strong>Problem 1 — Designing an exception hierarchy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-a-defensive-class"><strong>Problem 2 — A defensive class</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-find-and-fix-the-exception-handling-problems"><strong>Problem 3 — Find and fix the exception-handling problems</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-guaranteed-cleanup"><strong>Problem 4 — Guaranteed cleanup</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection"><strong>Reflection</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment-rubric-laboratory-portfolio-50-points"><strong>Assessment Rubric — Laboratory / Portfolio (50 points)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission"><strong>Submission</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="custom-exception-problem-set">
+<h1><strong>Custom-Exception Problem Set</strong><a class="headerlink" href="#custom-exception-problem-set" title="Link to this heading">#</a></h1>
+<p><strong>DS212 — Object-Oriented Programming</strong></p>
+<p><strong>Assessment:</strong> Problem set (with Quiz 3) · <strong>Week 11</strong> · <strong>CO3</strong></p>
+<p><strong>ILO :</strong> Design robust classes using exception handling, custom exceptions, and defensive programming.</p>
+<section id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Solve the four problems below. Each problem focuses on one part of robust, exception-aware object-oriented design.</p>
+</section>
+<section id="problem-1-designing-an-exception-hierarchy">
+<h2><strong>Problem 1 — Designing an exception hierarchy</strong><a class="headerlink" href="#problem-1-designing-an-exception-hierarchy" title="Link to this heading">#</a></h2>
+<p>An <strong>online laboratory reservation</strong> system has these failure situations:</p>
+<ul class="simple">
+<li><p>a student books a computer that does not exist;</p></li>
+<li><p>a computer is already reserved for the requested time;</p></li>
+<li><p>a reservation is outside laboratory hours (7:00–19:00);</p></li>
+<li><p>a student exceeds <strong>two</strong> reservations per day;</p></li>
+<li><p>the reservation file cannot be read.</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Design a custom exception hierarchy (class diagram) with <strong>one base exception</strong>.</p></li>
+<li><p>Decide which exceptions should carry <strong>attributes</strong> (for example, the conflicting time slot) and implement them.</p></li>
+<li><p>Explain which situations should use a <strong>built-in</strong> exception instead of a custom one.</p></li>
+</ol>
+</section>
+<section id="problem-2-a-defensive-class">
+<h2><strong>Problem 2 — A defensive class</strong><a class="headerlink" href="#problem-2-a-defensive-class" title="Link to this heading">#</a></h2>
+<p>Implement <code class="docutils literal notranslate"><span class="pre">LabReservations</span></code>, which uses your exceptions from Problem 1:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">add_computer(code)</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reserve(student_id,</span> <span class="pre">code,</span> <span class="pre">start_hour,</span> <span class="pre">hours)</span></code> that validates <strong>every</strong> rule and leaves the object <strong>unchanged</strong> if any rule fails;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cancel(student_id,</span> <span class="pre">code,</span> <span class="pre">start_hour)</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">schedule_for(code)</span></code> returning the reservations sorted by start time.</p></li>
+</ul>
+<p>Demonstrate <strong>every</strong> rule being violated once, and show that the object’s state is unchanged after each failure.</p>
+</section>
+<section id="problem-3-find-and-fix-the-exception-handling-problems">
+<h2><strong>Problem 3 — Find and fix the exception-handling problems</strong><a class="headerlink" href="#problem-3-find-and-fix-the-exception-handling-problems" title="Link to this heading">#</a></h2>
+<p>The following code “works” but handles exceptions badly. Identify <strong>at least five</strong> problems, explain each, and rewrite the code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GradeImporter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">name</span><span class="p">,</span> <span class="n">grade</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"error"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"not found"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Test your rewritten version with: a missing file, a line with a missing comma, a non-numeric grade, an empty file, and an unknown student name.</p>
+</section>
+<section id="problem-4-guaranteed-cleanup">
+<h2><strong>Problem 4 — Guaranteed cleanup</strong><a class="headerlink" href="#problem-4-guaranteed-cleanup" title="Link to this heading">#</a></h2>
+<p>Write a context manager class <code class="docutils literal notranslate"><span class="pre">AuditLog</span></code> that:</p>
+<ul class="simple">
+<li><p>opens (or creates) a log file in <code class="docutils literal notranslate"><span class="pre">__enter__</span></code>;</p></li>
+<li><p>lets code inside the <code class="docutils literal notranslate"><span class="pre">with</span></code> block call <code class="docutils literal notranslate"><span class="pre">log.write(message)</span></code>;</p></li>
+<li><p>in <code class="docutils literal notranslate"><span class="pre">__exit__</span></code>, writes <code class="docutils literal notranslate"><span class="pre">OK</span></code> if the block finished normally or <code class="docutils literal notranslate"><span class="pre">FAILED:</span> <span class="pre">&lt;ExceptionName&gt;:</span> <span class="pre">&lt;message&gt;</span></code> if an exception occurred, <strong>closes the file</strong>, and lets the exception propagate.</p></li>
+</ul>
+<p>Show both a successful block and a failing block, then print the log file’s contents.</p>
+</section>
+<section id="reflection">
+<h2><strong>Reflection</strong><a class="headerlink" href="#reflection" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In your own words, when should a method <strong>raise</strong> an exception, and when should it <strong>handle</strong> one?</p></li>
+<li><p>Why is <code class="docutils literal notranslate"><span class="pre">except:</span></code> with no exception type dangerous?</p></li>
+</ul>
+</section>
+<section id="assessment-rubric-laboratory-portfolio-50-points">
+<h2><strong>Assessment Rubric — Laboratory / Portfolio (50 points)</strong><a class="headerlink" href="#assessment-rubric-laboratory-portfolio-50-points" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criteria</p></th>
+<th class="head"><p>Unsatisfactory–Beginning</p></th>
+<th class="head"><p>Developing</p></th>
+<th class="head"><p>Accomplished</p></th>
+<th class="head"><p>Exemplary</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Technical Correctness and Completeness</strong></p></td>
+<td><p><strong>0–7 pts</strong> The program is incomplete or fails to run; major requirements are missing or technically incorrect.</p></td>
+<td><p><strong>8–11 pts</strong> The program runs only partially and contains substantial syntax, logic, data-handling, or output errors.</p></td>
+<td><p><strong>12–16 pts</strong> The program meets most requirements and produces generally correct results, with only minor technical errors.</p></td>
+<td><p><strong>17–20 pts</strong> The program fully meets the requirements, runs correctly, and demonstrates accurate and efficient implementation.</p></td>
+<td><p>/20</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OOP Design, Code Organization and Reproducibility</strong></p></td>
+<td><p><strong>0–4 pts</strong> Classes and modules are poorly organized, undocumented, and cannot be reproduced or maintained reliably.</p></td>
+<td><p><strong>5–7 pts</strong> Some class organization and documentation are evident, but responsibilities, relationships, or execution remain difficult to follow.</p></td>
+<td><p><strong>8–11 pts</strong> Classes, modules, dependencies, and outputs are generally organized and documented; the application is reproducible with minor clarification.</p></td>
+<td><p><strong>12–15 pts</strong> Classes, modules, dependencies, tests, and outputs are consistently organized, documented, maintainable, and fully reproducible.</p></td>
+<td><p>/15</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>OOP Application and Communication</strong></p></td>
+<td><p><strong>0–4 pts</strong> The application does not demonstrate meaningful OOP use, and its design and behavior are not explained clearly.</p></td>
+<td><p><strong>5–7 pts</strong> OOP principles are applied inconsistently, and the design explanation or demonstration contains notable gaps.</p></td>
+<td><p><strong>8–11 pts</strong> OOP principles are applied appropriately and the application is explained and demonstrated clearly, with only minor omissions.</p></td>
+<td><p><strong>12–15 pts</strong> OOP principles are applied purposefully, justified by the design, and communicated through a clear and professional demonstration.</p></td>
+<td><p>/15</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Timeliness</strong></p></td>
+<td><p><strong>Deduct 11 pts</strong> (overall failing) — submitted 2–3 days (49–72 hours) after the deadline.</p></td>
+<td><p><strong>Deduct 6–10 pts</strong> — submitted 1–2 days (25–48 hours) after the deadline.</p></td>
+<td><p><strong>Deduct 1–5 pts</strong> — submitted within 1 day (24 hours) after the deadline.</p></td>
+<td><p><strong>0 pts deducted</strong> — submitted on or before the deadline.</p></td>
+<td><p>−</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><strong>TOTAL POINTS (sum of the criteria)</strong></p></td>
+<td><p><strong>/50</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="submission">
+<h2><strong>Submission</strong><a class="headerlink" href="#submission" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Submit through <strong>USTeP</strong> before the deadline.</p></li>
+<li><p>File name: <code class="docutils literal notranslate"><span class="pre">&lt;Section&gt;_&lt;Surname&gt;_ExceptionSet</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">DS2A_Cruz_ExceptionSet.ipynb</span></code>, or <code class="docutils literal notranslate"><span class="pre">.zip</span></code> when several files are required).</p></li>
+<li><p>The notebook must run from top to bottom without errors (<strong>Kernel → Restart &amp; Run All</strong>).</p></li>
+<li><p><strong>AI use:</strong> AI tools may be used only as assistive technologies (for brainstorming or improving clarity). Disclose any use in a short <strong>AI Acknowledgement</strong> at the end of your submission. You remain responsible for the correctness and originality of your work.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Lott, S. F., &amp; Phillips, D. (2021). <em>Python object-oriented programming</em> (4th ed.). Packt Publishing.</p>
+<p>Python Software Foundation. (2026). <em>Built-in exceptions</em>. <a class="reference external" href="https://docs.python.org/3/library/exceptions.html">https://docs.python.org/3/library/exceptions.html</a></p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 8. Errors and exceptions</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">https://docs.python.org/3/tutorial/errors.html</a></p>
+<p>Ramalho, L. (2022). <em>Fluent Python: Clear, concise, and effective programming</em> (2nd ed.). O’Reilly Media.</p>
+<p>Thomas, D., &amp; Hunt, A. (2019). <em>The pragmatic programmer: Your journey to mastery</em> (20th anniversary ed.). Addison-Wesley.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\activities"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../exercises/09_Exercise.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Exception Handling — Coding Exercise</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../10_AdvancedOOP.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Advanced OOP Concepts</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><strong>Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-designing-an-exception-hierarchy"><strong>Problem 1 — Designing an exception hierarchy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-a-defensive-class"><strong>Problem 2 — A defensive class</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-find-and-fix-the-exception-handling-problems"><strong>Problem 3 — Find and fix the exception-handling problems</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-guaranteed-cleanup"><strong>Problem 4 — Guaranteed cleanup</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection"><strong>Reflection</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment-rubric-laboratory-portfolio-50-points"><strong>Assessment Rubric — Laboratory / Portfolio (50 points)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission"><strong>Submission</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
