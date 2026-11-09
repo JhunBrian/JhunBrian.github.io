@@ -1,0 +1,1060 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lists, Tuples, and Strings &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/07_ListsTuplesStrings';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seatwork: Lists, Tuples, and Strings" href="exercises/07_Seatwork_Sequences.html" />
+    <link rel="prev" title="Seatwork: Functions" href="exercises/06_Seatwork_Functions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/07_ListsTuplesStrings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lists, Tuples, and Strings</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-shared-by-all-sequences"><strong>Operations Shared by All Sequences</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists"><strong>Lists</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-a-list"><strong>Changing a list</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aliasing-two-names-one-list"><strong>Aliasing: two names, one list</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions"><strong>List comprehensions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-lists"><strong>Nested lists</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples"><strong>Tuples</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings"><strong>Strings</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-cleaning-and-counting-words"><strong>Example: cleaning and counting words</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-between-lists-tuples-and-strings"><strong>Choosing Between Lists, Tuples, and Strings</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lists-tuples-and-strings">
+<h1><strong>Lists, Tuples, and Strings</strong><a class="headerlink" href="#lists-tuples-and-strings" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 7:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Create data structures, use them, and differentiate their advantages and disadvantages.</p>
+<p>Real programs work with <strong>many</strong> values: all the scores in a class, the letters in a name, the coordinates of a place. Python stores ordered collections in <strong>sequences</strong>. This lesson covers the three most common: <strong>lists</strong>, <strong>tuples</strong>, and <strong>strings</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Ordered</p></th>
+<th class="head"><p>Mutable (changeable)?</p></th>
+<th class="head"><p>Typical use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[78,</span> <span class="pre">92,</span> <span class="pre">64]</span></code></p></td>
+<td><p>yes</p></td>
+<td><p><strong>yes</strong></p></td>
+<td><p>a collection that grows or changes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(8.48,</span> <span class="pre">124.65)</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>a fixed group of related values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;DS112&quot;</span></code></p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>text</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Analogy.</strong> A <strong>list</strong> is a <strong>class attendance sheet</strong> — you can add, remove, and correct names. A <strong>tuple</strong> is a <strong>printed ID card</strong> — the details are fixed once issued. A <strong>string</strong> is a <strong>word written in ink</strong> — to change it, you write a new one.</p>
+</div></blockquote>
+<section id="operations-shared-by-all-sequences">
+<h2><strong>Operations Shared by All Sequences</strong><a class="headerlink" href="#operations-shared-by-all-sequences" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Example (<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">&quot;DATA&quot;</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">s[i]</span></code></p></td>
+<td><p>item at position <em>i</em> (from 0)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s[0]</span></code> → <code class="docutils literal notranslate"><span class="pre">'D'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">s[-1]</span></code></p></td>
+<td><p>last item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'A'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">s[a:b]</span></code></p></td>
+<td><p>slice from <em>a</em> up to (not including) <em>b</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s[1:3]</span></code> → <code class="docutils literal notranslate"><span class="pre">'AT'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">len(s)</span></code></p></td>
+<td><p>number of items</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">s</span></code></p></td>
+<td><p>membership</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'T'</span> <span class="pre">in</span> <span class="pre">s</span></code> → <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">*</span> <span class="pre">n</span></code></p></td>
+<td><p>join, repeat</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;DA&quot;</span> <span class="pre">+</span> <span class="pre">&quot;TA&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ha&quot;</span> <span class="pre">*</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">s</span></code></p></td>
+<td><p>loop over items</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> index:    0    1    2    3
+         +----+----+----+----+
+         | D  | A  | T  | A  |
+         +----+----+----+----+
+ negative: -4   -3   -2   -1
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>          <span class="c1"># items 1, 2, 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>          <span class="c1"># every second item</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>         <span class="c1"># reversed</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="mi">85</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78 99
+[92, 64, 85]
+[78, 92, 64] [85, 70, 99]
+[78, 64, 70]
+[99, 70, 85, 64, 92, 78]
+6 True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lists">
+<h2><strong>Lists</strong><a class="headerlink" href="#lists" title="Link to this heading">#</a></h2>
+<section id="changing-a-list">
+<h3><strong>Changing a list</strong><a class="headerlink" href="#changing-a-list" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Ben"</span><span class="p">,</span> <span class="s2">"Carlo"</span><span class="p">]</span>
+
+<span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Diana"</span><span class="p">)</span>          <span class="c1"># add to the end</span>
+<span class="n">names</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Bea"</span><span class="p">)</span>         <span class="c1"># add at a position</span>
+<span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Anna"</span>              <span class="c1"># replace</span>
+<span class="n">removed</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>          <span class="c1"># remove and return the last item</span>
+<span class="n">names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"Ben"</span><span class="p">)</span>            <span class="c1"># remove by value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="s2">"| removed:"</span><span class="p">,</span> <span class="n">removed</span><span class="p">)</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">85</span><span class="p">]</span>
+<span class="n">scores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>                  <span class="c1"># sorts in place</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">scores</span><span class="p">)</span>   <span class="c1"># sorted() returns a new list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['Anna', 'Bea', 'Carlo'] | removed: Diana
+[64, 78, 85, 92] 319 64 92
+[92, 85, 78, 64] [64, 78, 85, 92]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">append(x)</span></code></p></td>
+<td><p>add <code class="docutils literal notranslate"><span class="pre">x</span></code> at the end</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">insert(i,</span> <span class="pre">x)</span></code></p></td>
+<td><p>add <code class="docutils literal notranslate"><span class="pre">x</span></code> at position <code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">extend(other)</span></code></p></td>
+<td><p>add all items of another sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">remove(x)</span></code></p></td>
+<td><p>remove the first <code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pop(i)</span></code></p></td>
+<td><p>remove and return item <code class="docutils literal notranslate"><span class="pre">i</span></code> (default: last)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sort()</span></code>, <code class="docutils literal notranslate"><span class="pre">reverse()</span></code></p></td>
+<td><p>reorder in place</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">index(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">count(x)</span></code></p></td>
+<td><p>position of <code class="docutils literal notranslate"><span class="pre">x</span></code>, number of <code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="aliasing-two-names-one-list">
+<h3><strong>Aliasing: two names, one list</strong><a class="headerlink" href="#aliasing-two-names-one-list" title="Link to this heading">#</a></h3>
+<p>Assigning a list to another variable does <strong>not</strong> copy it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>              <span class="c1"># b is another name for the SAME list</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>       <span class="c1"># c is a new list with the same items</span>
+<span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4] [1, 2, 3, 4] [1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Analogy.</strong> <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code> gives the same <strong>Google Doc link</strong> to a classmate — any edit is seen by both. <code class="docutils literal notranslate"><span class="pre">a.copy()</span></code> <strong>downloads a copy</strong> — changes no longer affect each other.</p>
+</div></blockquote>
+</section>
+<section id="list-comprehensions">
+<h3><strong>List comprehensions</strong><a class="headerlink" href="#list-comprehensions" title="Link to this heading">#</a></h3>
+<p>A <strong>comprehension</strong> builds a new list from an existing sequence in one readable line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span> <span class="k">if</span> <span class="n">condition</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+
+<span class="n">curved</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="o">+</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+<span class="n">passing</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"P"</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">75</span> <span class="k">else</span> <span class="s2">"F"</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">curved</span><span class="p">,</span> <span class="n">passing</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[83, 97, 69, 90, 75, 104]
+[78, 92, 85, 99]
+['P', 'P', 'F', 'P', 'F', 'P']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Paradigm lens · functional / declarative</p>
+<p>A comprehension describes <strong>what</strong> the new list contains — <em>“each score plus five”</em>, <em>“the scores that are at least 75”</em> — rather than the steps of creating an empty list and appending. It is a functional <code class="docutils literal notranslate"><span class="pre">map</span></code>/<code class="docutils literal notranslate"><span class="pre">filter</span></code> written in a declarative style, and it does not modify the original list.</p>
+</div>
+</section>
+<section id="nested-lists">
+<h3><strong>Nested lists</strong><a class="headerlink" href="#nested-lists" title="Link to this heading">#</a></h3>
+<p>Lists can contain lists — a simple way to store a <strong>table</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Ben"</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Carlo"</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">85</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">quiz</span><span class="p">,</span> <span class="n">exam</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="p">(</span><span class="n">quiz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">exam</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>        <span class="c1"># row 2, column 1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ana    90.0
+Ben    77.5
+Carlo  88.0
+91
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tuples">
+<h2><strong>Tuples</strong><a class="headerlink" href="#tuples" title="Link to this heading">#</a></h2>
+<p>A tuple is like a list that <strong>cannot change</strong>. Use one for values that belong together and should stay fixed: coordinates, RGB colors, a date, a database record.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ustp</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.4859</span><span class="p">,</span> <span class="mf">124.6567</span><span class="p">)</span>          <span class="c1"># (latitude, longitude)</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="o">=</span> <span class="n">ustp</span>                    <span class="c1"># unpacking</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">ustp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"TypeError:"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>                        <span class="c1"># swap using tuple packing/unpacking</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">single</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,)</span>                      <span class="c1"># a one-item tuple needs a comma</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">single</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.4859 124.6567
+TypeError: 'tuple' object does not support item assignment
+2 1
+&lt;class 'tuple'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Why use tuples?</strong> They protect data from accidental change, can be used as <strong>dictionary keys</strong> (next lesson), and signal to readers <em>“this group of values is fixed.”</em></p>
+</section>
+<section id="strings">
+<h2><strong>Strings</strong><a class="headerlink" href="#strings" title="Link to this heading">#</a></h2>
+<p>A string is an <strong>immutable sequence of characters</strong>. All sequence operations work on strings, plus many <strong>string methods</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">review</span> <span class="o">=</span> <span class="s2">"  The room was CLEAN and the staff were friendly!  "</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>                      <span class="c1"># remove surrounding spaces</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>              <span class="c1"># list of words</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"the"</span><span class="p">),</span> <span class="n">review</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"staff"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"CLEAN"</span><span class="p">,</span> <span class="s2">"spotless"</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">"2026"</span><span class="p">,</span> <span class="s2">"08"</span><span class="p">,</span> <span class="s2">"10"</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"DS112"</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"DS"</span><span class="p">),</span> <span class="s2">"2026"</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The room was CLEAN and the staff were friendly!
+  the room was clean and the staff were friendly!  
+['The', 'room', 'was', 'CLEAN', 'and', 'the', 'staff', 'were', 'friendly!']
+1 29
+The room was spotless and the staff were friendly!
+2026-08-10
+True True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lower()</span></code>, <code class="docutils literal notranslate"><span class="pre">upper()</span></code>, <code class="docutils literal notranslate"><span class="pre">title()</span></code></p></td>
+<td><p>change case</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">strip()</span></code></p></td>
+<td><p>remove leading/trailing whitespace</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">split(sep)</span></code></p></td>
+<td><p>break into a list</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sep.join(list)</span></code></p></td>
+<td><p>combine a list into one string</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">replace(old,</span> <span class="pre">new)</span></code></p></td>
+<td><p>substitute text</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">find(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">count(x)</span></code></p></td>
+<td><p>locate / count a substring</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">startswith()</span></code>, <code class="docutils literal notranslate"><span class="pre">endswith()</span></code>, <code class="docutils literal notranslate"><span class="pre">isdigit()</span></code>, <code class="docutils literal notranslate"><span class="pre">isalpha()</span></code></p></td>
+<td><p>tests that return <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Because strings are immutable, methods <strong>return new strings</strong> — the original is unchanged.</p>
+<section id="example-cleaning-and-counting-words">
+<h3><strong>Example: cleaning and counting words</strong><a class="headerlink" href="#example-cleaning-and-counting-words" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">"Great location. Great staff! The breakfast was great, the room was small."</span>
+
+<span class="n">cleaned</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">mark</span> <span class="ow">in</span> <span class="s2">".,!"</span><span class="p">:</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">cleaned</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="n">cleaned</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="s2">"words"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"'great' appears"</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"great"</span><span class="p">),</span> <span class="s2">"times"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"longest word:"</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12 words
+'great' appears 3 times
+longest word: breakfast
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="choosing-between-lists-tuples-and-strings">
+<h2><strong>Choosing Between Lists, Tuples, and Strings</strong><a class="headerlink" href="#choosing-between-lists-tuples-and-strings" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>List</p></th>
+<th class="head"><p>Tuple</p></th>
+<th class="head"><p>String</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Advantages</strong></p></td>
+<td><p>flexible: add, remove, sort; many methods</p></td>
+<td><p>safe from change; usable as dict keys; slightly faster</p></td>
+<td><p>rich text methods; natural for text</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Disadvantages</strong></p></td>
+<td><p>can be changed by accident; aliasing surprises</p></td>
+<td><p>cannot be updated — must create a new one</p></td>
+<td><p>only characters; every change creates a new string</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Use when</strong></p></td>
+<td><p>the collection changes</p></td>
+<td><p>the values are a fixed record</p></td>
+<td><p>you store text</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Key idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>indexing / slicing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s[i]</span></code>, <code class="docutils literal notranslate"><span class="pre">s[a:b]</span></code>, negative indexes count from the end</p></td>
+</tr>
+<tr class="row-odd"><td><p>list</p></td>
+<td><p>mutable ordered collection; <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>aliasing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code> shares the list; use <code class="docutils literal notranslate"><span class="pre">.copy()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>comprehension</p></td>
+<td><p>build a new list declaratively</p></td>
+</tr>
+<tr class="row-even"><td><p>tuple</p></td>
+<td><p>immutable record; packing and unpacking</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>immutable text; methods return new strings</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Downey, A. B. (2024). <em>Think Python: How to think like a computer scientist</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://allendowney.github.io/ThinkPython/">https://allendowney.github.io/ThinkPython/</a></p>
+<p>Liang, Y. D. (2013). <em>Introduction to programming using Python</em>. Pearson.</p>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>Python Software Foundation. (2026). <em>Built-in types</em>. <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html">https://docs.python.org/3/library/stdtypes.html</a></p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 5. Data structures</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">https://docs.python.org/3/tutorial/datastructures.html</a></p>
+<p>Tutorialspoint. (2026). <em>Python tutorial</em>. <a class="reference external" href="https://www.tutorialspoint.com/python/">https://www.tutorialspoint.com/python/</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/06_Seatwork_Functions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Seatwork: Functions</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/07_Seatwork_Sequences.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Seatwork: Lists, Tuples, and Strings</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-shared-by-all-sequences"><strong>Operations Shared by All Sequences</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists"><strong>Lists</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-a-list"><strong>Changing a list</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aliasing-two-names-one-list"><strong>Aliasing: two names, one list</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions"><strong>List comprehensions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-lists"><strong>Nested lists</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples"><strong>Tuples</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings"><strong>Strings</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-cleaning-and-counting-words"><strong>Example: cleaning and counting words</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-between-lists-tuples-and-strings"><strong>Choosing Between Lists, Tuples, and Strings</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1304 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reading and Writing Data; Working with Text &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/16_ReadingWritingData';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seatwork: Reading Data and Text Preprocessing" href="exercises/16_Seatwork_TextData.html" />
+    <link rel="prev" title="Seatwork: Series and DataFrames" href="exercises/15_Seatwork_PandasIntro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/16_ReadingWritingData.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reading and Writing Data; Working with Text</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-csv-files"><strong>Reading CSV Files</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-read-csv-options"><strong>Useful <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> options</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-excel-files"><strong>Reading Excel Files</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-files"><strong>Writing Files</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-text-data"><strong>Working with Text Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-text-cleaning-pipeline"><strong>A text-cleaning pipeline</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reading-and-writing-data-working-with-text">
+<h1><strong>Reading and Writing Data; Working with Text</strong><a class="headerlink" href="#reading-and-writing-data-working-with-text" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 13:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Use pandas to read and write CSV and Excel files and to process text data.</p>
+<p>Most data arrives in <strong>files</strong>. pandas can read dozens of formats with one function call and turns them into DataFrames ready for analysis. This lesson also introduces pandas’ tools for <strong>text data</strong>, using the course’s collection of hotel reviews.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>Read</p></th>
+<th class="head"><p>Write</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CSV</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.to_csv()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Excel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_excel()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.to_excel()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>JSON</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_json()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.to_json()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>HTML tables, SQL, Parquet, …</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_html()</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.read_sql()</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.read_parquet()</span></code></p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="reading-csv-files">
+<h2><strong>Reading CSV Files</strong><a class="headerlink" href="#reading-csv-files" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/grades.csv"</span><span class="p">)</span>
+<span class="n">grades</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student_id</th>
+      <th>name</th>
+      <th>section</th>
+      <th>quiz</th>
+      <th>lab</th>
+      <th>midterm</th>
+      <th>final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2026-0001</td>
+      <td>Ana</td>
+      <td>DS1A</td>
+      <td>56.8</td>
+      <td>69.2</td>
+      <td>59.7</td>
+      <td>62.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2026-0002</td>
+      <td>Ben</td>
+      <td>DS1A</td>
+      <td>91.0</td>
+      <td>82.4</td>
+      <td>81.0</td>
+      <td>80.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2026-0003</td>
+      <td>Carlo</td>
+      <td>DS1D</td>
+      <td>95.0</td>
+      <td>96.8</td>
+      <td>87.5</td>
+      <td>91.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2026-0004</td>
+      <td>Diana</td>
+      <td>DS1D</td>
+      <td>83.1</td>
+      <td>83.7</td>
+      <td>76.5</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2026-0005</td>
+      <td>Ella</td>
+      <td>DS1C</td>
+      <td>97.9</td>
+      <td>100.0</td>
+      <td>84.7</td>
+      <td>88.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">grades.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">menu.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">canteen_sales.csv</span></code>, and <code class="docutils literal notranslate"><span class="pre">weather.csv</span></code> files used in these lessons are <strong>synthetic</strong> datasets generated for this book.</p>
+</div></blockquote>
+<section id="useful-read-csv-options">
+<h3><strong>Useful <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> options</strong><a class="headerlink" href="#useful-read-csv-options" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">usecols</span></code></p></td>
+<td><p>read only some columns</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">usecols=[&quot;name&quot;,</span> <span class="pre">&quot;final&quot;]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">index_col</span></code></p></td>
+<td><p>use a column as the row labels</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">index_col=&quot;student_id&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
+<td><p>force column types</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dtype={&quot;section&quot;:</span> <span class="pre">&quot;category&quot;}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parse_dates</span></code></p></td>
+<td><p>convert columns to dates</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">parse_dates=[&quot;date&quot;]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">na_values</span></code></p></td>
+<td><p>extra markers for missing data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">na_values=[&quot;n/a&quot;,</span> <span class="pre">&quot;-&quot;]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nrows</span></code></p></td>
+<td><p>read only the first rows</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrows=100</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sep</span></code></p></td>
+<td><p>a different separator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sep=&quot;;&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/grades.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"student_id"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">"section"</span><span class="p">:</span> <span class="s2">"category"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>          <span class="c1"># missing values per column</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(36, 6)
+name       0
+section    0
+quiz       0
+lab        1
+midterm    2
+final      0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/weather.csv"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weather</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="n">weather</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>date        datetime64[us]
+station                str
+temp_c             float64
+rain_mm            float64
+humidity             int64
+dtype: object
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>station</th>
+      <th>temp_c</th>
+      <th>rain_mm</th>
+      <th>humidity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2026-08-01</td>
+      <td>Cagayan de Oro</td>
+      <td>28.5</td>
+      <td>9.5</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2026-08-02</td>
+      <td>Cagayan de Oro</td>
+      <td>29.4</td>
+      <td>2.6</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2026-08-03</td>
+      <td>Cagayan de Oro</td>
+      <td>27.2</td>
+      <td>1.8</td>
+      <td>71</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="reading-excel-files">
+<h2><strong>Reading Excel Files</strong><a class="headerlink" href="#reading-excel-files" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">read_excel()</span></code> reads <code class="docutils literal notranslate"><span class="pre">.xlsx</span></code> files (it needs the <code class="docutils literal notranslate"><span class="pre">openpyxl</span></code> package). Use <code class="docutils literal notranslate"><span class="pre">sheet_name</span></code> to choose a sheet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loans</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"data/sample_data.xlsx"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">loans</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">loans</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(15, 5)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>has_job</th>
+      <th>own_house</th>
+      <th>credit_rating</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>young</td>
+      <td>False</td>
+      <td>False</td>
+      <td>fair</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>young</td>
+      <td>False</td>
+      <td>False</td>
+      <td>good</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>young</td>
+      <td>True</td>
+      <td>False</td>
+      <td>good</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>young</td>
+      <td>True</td>
+      <td>True</td>
+      <td>fair</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>young</td>
+      <td>False</td>
+      <td>False</td>
+      <td>fair</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="writing-files">
+<h2><strong>Writing Files</strong><a class="headerlink" href="#writing-files" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">to_csv()</span></code> and <code class="docutils literal notranslate"><span class="pre">to_excel()</span></code>. Pass <code class="docutils literal notranslate"><span class="pre">index=False</span></code> unless the index carries information. The cell below writes to a <strong>temporary</strong> folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"section"</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">)[[</span><span class="s2">"quiz"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">summary</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out</span> <span class="o">/</span> <span class="s2">"section_summary.csv"</span><span class="p">)</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">out</span> <span class="o">/</span> <span class="s2">"section_summary.xlsx"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">out</span> <span class="o">/</span> <span class="s2">"section_summary.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['section_summary.csv', 'section_summary.xlsx']
+section,quiz,final
+DS1A,77.22,76.32
+DS1B,80.5,79.2
+DS1C,86.5,74.08
+DS1D,78.45,79.32
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-text-data">
+<h2><strong>Working with Text Data</strong><a class="headerlink" href="#working-with-text-data" title="Link to this heading">#</a></h2>
+<p>Text columns have a special <strong><code class="docutils literal notranslate"><span class="pre">.str</span></code> accessor</strong> that applies string methods to <strong>every</strong> value at once — the vectorized version of the string methods from Week 7.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/reviews.csv"</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"reviews.text"</span><span class="p">])</span>
+<span class="n">reviews</span> <span class="o">=</span> <span class="n">reviews</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"reviews.text"</span><span class="p">:</span> <span class="s2">"text"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reviews</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">reviews</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000, 2)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AWE2FvX5RxPSIh2RscTK</td>
+      <td>This hotel was nice and quiet. Did not know, t...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AVwcj_OhkufWRAb5wi9T</td>
+      <td>We stayed in the king suite with the separatio...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AVwcj_OhkufWRAb5wi9T</td>
+      <td>Parking was horrible, somebody ran into my ren...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">reviews</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>          <span class="c1"># review length in characters</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"breakfast"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="s2">"of reviews mention breakfast"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>           <span class="c1"># number of words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    10000.0
+mean       651.9
+std        593.6
+min          8.0
+25%        302.0
+50%        462.0
+75%        812.2
+max      14254.0
+Name: text, dtype: float64
+0.324 of reviews mention breakfast
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    39
+1    61
+2    54
+3    52
+4    61
+Name: text, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.str.lower()</span></code>, <code class="docutils literal notranslate"><span class="pre">.str.upper()</span></code>, <code class="docutils literal notranslate"><span class="pre">.str.strip()</span></code></p></td>
+<td><p>clean case and spaces</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.str.len()</span></code></p></td>
+<td><p>length of each string</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.str.contains(pattern)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the text contains a word or pattern</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.str.replace(pattern,</span> <span class="pre">new,</span> <span class="pre">regex=True)</span></code></p></td>
+<td><p>substitute using a <strong>regular expression</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.str.split()</span></code>, <code class="docutils literal notranslate"><span class="pre">.str.get(i)</span></code></p></td>
+<td><p>split into lists / take an item</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.str.count(pattern)</span></code></p></td>
+<td><p>count matches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.str.extract(pattern)</span></code></p></td>
+<td><p>pull out matching parts into a column</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="a-text-cleaning-pipeline">
+<h3><strong>A text-cleaning pipeline</strong><a class="headerlink" href="#a-text-cleaning-pipeline" title="Link to this heading">#</a></h3>
+<p>Before analysis, text is usually <strong>normalized</strong>: lowercase, remove punctuation and digits, and collapse extra spaces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">reviews</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[^a-z\s]"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>      <span class="c1"># keep letters and spaces only</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>           <span class="c1"># collapse repeated spaces</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">reviews</span> <span class="o">=</span> <span class="n">reviews</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="n">clean</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="n">clean</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">())</span>
+<span class="n">reviews</span><span class="p">[[</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">"clean"</span><span class="p">,</span> <span class="s2">"words"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>clean</th>
+      <th>words</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>This hotel was nice and quiet. Did not know, t...</td>
+      <td>this hotel was nice and quiet did not know the...</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>We stayed in the king suite with the separatio...</td>
+      <td>we stayed in the king suite with the separatio...</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Parking was horrible, somebody ran into my ren...</td>
+      <td>parking was horrible somebody ran into my rent...</td>
+      <td>55</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="n">reviews</span><span class="p">[</span><span class="s2">"clean"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span>                <span class="c1"># one row per word</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"the"</span><span class="p">,</span> <span class="s2">"and"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="s2">"was"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">,</span> <span class="s2">"we"</span><span class="p">,</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"of"</span><span class="p">,</span> <span class="s2">"in"</span><span class="p">,</span> <span class="s2">"it"</span><span class="p">,</span> <span class="s2">"for"</span><span class="p">,</span> <span class="s2">"our"</span><span class="p">,</span> <span class="s2">"my"</span><span class="p">,</span>
+        <span class="s2">"with"</span><span class="p">,</span> <span class="s2">"were"</span><span class="p">,</span> <span class="s2">"very"</span><span class="p">,</span> <span class="s2">"but"</span><span class="p">,</span> <span class="s2">"at"</span><span class="p">,</span> <span class="s2">"this"</span><span class="p">,</span> <span class="s2">"had"</span><span class="p">,</span> <span class="s2">"not"</span><span class="p">,</span> <span class="s2">"you"</span><span class="p">,</span> <span class="s2">"on"</span><span class="p">,</span> <span class="s2">"they"</span><span class="p">,</span> <span class="s2">"that"</span><span class="p">,</span>
+        <span class="s2">"are"</span><span class="p">,</span> <span class="s2">"there"</span><span class="p">,</span> <span class="s2">"room"</span><span class="p">,</span> <span class="s2">"hotel"</span><span class="p">,</span> <span class="s2">"stay"</span><span class="p">,</span> <span class="s2">"be"</span><span class="p">,</span> <span class="s2">"as"</span><span class="p">,</span> <span class="s2">"so"</span><span class="p">,</span> <span class="s2">"would"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">,</span> <span class="s2">"t"</span><span class="p">,</span> <span class="s2">"more"</span><span class="p">}</span>
+<span class="n">words</span><span class="p">[</span><span class="o">~</span><span class="n">words</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">stop</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clean
+your         10031
+staff         6251
+have          6067
+great         5909
+us            5643
+from          4690
+clean         4222
+all           4214
+breakfast     4174
+thank         3975
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Positive and negative words can be counted with <code class="docutils literal notranslate"><span class="pre">.str.count()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span><span class="p">[</span><span class="s2">"positive"</span><span class="p">]</span> <span class="o">=</span> <span class="n">reviews</span><span class="p">[</span><span class="s2">"clean"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b(?:great|clean|friendly|excellent|comfortable)\b"</span><span class="p">)</span>
+<span class="n">reviews</span><span class="p">[</span><span class="s2">"negative"</span><span class="p">]</span> <span class="o">=</span> <span class="n">reviews</span><span class="p">[</span><span class="s2">"clean"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b(?:dirty|rude|noisy|broken|smell)\b"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reviews</span><span class="p">[[</span><span class="s2">"positive"</span><span class="p">,</span> <span class="s2">"negative"</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">reviews</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"negative"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[[</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">"negative"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>positive    16498
+negative      979
+dtype: int64
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>negative</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5752</th>
+      <td>My husband and I were excited to stay at Estan...</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>8358</th>
+      <td>I stayed here for 2 nights in July 2013.I orig...</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Paradigm lens · functional</p>
+<p>The cleaning code is a <strong>chain of transformations</strong> — <code class="docutils literal notranslate"><span class="pre">lower</span> <span class="pre">→</span> <span class="pre">replace</span> <span class="pre">→</span> <span class="pre">replace</span> <span class="pre">→</span> <span class="pre">strip</span></code> — each producing a new Series from the previous one, with no loop and no changing variables. This <strong>method chaining</strong> style is the functional pipeline from Week 3, applied to 10,000 reviews at once.</p>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>read CSV / Excel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_csv(path,</span> <span class="pre">…)</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.read_excel(path,</span> <span class="pre">sheet_name=…)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>write CSV / Excel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.to_csv(path,</span> <span class="pre">index=False)</span></code>, <code class="docutils literal notranslate"><span class="pre">df.to_excel(path)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>count missing values</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.isna().sum()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>vectorized text methods</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s.str.lower()</span></code>, <code class="docutils literal notranslate"><span class="pre">.str.contains()</span></code>, <code class="docutils literal notranslate"><span class="pre">.str.replace(regex=True)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>one row per word</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s.str.split().explode()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>most common values</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">value_counts()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>McKinney, W. (2022). <em>Python for data analysis: Data wrangling with pandas, NumPy, and Jupyter</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a></p>
+<p>The pandas development team. (2026). <em>IO tools (text, CSV, HDF5, …)</em>. <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/io.html">https://pandas.pydata.org/docs/user_guide/io.html</a></p>
+<p>The pandas development team. (2026). <em>Working with text data</em>. <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/text.html">https://pandas.pydata.org/docs/user_guide/text.html</a></p>
+<p>VanderPlas, J. (2023). <em>Python data science handbook: Essential tools for working with data</em> (2nd ed.). O’Reilly Media. <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/15_Seatwork_PandasIntro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Seatwork: Series and DataFrames</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/16_Seatwork_TextData.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Seatwork: Reading Data and Text Preprocessing</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-csv-files"><strong>Reading CSV Files</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-read-csv-options"><strong>Useful <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> options</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-excel-files"><strong>Reading Excel Files</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-files"><strong>Writing Files</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-text-data"><strong>Working with Text Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-text-cleaning-pipeline"><strong>A text-cleaning pipeline</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

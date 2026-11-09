@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Seatwork: Variables, Expressions, and Statements &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/exercises/04_Seatwork_Variables';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Control Structures: Conditionals and Iteration" href="../05_ControlStructures.html" />
+    <link rel="prev" title="Variables, Expressions, and Statements" href="../04_VariablesExpressions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/exercises/04_Seatwork_Variables.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Seatwork: Variables, Expressions, and Statements</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-the-canteen-receipt"><strong>Laboratory Exercise: The Canteen Receipt</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-variables-and-arithmetic"><strong>Task 1 — Variables and arithmetic</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-discount-and-change"><strong>Task 2 — Discount and change</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-breaking-down-the-change"><strong>Task 3 — Breaking down the change</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-type-conversion"><strong>Task 4 — Type conversion</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-a-formatted-receipt"><strong>Task 5 — A formatted receipt</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-fix-the-style"><strong>Task 6 — Fix the style</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-reflection"><strong>Task 7 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="seatwork-variables-expressions-and-statements">
+<h1><strong>Seatwork: Variables, Expressions, and Statements</strong><a class="headerlink" href="#seatwork-variables-expressions-and-statements" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objective</strong></p>
+<p>Implement program logic in Python using variables, operators, type conversion, and f-strings, following PEP 8 conventions.</p>
+<section id="laboratory-exercise-the-canteen-receipt">
+<h2><strong>Laboratory Exercise: The Canteen Receipt</strong><a class="headerlink" href="#laboratory-exercise-the-canteen-receipt" title="Link to this heading">#</a></h2>
+<p>Write each task in its own code cell. Use <strong>meaningful variable names</strong> and <strong>f-strings</strong> for output. Do not use <code class="docutils literal notranslate"><span class="pre">input()</span></code> — assign values directly.</p>
+<section id="task-1-variables-and-arithmetic">
+<h3><strong>Task 1 — Variables and arithmetic</strong><a class="headerlink" href="#task-1-variables-and-arithmetic" title="Link to this heading">#</a></h3>
+<p>A student buys <strong>2</strong> cups of rice at <strong>₱15</strong>, <strong>1</strong> chicken adobo at <strong>₱80</strong>, and <strong>1</strong> buko juice at <strong>₱40</strong>. Store each quantity and price in variables, then compute the <strong>subtotal</strong>.</p>
+<p>Print it exactly as shown.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Subtotal: ₱150.00
+</pre></div>
+</div>
+</section>
+<section id="task-2-discount-and-change">
+<h3><strong>Task 2 — Discount and change</strong><a class="headerlink" href="#task-2-discount-and-change" title="Link to this heading">#</a></h3>
+<p>Students get a <strong>10% discount</strong>. The student pays with a <strong>₱200</strong> bill. Compute the discount, the amount due, and the change.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Discount: ₱15.00
+Amount due: ₱135.00
+Change: ₱65.00
+</pre></div>
+</div>
+</section>
+<section id="task-3-breaking-down-the-change">
+<h3><strong>Task 3 — Breaking down the change</strong><a class="headerlink" href="#task-3-breaking-down-the-change" title="Link to this heading">#</a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">//</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code>, express the change (as a <strong>whole number of pesos</strong>) in ₱50 bills, ₱20 bills, ₱5 coins, and ₱1 coins, using as few pieces as possible.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>₱50 × 1, ₱20 × 0, ₱5 × 3, ₱1 × 0
+</pre></div>
+</div>
+</section>
+<section id="task-4-type-conversion">
+<h3><strong>Task 4 — Type conversion</strong><a class="headerlink" href="#task-4-type-conversion" title="Link to this heading">#</a></h3>
+<p>The cashier’s system stores values as <strong>text</strong>: <code class="docutils literal notranslate"><span class="pre">price_text</span> <span class="pre">=</span> <span class="pre">&quot;65.50&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">qty_text</span> <span class="pre">=</span> <span class="pre">&quot;3&quot;</span></code>. Convert them and print the total, then print the <strong>type</strong> of each converted value.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total: ₱196.50
+&lt;class 'float'&gt; &lt;class 'int'&gt;
+</pre></div>
+</div>
+</section>
+<section id="task-5-a-formatted-receipt">
+<h3><strong>Task 5 — A formatted receipt</strong><a class="headerlink" href="#task-5-a-formatted-receipt" title="Link to this heading">#</a></h3>
+<p>Print a receipt with aligned columns using format specifiers (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, widths). Your output must match exactly:</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>================================
+Item             Qty      Amount
+--------------------------------
+Rice               2       30.00
+Chicken adobo      1       80.00
+Buko juice         1       40.00
+--------------------------------
+Subtotal                  150.00
+Discount (10%)            -15.00
+TOTAL                     135.00
+================================
+</pre></div>
+</div>
+</section>
+<section id="task-6-fix-the-style">
+<h3><strong>Task 6 — Fix the style</strong><a class="headerlink" href="#task-6-fix-the-style" title="Link to this heading">#</a></h3>
+<p>Rewrite this code so it follows PEP 8 and is easy to understand. The output must not change.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">B</span><span class="o">=</span><span class="mi">15</span><span class="p">;</span><span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">D</span><span class="o">=</span><span class="mi">80</span>
+<span class="n">T</span><span class="o">=</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="o">+</span><span class="n">c</span><span class="o">*</span><span class="n">D</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>110
+</pre></div>
+</div>
+</section>
+<section id="task-7-reflection">
+<h3><strong>Task 7 — Reflection</strong><a class="headerlink" href="#task-7-reflection" title="Link to this heading">#</a></h3>
+<p>Answer in a Markdown cell:</p>
+<ol class="arabic simple">
+<li><p>Why does <code class="docutils literal notranslate"><span class="pre">input()</span></code> require type conversion before arithmetic?</p></li>
+<li><p>What is the difference between <code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">//</span></code>? Give an example from the canteen problem.</p></li>
+<li><p>Which PEP 8 rules did you apply in Task 6?</p></li>
+</ol>
+</section>
+</section>
+<section id="submission-requirements">
+<h2><strong>Submission Requirements</strong><a class="headerlink" href="#submission-requirements" title="Link to this heading">#</a></h2>
+<p>Submit <strong>one Jupyter Notebook</strong> containing all tasks in order. Each task should have:</p>
+<ul class="simple">
+<li><p>the code that solves it;</p></li>
+<li><p>the output produced by running the code; and</p></li>
+<li><p>the Markdown answers to the questions asked.</p></li>
+</ul>
+<p>Make sure the notebook runs from top to bottom without errors (<strong>Kernel → Restart &amp; Run All</strong>) before submitting.</p>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Downey, A. B. (2024). <em>Think Python: How to think like a computer scientist</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://allendowney.github.io/ThinkPython/">https://allendowney.github.io/ThinkPython/</a></p>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 3. An informal introduction to Python</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/introduction.html">https://docs.python.org/3/tutorial/introduction.html</a></p>
+<p>van Rossum, G., Warsaw, B., &amp; Coghlan, A. (2001). <em>PEP 8 — Style guide for Python code</em>. Python Software Foundation. <a class="reference external" href="https://peps.python.org/pep-0008/">https://peps.python.org/pep-0008/</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../04_VariablesExpressions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Variables, Expressions, and Statements</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../05_ControlStructures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Control Structures: Conditionals and Iteration</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-the-canteen-receipt"><strong>Laboratory Exercise: The Canteen Receipt</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-variables-and-arithmetic"><strong>Task 1 — Variables and arithmetic</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-discount-and-change"><strong>Task 2 — Discount and change</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-breaking-down-the-change"><strong>Task 3 — Breaking down the change</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-type-conversion"><strong>Task 4 — Type conversion</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-a-formatted-receipt"><strong>Task 5 — A formatted receipt</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-fix-the-style"><strong>Task 6 — Fix the style</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-reflection"><strong>Task 7 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

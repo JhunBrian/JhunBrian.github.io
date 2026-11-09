@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Course home &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="icon" href="_static/favicon.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to use this book" href="course-guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Course home</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-course">Explore the course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome">Welcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-this-course-is-organized">How this course is organized</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-paradigms">A note on paradigms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-material">About this material</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="course-home">
+<h1>Course home<a class="headerlink" href="#course-home" title="Link to this heading">#</a></h1>
+<section class="course-hero" aria-label="Welcome to DS112">
+  <div class="course-eyebrow">DS112 / The course companion</div>
+  <p class="hero-title">Think in steps.<br>Compute with Python.</p>
+  <p>Computer Programming for Data Science. Learn to plan algorithms, write clear Python, and analyze data with NumPy and pandas.</p>
+  <div class="hero-actions">
+    <a class="hero-button" href="notebooks/00_ProgrammingLanguages.html">Start learning <span aria-hidden="true">→</span></a>
+    <a class="hero-button secondary" href="course-guide.html">How to use this book</a>
+  </div>
+</section>
+<div class="course-meta">FIRST-YEAR DATA SCIENCE · USTP · COLLEGE OF INFORMATION TECHNOLOGY AND COMPUTING</div><section id="explore-the-course">
+<h2>Explore the course<a class="headerlink" href="#explore-the-course" title="Link to this heading">#</a></h2>
+<p>Choose a module below, or follow the course navigation from top to bottom. <strong>Seatworks</strong> (practice) and graded <strong>activities</strong> appear beneath the lessons they support.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+01 · Introduction to programming</div>
+<p class="sd-card-text">Programming languages and Python, algorithms and flowcharts, programming paradigms, and the Jupyter Notebook. <em>Weeks 2–3</em></p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Begin with programming languages →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/00_ProgrammingLanguages.html"><span class="doc">Programming Languages and Python</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+02 · Python programming</div>
+<p class="sd-card-text">Variables and expressions, control structures, functions, lists, tuples, strings, dictionaries, files, exceptions, and a first look at classes. <em>Weeks 4–8</em></p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Start writing Python →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/04_VariablesExpressions.html"><span class="doc">Variables, Expressions, and Statements</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+03 · NumPy</div>
+<p class="sd-card-text">Fast numerical arrays: 1D and 2D operations, broadcasting, universal functions, axes, and reshaping. <em>Weeks 10–12</em></p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Start NumPy →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/11_IntroNumPy.html"><span class="doc">Introduction to NumPy</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+04 · pandas</div>
+<p class="sd-card-text">Series and DataFrames, reading data, selection, visualization, grouping, merging, and pivot tables. <em>Weeks 13–16</em></p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Start pandas →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/15_IntroPandas.html"><span class="doc">Introduction to pandas: Series and DataFrames</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+05 · Integrated PyData project</div>
+<p class="sd-card-text">Bring everything together in a tested, reproducible data analysis project and presentation. <em>Weeks 13–17</em></p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Read the project guide →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/23_PyDataProject.html"><span class="doc">The Integrated PyData Project</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Paradigms throughout the course</div>
+<p class="sd-card-text">Structured, procedural, and functional thinking — introduced in Week 3, revisited with real data in Week 16.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Explore programming paradigms →</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="notebooks/02_ProgrammingParadigms.html"><span class="doc">Programming Paradigms</span></a></div>
+</div>
+</div>
+</div>
+<p><a class="reference internal" href="syllabus.html"><span class="std std-doc">View the course syllabus</span></a> · <a class="reference internal" href="course-guide.html"><span class="std std-doc">How to use this book</span></a> · <a class="reference internal" href="datasets.html"><span class="std std-doc">Datasets</span></a> · <a class="reference internal" href="notebooks/MidtermReview.html"><span class="std std-doc">Midterm review guide</span></a></p>
+</section>
+<section id="welcome">
+<h2>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h2>
+<p>Welcome to <strong>Computer Programming for Data Science</strong>, the first programming course of the BS Data Science program. No prior programming experience is assumed.</p>
+<p>Data scientists spend much of their time <strong>writing programs</strong>: programs that collect data, clean it, compute with it, and present what it means. In this course, you will learn to think like a programmer — to break a problem into <strong>precise steps</strong> — and to express those steps in <strong>Python</strong>, the most widely used language in data science.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Problem → Algorithm → Python program → Data analysis with NumPy &amp; pandas → Insight
+</pre></div>
+</div>
+</section>
+<section id="how-this-course-is-organized">
+<h2>How this course is organized<a class="headerlink" href="#how-this-course-is-organized" title="Link to this heading">#</a></h2>
+<p>The course follows a path from <strong>thinking</strong> to <strong>coding</strong> to <strong>analyzing</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Introduction to programming.</strong> What programs and programming languages are, how to design <strong>algorithms</strong> and draw <strong>flowcharts</strong>, the main <strong>programming paradigms</strong>, and how to work in <strong>Jupyter notebooks</strong>.</p></li>
+<li><p><strong>Python programming.</strong> The core language: variables, control structures, functions, data structures, files, exceptions, and objects.</p></li>
+<li><p><strong>NumPy.</strong> Fast computation with arrays — the foundation of scientific Python.</p></li>
+<li><p><strong>pandas.</strong> Working with real tables of data: selecting, cleaning, grouping, merging, reshaping, and visualizing.</p></li>
+<li><p><strong>Integrated project.</strong> A complete, reproducible data analysis presented to the class.</p></li>
+</ol>
+</section>
+<section id="a-note-on-paradigms">
+<h2>A note on paradigms<a class="headerlink" href="#a-note-on-paradigms" title="Link to this heading">#</a></h2>
+<p>This course places special emphasis on three ways of organizing programs:</p>
+<ul class="simple">
+<li><p><strong>Structured programming</strong> — building every program from sequence, selection, and iteration;</p></li>
+<li><p><strong>Procedural programming</strong> — decomposing problems into well-named, reusable functions;</p></li>
+<li><p><strong>Functional programming</strong> — transforming data through pure functions and pipelines, the style behind NumPy and pandas.</p></li>
+</ul>
+<p>Look for the <strong>Paradigm lens</strong> notes throughout the book. They show which way of thinking each new tool belongs to.</p>
+<div class="tip admonition">
+<p class="admonition-title">A note to learners</p>
+<p>Programming is learned by doing. Read each example, <strong>predict</strong> what it will print, run it, and then change it to see what happens. Mistakes and error messages are a normal part of learning — read them carefully; they tell you what went wrong.</p>
+</div>
+</section>
+<section id="about-this-material">
+<h2>About this material<a class="headerlink" href="#about-this-material" title="Link to this heading">#</a></h2>
+<p>This Jupyter Book is an instructional resource of the <strong>Department of Data Science, USTP</strong>, for <strong>DS112 — Computer Programming</strong>. It follows the official course syllabus and draws on the course’s instructional materials and the readings listed in the syllabus. Every page ends with its references.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="course-guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">How to use this book</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-course">Explore the course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome">Welcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-this-course-is-organized">How this course is organized</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-paradigms">A note on paradigms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-material">About this material</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Seatwork: Functions &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/exercises/06_Seatwork_Functions';</script>
+    <link rel="icon" href="../../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lists, Tuples, and Strings" href="../07_ListsTuplesStrings.html" />
+    <link rel="prev" title="Functions" href="../06_Functions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/exercises/06_Seatwork_Functions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Seatwork: Functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-gwa-toolkit"><strong>Laboratory Exercise: GWA Toolkit</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-small-functions-with-return"><strong>Task 1 — Small functions with return</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-default-and-keyword-arguments"><strong>Task 2 — Default and keyword arguments</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-decomposition"><strong>Task 3 — Decomposition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-sorting-with-a-key-function"><strong>Task 4 — Sorting with a key function</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-map-and-filter"><strong>Task 5 — map and filter</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-pure-vs-impure"><strong>Task 6 — Pure vs. impure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-reflection"><strong>Task 7 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="seatwork-functions">
+<h1><strong>Seatwork: Functions</strong><a class="headerlink" href="#seatwork-functions" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objective</strong></p>
+<p>Define and call user-defined functions; decompose a problem into procedures; use lambda, map, and filter.</p>
+<section id="laboratory-exercise-gwa-toolkit">
+<h2><strong>Laboratory Exercise: GWA Toolkit</strong><a class="headerlink" href="#laboratory-exercise-gwa-toolkit" title="Link to this heading">#</a></h2>
+<p>Each subject is a tuple <code class="docutils literal notranslate"><span class="pre">(code,</span> <span class="pre">grade,</span> <span class="pre">units)</span></code>, where grades follow the university scale (1.00 is highest, 3.00 is the lowest passing grade, 5.00 is failing).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">subjects</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"DS112"</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">"MATH101"</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">"GE1"</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">"NSTP1"</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">"PE1"</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+</div>
+<section id="task-1-small-functions-with-return">
+<h3><strong>Task 1 — Small functions with return</strong><a class="headerlink" href="#task-1-small-functions-with-return" title="Link to this heading">#</a></h3>
+<p>Write <code class="docutils literal notranslate"><span class="pre">total_units(subjects)</span></code> and <code class="docutils literal notranslate"><span class="pre">gwa(subjects)</span></code> (the units-weighted average of the grades). Both must <strong>return</strong> their results. Print the GWA to <strong>3 decimals</strong>.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>14
+1.464
+</pre></div>
+</div>
+</section>
+<section id="task-2-default-and-keyword-arguments">
+<h3><strong>Task 2 — Default and keyword arguments</strong><a class="headerlink" href="#task-2-default-and-keyword-arguments" title="Link to this heading">#</a></h3>
+<p>Write <code class="docutils literal notranslate"><span class="pre">is_passing(grade,</span> <span class="pre">passing=3.00)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the grade is <strong>at most</strong> <code class="docutils literal notranslate"><span class="pre">passing</span></code>. Call it for <code class="docutils literal notranslate"><span class="pre">2.75</span></code>, <code class="docutils literal notranslate"><span class="pre">3.25</span></code>, and <code class="docutils literal notranslate"><span class="pre">3.25</span></code> with <code class="docutils literal notranslate"><span class="pre">passing=3.50</span></code>.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False True
+</pre></div>
+</div>
+</section>
+<section id="task-3-decomposition">
+<h3><strong>Task 3 — Decomposition</strong><a class="headerlink" href="#task-3-decomposition" title="Link to this heading">#</a></h3>
+<p>Write <code class="docutils literal notranslate"><span class="pre">standing(gwa_value)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">&quot;Excellent&quot;</span></code> (≤ 1.50), <code class="docutils literal notranslate"><span class="pre">&quot;Very</span> <span class="pre">good&quot;</span></code> (≤ 2.00), <code class="docutils literal notranslate"><span class="pre">&quot;Good&quot;</span></code> (≤ 2.50), or <code class="docutils literal notranslate"><span class="pre">&quot;Fair&quot;</span></code>. Then write <code class="docutils literal notranslate"><span class="pre">report(name,</span> <span class="pre">subjects)</span></code> that <strong>uses</strong> <code class="docutils literal notranslate"><span class="pre">gwa()</span></code> and <code class="docutils literal notranslate"><span class="pre">standing()</span></code> and returns a single string. Print the report for Ana.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Ana: GWA 1.464 (Excellent), 14 units
+</pre></div>
+</div>
+</section>
+<section id="task-4-sorting-with-a-key-function">
+<h3><strong>Task 4 — Sorting with a key function</strong><a class="headerlink" href="#task-4-sorting-with-a-key-function" title="Link to this heading">#</a></h3>
+<p>Print the subject <strong>codes</strong> sorted from best grade to worst; break ties by more units first. Use <code class="docutils literal notranslate"><span class="pre">sorted()</span></code> with a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> key.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['NSTP1', 'DS112', 'GE1', 'MATH101', 'PE1']
+</pre></div>
+</div>
+</section>
+<section id="task-5-map-and-filter">
+<h3><strong>Task 5 — map and filter</strong><a class="headerlink" href="#task-5-map-and-filter" title="Link to this heading">#</a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">filter</span></code> and <code class="docutils literal notranslate"><span class="pre">map</span></code> with <code class="docutils literal notranslate"><span class="pre">lambda</span></code>:</p>
+<ol class="arabic simple">
+<li><p>list the codes of subjects with a grade <strong>better than 1.50</strong> (strictly less than 1.50);</p></li>
+<li><p>convert every grade to a <strong>percentage equivalent</strong> using <code class="docutils literal notranslate"><span class="pre">percent</span> <span class="pre">=</span> <span class="pre">100</span> <span class="pre">-</span> <span class="pre">(grade</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">12.5</span></code>, rounded to 1 decimal.</p></li>
+</ol>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['DS112', 'NSTP1']
+[96.9, 90.6, 93.8, 100.0, 87.5]
+</pre></div>
+</div>
+</section>
+<section id="task-6-pure-vs-impure">
+<h3><strong>Task 6 — Pure vs. impure</strong><a class="headerlink" href="#task-6-pure-vs-impure" title="Link to this heading">#</a></h3>
+<p>The function below has a <strong>side effect</strong>. Rewrite it as a <strong>pure</strong> function <code class="docutils literal notranslate"><span class="pre">curved(grades,</span> <span class="pre">bonus)</span></code> that returns a new list and leaves the original unchanged. Show that <code class="docutils literal notranslate"><span class="pre">original</span></code> is unchanged after calling your function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">curve</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">bonus</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)):</span>
+        <span class="n">grades</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">grades</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">bonus</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grades</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1.0, 1.25, 1.5]
+[1.25, 1.75, 2.0]
+</pre></div>
+</div>
+</section>
+<section id="task-7-reflection">
+<h3><strong>Task 7 — Reflection</strong><a class="headerlink" href="#task-7-reflection" title="Link to this heading">#</a></h3>
+<p>Answer in a Markdown cell:</p>
+<ol class="arabic simple">
+<li><p>Why should <code class="docutils literal notranslate"><span class="pre">gwa()</span></code> <strong>return</strong> its value instead of printing it?</p></li>
+<li><p>Draw the decomposition tree of your Task 3 solution.</p></li>
+<li><p>Which of your functions are pure? Which paradigm(s) did you use in this seatwork?</p></li>
+</ol>
+</section>
+</section>
+<section id="submission-requirements">
+<h2><strong>Submission Requirements</strong><a class="headerlink" href="#submission-requirements" title="Link to this heading">#</a></h2>
+<p>Submit <strong>one Jupyter Notebook</strong> containing all tasks in order. Each task should have:</p>
+<ul class="simple">
+<li><p>the code that solves it;</p></li>
+<li><p>the output produced by running the code; and</p></li>
+<li><p>the Markdown answers to the questions asked.</p></li>
+</ul>
+<p>Make sure the notebook runs from top to bottom without errors (<strong>Kernel → Restart &amp; Run All</strong>) before submitting.</p>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Downey, A. B. (2024). <em>Think Python: How to think like a computer scientist</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://allendowney.github.io/ThinkPython/">https://allendowney.github.io/ThinkPython/</a></p>
+<p>Kuchling, A. M. (2026). <em>Functional programming HOWTO</em>. Python Software Foundation. <a class="reference external" href="https://docs.python.org/3/howto/functional.html">https://docs.python.org/3/howto/functional.html</a></p>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 4. More control flow tools</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html">https://docs.python.org/3/tutorial/controlflow.html</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../06_Functions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Functions</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../07_ListsTuplesStrings.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lists, Tuples, and Strings</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-exercise-gwa-toolkit"><strong>Laboratory Exercise: GWA Toolkit</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-small-functions-with-return"><strong>Task 1 — Small functions with return</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-default-and-keyword-arguments"><strong>Task 2 — Default and keyword arguments</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-decomposition"><strong>Task 3 — Decomposition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-sorting-with-a-key-function"><strong>Task 4 — Sorting with a key function</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-map-and-filter"><strong>Task 5 — map and filter</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-pure-vs-impure"><strong>Task 6 — Pure vs. impure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-reflection"><strong>Task 7 — Reflection</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements"><strong>Submission Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Indexing, Selection, and Summary Operations &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/17_IndexingSelection';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seatwork: Indexing, Selection, and Summaries" href="exercises/17_Seatwork_Selection.html" />
+    <link rel="prev" title="Seatwork: Reading Data and Text Preprocessing" href="exercises/16_Seatwork_TextData.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/17_IndexingSelection.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Indexing, Selection, and Summary Operations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-select"><strong>Three Ways to Select</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-with-boolean-conditions"><strong>Filtering with Boolean Conditions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-values-safely"><strong>Changing Values Safely</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values"><strong>Missing Values</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-operations"><strong>Summary Operations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-chaining"><strong>Method Chaining</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="indexing-selection-and-summary-operations">
+<h1><strong>Indexing, Selection, and Summary Operations</strong><a class="headerlink" href="#indexing-selection-and-summary-operations" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 14:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Perform selection, filtering, missing-value handling, and summary operations using pandas.</p>
+<p>Most analysis questions are about <strong>subsets</strong> of the data: <em>Which students failed the midterm? What is the average final of section DS1A? Who has missing scores?</em> This lesson covers how to <strong>select</strong>, <strong>filter</strong>, <strong>clean</strong>, and <strong>summarize</strong> data in pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+
+<span class="n">grades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/grades.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"student_id"</span><span class="p">)</span>
+<span class="n">grades</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>section</th>
+      <th>quiz</th>
+      <th>lab</th>
+      <th>midterm</th>
+      <th>final</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0001</th>
+      <td>Ana</td>
+      <td>DS1A</td>
+      <td>56.8</td>
+      <td>69.2</td>
+      <td>59.7</td>
+      <td>62.1</td>
+    </tr>
+    <tr>
+      <th>2026-0002</th>
+      <td>Ben</td>
+      <td>DS1A</td>
+      <td>91.0</td>
+      <td>82.4</td>
+      <td>81.0</td>
+      <td>80.7</td>
+    </tr>
+    <tr>
+      <th>2026-0003</th>
+      <td>Carlo</td>
+      <td>DS1D</td>
+      <td>95.0</td>
+      <td>96.8</td>
+      <td>87.5</td>
+      <td>91.4</td>
+    </tr>
+    <tr>
+      <th>2026-0004</th>
+      <td>Diana</td>
+      <td>DS1D</td>
+      <td>83.1</td>
+      <td>83.7</td>
+      <td>76.5</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>2026-0005</th>
+      <td>Ella</td>
+      <td>DS1C</td>
+      <td>97.9</td>
+      <td>100.0</td>
+      <td>84.7</td>
+      <td>88.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="three-ways-to-select">
+<h2><strong>Three Ways to Select</strong><a class="headerlink" href="#three-ways-to-select" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Syntax</p></th>
+<th class="head"><p>Selects by</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df[&quot;col&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">df[[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;]]</span></code></p></td>
+<td><p>column name(s)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grades[&quot;final&quot;]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.loc[rows,</span> <span class="pre">cols]</span></code></p></td>
+<td><p><strong>labels</strong> (index values, column names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grades.loc[&quot;2026-0003&quot;,</span> <span class="pre">&quot;final&quot;]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.iloc[rows,</span> <span class="pre">cols]</span></code></p></td>
+<td><p><strong>integer positions</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grades.iloc[2,</span> <span class="pre">5]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Analogy.</strong> <code class="docutils literal notranslate"><span class="pre">loc</span></code> is like finding a seat by its <strong>ticket label</strong> (<em>Row F, Seat 12</em>); <code class="docutils literal notranslate"><span class="pre">iloc</span></code> is like counting <strong>positions</strong> (<em>the third row, the sixth seat</em>).</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="s2">"final"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2026-0003"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">grades</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2026-0001"</span><span class="p">:</span><span class="s2">"2026-0004"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"quiz"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span>    <span class="c1"># label slices INCLUDE the end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>student_id
+2026-0001    62.1
+2026-0002    80.7
+2026-0003    91.4
+Name: final, dtype: float64
+91.4
+91.4
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>quiz</th>
+      <th>final</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0001</th>
+      <td>Ana</td>
+      <td>56.8</td>
+      <td>62.1</td>
+    </tr>
+    <tr>
+      <th>2026-0002</th>
+      <td>Ben</td>
+      <td>91.0</td>
+      <td>80.7</td>
+    </tr>
+    <tr>
+      <th>2026-0003</th>
+      <td>Carlo</td>
+      <td>95.0</td>
+      <td>91.4</td>
+    </tr>
+    <tr>
+      <th>2026-0004</th>
+      <td>Diana</td>
+      <td>83.1</td>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>                                                <span class="c1"># position slices exclude the end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>section</th>
+      <th>quiz</th>
+      <th>lab</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0001</th>
+      <td>DS1A</td>
+      <td>56.8</td>
+      <td>69.2</td>
+    </tr>
+    <tr>
+      <th>2026-0002</th>
+      <td>DS1A</td>
+      <td>91.0</td>
+      <td>82.4</td>
+    </tr>
+    <tr>
+      <th>2026-0003</th>
+      <td>DS1D</td>
+      <td>95.0</td>
+      <td>96.8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="filtering-with-boolean-conditions">
+<h2><strong>Filtering with Boolean Conditions</strong><a class="headerlink" href="#filtering-with-boolean-conditions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">failed_midterm</span> <span class="o">=</span> <span class="n">grades</span><span class="p">[</span><span class="n">grades</span><span class="p">[</span><span class="s2">"midterm"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">75</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">failed_midterm</span><span class="p">),</span> <span class="s2">"students below 75 on the midterm"</span><span class="p">)</span>
+
+<span class="n">ds1a_high</span> <span class="o">=</span> <span class="n">grades</span><span class="p">[(</span><span class="n">grades</span><span class="p">[</span><span class="s2">"section"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"DS1A"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="s2">"final"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">85</span><span class="p">)]</span>
+<span class="n">ds1a_high</span><span class="p">[[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"section"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12 students below 75 on the midterm
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>section</th>
+      <th>final</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0011</th>
+      <td>Kara</td>
+      <td>DS1A</td>
+      <td>85.0</td>
+    </tr>
+    <tr>
+      <th>2026-0023</th>
+      <td>Wena</td>
+      <td>DS1A</td>
+      <td>96.7</td>
+    </tr>
+    <tr>
+      <th>2026-0029</th>
+      <td>Cris</td>
+      <td>DS1A</td>
+      <td>92.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Combine conditions with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (and), <code class="docutils literal notranslate"><span class="pre">|</span></code> (or), <code class="docutils literal notranslate"><span class="pre">~</span></code> (not), and wrap each condition in <strong>parentheses</strong>.</p>
+<p>Other handy filters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="n">grades</span><span class="p">[</span><span class="s2">"section"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"DS1B"</span><span class="p">,</span> <span class="s2">"DS1D"</span><span class="p">])]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="n">grades</span><span class="p">[</span><span class="s2">"quiz"</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">)][</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">grades</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"final &gt;= 90 and lab &gt;= 85"</span><span class="p">)[[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"lab"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20, 6)
+['Felix', 'Hector', 'Kara', 'Tomas', 'Xian', 'Bea']
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>lab</th>
+      <th>final</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0003</th>
+      <td>Carlo</td>
+      <td>96.8</td>
+      <td>91.4</td>
+    </tr>
+    <tr>
+      <th>2026-0007</th>
+      <td>Gina</td>
+      <td>93.5</td>
+      <td>96.3</td>
+    </tr>
+    <tr>
+      <th>2026-0023</th>
+      <td>Wena</td>
+      <td>100.0</td>
+      <td>96.7</td>
+    </tr>
+    <tr>
+      <th>2026-0029</th>
+      <td>Cris</td>
+      <td>93.2</td>
+      <td>92.5</td>
+    </tr>
+    <tr>
+      <th>2026-0030</th>
+      <td>Dindo</td>
+      <td>85.5</td>
+      <td>94.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="changing-values-safely">
+<h2><strong>Changing Values Safely</strong><a class="headerlink" href="#changing-values-safely" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">loc</span></code> with a condition to change only the matching rows — in one step:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">adjusted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adjusted</span><span class="p">[</span><span class="s2">"final"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>           <span class="c1"># floor very low finals at 60 (an example policy)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">grades</span><span class="p">[</span><span class="s2">"final"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">"values changed;"</span><span class="p">,</span> <span class="n">adjusted</span><span class="p">[</span><span class="s2">"final"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s2">"is the new minimum"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 values changed; 60.0 is the new minimum
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Avoid “chained” assignments like <code class="docutils literal notranslate"><span class="pre">df[df[&quot;x&quot;]</span> <span class="pre">&gt;</span> <span class="pre">0][&quot;y&quot;]</span> <span class="pre">=</span> <span class="pre">1</span></code> — they modify a temporary copy, not your DataFrame. Use <code class="docutils literal notranslate"><span class="pre">df.loc[condition,</span> <span class="pre">&quot;y&quot;]</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="missing-values">
+<h2><strong>Missing Values</strong><a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
+<p>pandas marks missing data as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. The main tools:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">isna()</span></code>, <code class="docutils literal notranslate"><span class="pre">notna()</span></code></p></td>
+<td><p>find missing values</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dropna()</span></code></p></td>
+<td><p>remove rows (or columns) with missing values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fillna(value)</span></code></p></td>
+<td><p>replace missing values</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">grades</span><span class="p">[</span><span class="n">grades</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)][[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"lab"</span><span class="p">,</span> <span class="s2">"midterm"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name       0
+section    0
+quiz       0
+lab        1
+midterm    2
+final      0
+dtype: int64
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>lab</th>
+      <th>midterm</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0006</th>
+      <td>Felix</td>
+      <td>81.8</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2026-0012</th>
+      <td>Leo</td>
+      <td>NaN</td>
+      <td>72.7</td>
+    </tr>
+    <tr>
+      <th>2026-0018</th>
+      <td>Rafael</td>
+      <td>78.4</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">filled</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s2">"midterm"</span><span class="p">:</span> <span class="n">grades</span><span class="p">[</span><span class="s2">"midterm"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s2">"lab"</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span> <span class="s2">"→"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">),</span> <span class="s2">"rows after dropna"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">grades</span><span class="p">[</span><span class="s2">"midterm"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="p">[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"midterm"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36 → 33 rows after dropna
+              name  midterm
+student_id                 
+2026-0006    Felix     75.7
+2026-0018   Rafael     75.7
+</pre></div>
+</div>
+</div>
+</div>
+<p>Choosing <strong>how</strong> to handle missing data is a decision with consequences: dropping rows loses students; filling with the mean may hide a real absence. Always state the choice you made.</p>
+</section>
+<section id="summary-operations">
+<h2><strong>Summary Operations</strong><a class="headerlink" href="#summary-operations" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">grades</span><span class="p">[[</span><span class="s2">"quiz"</span><span class="p">,</span> <span class="s2">"lab"</span><span class="p">,</span> <span class="s2">"midterm"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>                   <span class="c1"># per column</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>      <span class="c1"># per student</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="s2">"section"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="s2">"section"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> <span class="n">grades</span><span class="p">[</span><span class="s2">"section"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">grades</span><span class="p">[</span><span class="s2">"final"</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="s2">"name"</span><span class="p">],</span> <span class="s2">"has the highest final"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>quiz       79.74
+lab        84.19
+midterm    75.69
+final      77.60
+dtype: float64
+student_id
+2026-0001    61.95
+2026-0002    83.78
+2026-0003    92.68
+2026-0004    85.82
+2026-0005    92.68
+dtype: float64
+section
+DS1D    15
+DS1A    10
+DS1C     6
+DS1B     5
+Name: count, dtype: int64
+4 &lt;StringArray&gt;
+['DS1A', 'DS1D', 'DS1C', 'DS1B']
+Length: 4, dtype: str
+Diana has the highest final
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">)[[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"section"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>section</th>
+      <th>final</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0004</th>
+      <td>Diana</td>
+      <td>DS1D</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>2026-0023</th>
+      <td>Wena</td>
+      <td>DS1A</td>
+      <td>96.7</td>
+    </tr>
+    <tr>
+      <th>2026-0007</th>
+      <td>Gina</td>
+      <td>DS1D</td>
+      <td>96.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span><span class="p">[[</span><span class="s2">"quiz"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"min"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>quiz</th>
+      <th>final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mean</th>
+      <td>79.74</td>
+      <td>77.60</td>
+    </tr>
+    <tr>
+      <th>median</th>
+      <td>82.95</td>
+      <td>76.90</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>12.97</td>
+      <td>12.36</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>48.50</td>
+      <td>52.70</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>100.00</td>
+      <td>100.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="method-chaining">
+<h2><strong>Method Chaining</strong><a class="headerlink" href="#method-chaining" title="Link to this heading">#</a></h2>
+<p>Several steps can be written as one readable chain:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">grades</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">average</span><span class="o">=</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="p">[[</span><span class="s2">"quiz"</span><span class="p">,</span> <span class="s2">"lab"</span><span class="p">,</span> <span class="s2">"midterm"</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"average &gt;= 85"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"average"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">[[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"section"</span><span class="p">,</span> <span class="s2">"average"</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>section</th>
+      <th>average</th>
+    </tr>
+    <tr>
+      <th>student_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-0023</th>
+      <td>Wena</td>
+      <td>DS1A</td>
+      <td>95.22</td>
+    </tr>
+    <tr>
+      <th>2026-0009</th>
+      <td>Ivy</td>
+      <td>DS1B</td>
+      <td>94.82</td>
+    </tr>
+    <tr>
+      <th>2026-0003</th>
+      <td>Carlo</td>
+      <td>DS1D</td>
+      <td>92.68</td>
+    </tr>
+    <tr>
+      <th>2026-0005</th>
+      <td>Ella</td>
+      <td>DS1C</td>
+      <td>92.68</td>
+    </tr>
+    <tr>
+      <th>2026-0007</th>
+      <td>Gina</td>
+      <td>DS1D</td>
+      <td>91.10</td>
+    </tr>
+    <tr>
+      <th>2026-0030</th>
+      <td>Dindo</td>
+      <td>DS1D</td>
+      <td>87.10</td>
+    </tr>
+    <tr>
+      <th>2026-0034</th>
+      <td>Hans</td>
+      <td>DS1A</td>
+      <td>86.60</td>
+    </tr>
+    <tr>
+      <th>2026-0029</th>
+      <td>Cris</td>
+      <td>DS1A</td>
+      <td>86.30</td>
+    </tr>
+    <tr>
+      <th>2026-0025</th>
+      <td>Yuri</td>
+      <td>DS1D</td>
+      <td>86.02</td>
+    </tr>
+    <tr>
+      <th>2026-0004</th>
+      <td>Diana</td>
+      <td>DS1D</td>
+      <td>85.82</td>
+    </tr>
+    <tr>
+      <th>2026-0015</th>
+      <td>Olive</td>
+      <td>DS1C</td>
+      <td>85.25</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Paradigm lens · declarative</p>
+<p><code class="docutils literal notranslate"><span class="pre">grades.query(&quot;average</span> <span class="pre">&gt;=</span> <span class="pre">85&quot;)</span></code> describes <strong>which rows you want</strong> rather than how to loop through them — much like SQL’s <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause. Combined with method chaining, pandas code reads as a description of the result.</p>
+</div>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>select columns</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[&quot;a&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">df[[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>select by label / position</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[r,</span> <span class="pre">c]</span></code> / <code class="docutils literal notranslate"><span class="pre">df.iloc[r,</span> <span class="pre">c]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>filter rows</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[cond]</span></code>, <code class="docutils literal notranslate"><span class="pre">isin</span></code>, <code class="docutils literal notranslate"><span class="pre">between</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>set values</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[cond,</span> <span class="pre">&quot;col&quot;]</span> <span class="pre">=</span> <span class="pre">value</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>missing values</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isna</span></code>, <code class="docutils literal notranslate"><span class="pre">dropna</span></code>, <code class="docutils literal notranslate"><span class="pre">fillna</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>summaries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">agg</span></code>, <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>, <code class="docutils literal notranslate"><span class="pre">nunique</span></code>, <code class="docutils literal notranslate"><span class="pre">idxmax</span></code>, <code class="docutils literal notranslate"><span class="pre">nlargest</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>McKinney, W. (2022). <em>Python for data analysis: Data wrangling with pandas, NumPy, and Jupyter</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a></p>
+<p>The pandas development team. (2026). <em>Indexing and selecting data</em>. <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/indexing.html">https://pandas.pydata.org/docs/user_guide/indexing.html</a></p>
+<p>The pandas development team. (2026). <em>pandas documentation</em>. <a class="reference external" href="https://pandas.pydata.org/docs/">https://pandas.pydata.org/docs/</a></p>
+<p>VanderPlas, J. (2023). <em>Python data science handbook: Essential tools for working with data</em> (2nd ed.). O’Reilly Media. <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/16_Seatwork_TextData.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Seatwork: Reading Data and Text Preprocessing</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/17_Seatwork_Selection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Seatwork: Indexing, Selection, and Summaries</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-select"><strong>Three Ways to Select</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-with-boolean-conditions"><strong>Filtering with Boolean Conditions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-values-safely"><strong>Changing Values Safely</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values"><strong>Missing Values</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-operations"><strong>Summary Operations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-chaining"><strong>Method Chaining</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

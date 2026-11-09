@@ -1,0 +1,1540 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Revisiting Paradigms: One Problem, Four Solutions &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/22_RevisitingParadigms';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Integrated PyData Project" href="23_PyDataProject.html" />
+    <link rel="prev" title="pandas Portfolio" href="activities/W16_PandasPortfolio.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/22_RevisitingParadigms.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Revisiting Paradigms: One Problem, Four Solutions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task"><strong>Task</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data"><strong>The Data</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-programming"><strong>Imperative Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-programming"><strong>Functional Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-programming"><strong>Object-Oriented Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-programming"><strong>Declarative Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-vectorized-numpy-version"><strong>A vectorized NumPy version</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection"><strong>Reflection</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-paradigms-in-other-languages"><strong>Additional Notes: Paradigms in Other Languages</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-style-in-javascript"><strong>Functional Style in JavaScript</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-programming-in-sql"><strong>Declarative Programming in SQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-programming-in-c"><strong>Imperative Programming in C</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="revisiting-paradigms-one-problem-four-solutions">
+<h1><strong>Revisiting Paradigms: One Problem, Four Solutions</strong><a class="headerlink" href="#revisiting-paradigms-one-problem-four-solutions" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 16:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Compare imperative, functional, object-oriented, and declarative solutions to the same data science problem using Python, NumPy, and pandas.</p>
+<p>In Week 3, you compared programming paradigms using pseudocode and analogies. Now that you know Python, NumPy, and pandas, we return to the same idea with a <strong>real data science task</strong> — and solve it <strong>four times</strong>, once per paradigm.</p>
+<pre  class="mermaid">
+        flowchart LR
+    P[&quot;Simple linear regression&quot;] --&gt; I[&quot;Imperative&lt;br/&gt;step-by-step loops&quot;]
+    P --&gt; F[&quot;Functional&lt;br/&gt;small pure functions&quot;]
+    P --&gt; O[&quot;Object-oriented&lt;br/&gt;a model object&quot;]
+    P --&gt; D[&quot;Declarative&lt;br/&gt;describe the model, let a library fit it&quot;]
+    </pre><section id="task">
+<h2><strong>Task</strong><a class="headerlink" href="#task" title="Link to this heading">#</a></h2>
+<section id="simple-linear-regression">
+<h3>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Link to this heading">#</a></h3>
+<p>Simple linear regression is used to model the relationship between two continuous variables. Often, the objective is to predict the value of an output variable (or response) based on the value of an input (or predictor) variable.</p>
+<p><strong>Hypothesis: Assumes that the relationship between the independent and dependent variables can be described by a straight line.</strong></p>
+<p><strong>Linear Regression function</strong></p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = mx + c\tag{1}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the slope of the line</p></li>
+<li><p><span class="math notranslate nohighlight">\(c\)</span> is the <span class="math notranslate nohighlight">\(y\)</span> intercept</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is the independent variable</p></li>
+</ul>
+<p><strong>Slope of Regression Line</strong></p>
+<div class="math notranslate nohighlight">
+\[m = r\frac{\sigma_y}{\sigma_x}\tag{2}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r\)</span> is the Pearson correlation coefficient</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_y\)</span> is the standard deviation of <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_x\)</span> is the standard deviation of <span class="math notranslate nohighlight">\(x\)</span></p></li>
+</ul>
+<p><strong><span class="math notranslate nohighlight">\(y\)</span> intercept of a Regression Line</strong></p>
+<div class="math notranslate nohighlight">
+\[c = \bar{y} - m\bar{x}\tag{3}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the slope of the regression line</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{y}\)</span> is the mean of <span class="math notranslate nohighlight">\(y\)</span> values</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> is the mean of <span class="math notranslate nohighlight">\(x\)</span> values</p></li>
+</ul>
+<p><strong>Pearson Correlation</strong>
+$<span class="math notranslate nohighlight">\(r = \frac{\sum((x-\bar{x})(y-\bar{y}))}{\sqrt{\sum(x-\bar{x})^2 \sum{(y-\bar{y})^2}}}\tag{4}\)</span>$</p>
+<p><strong>Coefficient of determination</strong> — how much of the variation in <span class="math notranslate nohighlight">\(y\)</span> the line explains:</p>
+<div class="math notranslate nohighlight">
+\[R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}\tag{5}\]</div>
+</section>
+</section>
+<section id="the-data">
+<h2><strong>The Data</strong><a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
+<p>We use a <strong>synthetic</strong> advertising dataset shaped like the well-known <em>Advertising</em> data from <em>An Introduction to Statistical Learning</em>: TV advertising budget (in thousands) and product sales (in thousands of units) for 200 markets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/advertising_synthetic.csv"</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"TV"</span><span class="p">,</span> <span class="s2">"Sales"</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TV</th>
+      <th>Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>50.9</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>252.2</td>
+      <td>21.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5.1</td>
+      <td>5.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>60.1</td>
+      <td>11.7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>219.9</td>
+      <td>18.6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="imperative-programming">
+<h2><strong>Imperative Programming</strong><a class="headerlink" href="#imperative-programming" title="Link to this heading">#</a></h2>
+<p><strong>Imperative programming</strong> is a programming paradigm in which a program is expressed as a sequence of explicit instructions that tell the computer <strong>how to perform a task step by step</strong>. The programmer controls the flow of execution and typically changes the program’s state through variables, assignments, loops, and conditional statements. Python naturally supports imperative programming through constructs such as <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, variable assignment, and function calls. The programmer explicitly describes each operation the computer must perform. Thus, the central question in imperative programming is: <strong>“What steps should I follow to solve the problem?”</strong></p>
+<div class="math notranslate nohighlight">
+\[\bar{x} = \frac{\sum x_i}{n}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xsum</span><span class="p">,</span> <span class="n">ysum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">xsum</span> <span class="o">+=</span> <span class="n">x</span>
+    <span class="n">ysum</span> <span class="o">+=</span> <span class="n">y</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">xsum</span> <span class="o">/</span> <span class="n">count</span>
+<span class="n">ybar</span> <span class="o">=</span> <span class="n">ysum</span> <span class="o">/</span> <span class="n">count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\sigma = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}}\]</div>
+<blockquote>
+<div><p><strong>Watch the parentheses.</strong> An earlier version of this notebook wrote <code class="docutils literal notranslate"><span class="pre">(xstd</span> <span class="pre">/</span> <span class="pre">xcnt</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">**</span> <span class="pre">0.5</span></code>, which divides by <em>n</em> and <strong>then</strong> subtracts 1. The sample standard deviation divides by <strong>(n − 1)</strong>: <code class="docutils literal notranslate"><span class="pre">(xstd</span> <span class="pre">/</span> <span class="pre">(count</span> <span class="pre">-</span> <span class="pre">1))</span> <span class="pre">**</span> <span class="pre">0.5</span></code>. Operator precedence matters!</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xss</span><span class="p">,</span> <span class="n">yss</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">xss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xbar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">yss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">xstd</span> <span class="o">=</span> <span class="p">(</span><span class="n">xss</span> <span class="o">/</span> <span class="p">(</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+<span class="n">ystd</span> <span class="o">=</span> <span class="p">(</span><span class="n">yss</span> <span class="o">/</span> <span class="p">(</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[r = \frac{\sum((x-\bar{x})(y-\bar{y}))}{\sqrt{\sum(x-\bar{x})^2 \sum{(y-\bar{y})^2}}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">den_x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">den_y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">num</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xbar</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span>
+    <span class="n">den_x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xbar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">den_y</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="p">((</span><span class="n">den_x</span> <span class="o">*</span> <span class="n">den_y</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">ystd</span> <span class="o">/</span> <span class="n">xstd</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ybar</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="n">xbar</span>
+
+<span class="n">ss_res</span><span class="p">,</span> <span class="n">ss_tot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+    <span class="n">ss_res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">ss_tot</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ss_res</span> <span class="o">/</span> <span class="n">ss_tot</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Imperative:  m = </span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, c = </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, R² = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imperative:  m = 0.04746, c = 6.8875, R² = 0.6494
+</pre></div>
+</div>
+</div>
+</div>
+<p>Every quantity is built by a loop that <strong>updates variables step by step</strong>. It is easy to follow line by line, but long, repetitive, and slow (<code class="docutils literal notranslate"><span class="pre">iterrows</span></code> processes one row at a time).</p>
+</section>
+<section id="functional-programming">
+<h2><strong>Functional Programming</strong><a class="headerlink" href="#functional-programming" title="Link to this heading">#</a></h2>
+<p><strong>Functional programming</strong> approaches computation primarily as the <strong>evaluation and composition of functions</strong>, emphasizing the transformation of input data into output data rather than repeatedly modifying shared program state. Functional programming commonly favors <strong>pure functions</strong>, immutable data, function composition, and functions that can be passed to or returned from other functions. Python is not a purely functional language, but it supports many functional programming concepts through first-class functions, <code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions, comprehensions, generators, and functions such as <code class="docutils literal notranslate"><span class="pre">map()</span></code>, <code class="docutils literal notranslate"><span class="pre">filter()</span></code>, and <code class="docutils literal notranslate"><span class="pre">reduce()</span></code>. In data processing, for instance, separate functions might clean, normalize, and transform a dataset, with the output of one function becoming the input of another rather than modifying global data. This approach is especially relevant to Python’s data-processing ecosystem, where information frequently passes through a sequence of transformations. Its guiding question is: <strong>“What transformations should I apply to the data?”</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">xbar</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">squared_diff</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xbar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">squared_diff</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">ddof</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">corr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">xbar</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">ybar</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">xi</span> <span class="o">-</span> <span class="n">xbar</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">yi</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">denominator_x</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">xi</span> <span class="o">-</span> <span class="n">xbar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span>
+    <span class="p">)</span>
+
+    <span class="n">denominator_y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">yi</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">yi</span> <span class="ow">in</span> <span class="n">y</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="p">(</span><span class="n">denominator_x</span> <span class="o">*</span> <span class="n">denominator_y</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">r2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">):</span>
+    <span class="n">ybar</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">ss_res</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">yi</span> <span class="o">-</span> <span class="n">yhati</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">yi</span><span class="p">,</span> <span class="n">yhati</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">ss_tot</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">yi</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">yi</span> <span class="ow">in</span> <span class="n">y</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">ss_res</span> <span class="o">/</span> <span class="n">ss_tot</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">xstd</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">ddof</span><span class="p">)</span>
+    <span class="n">ystd</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ddof</span><span class="p">)</span>
+
+    <span class="n">coef</span> <span class="o">=</span> <span class="n">correlation</span> <span class="o">*</span> <span class="p">(</span><span class="n">ystd</span> <span class="o">/</span> <span class="n">xstd</span><span class="p">)</span>
+    <span class="n">intercept</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">coef</span> <span class="o">*</span> <span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">coef</span><span class="p">,</span> <span class="n">intercept</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="n">coef</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">intercept</span> <span class="o">+</span> <span class="n">coef</span> <span class="o">*</span> <span class="n">x</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span>
+    <span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">r2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"TV"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Sales"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Functional:  m = </span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, c = </span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, R² = </span><span class="si">{</span><span class="n">score</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'TV'</span><span class="p">],</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="s1">'Sales'</span><span class="p">],</span><span class="w"> </span><span class="n">model</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Functional:  m = 0.04746, c = 6.8875, R² = 0.6494
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each function is <strong>small and pure</strong>: it receives values and returns a new value without modifying anything else. <code class="docutils literal notranslate"><span class="pre">fit</span></code> is built by <strong>composing</strong> <code class="docutils literal notranslate"><span class="pre">corr</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>, and <code class="docutils literal notranslate"><span class="pre">mean</span></code>, and the “model” is just a tuple of numbers passed from function to function.</p>
+</section>
+<section id="object-oriented-programming">
+<h2><strong>Object-Oriented Programming</strong><a class="headerlink" href="#object-oriented-programming" title="Link to this heading">#</a></h2>
+<p><strong>Object-oriented programming (OOP)</strong> organizes a program around <strong>objects that combine data with the behaviors that operate on that data</strong>. Instead of viewing a program primarily as a sequence of instructions, OOP models the problem in terms of entities, their characteristics, responsibilities, and interactions with other entities. Python provides direct support for OOP through <strong>classes, objects, attributes, methods, inheritance, encapsulation, and polymorphism</strong>. For example, a data science application might define a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> class containing the dataset as its attributes and methods such as <code class="docutils literal notranslate"><span class="pre">clean()</span></code>, <code class="docutils literal notranslate"><span class="pre">summarize()</span></code>, and <code class="docutils literal notranslate"><span class="pre">visualize()</span></code>. Each object is then responsible for operations related to itself. This makes OOP particularly useful when a problem can be represented using identifiable entities with related data and behaviors. Its guiding question can therefore be expressed as: <strong>“What objects are involved, and what can they do?”</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimpleLinearRegression</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">'''A simple linear regression model with a scikit-learn-like interface.'''</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ddof</span> <span class="o">=</span> <span class="n">ddof</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mean</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddof</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">x_mean</span><span class="p">,</span> <span class="n">y_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">xi</span> <span class="o">-</span> <span class="n">x_mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">yi</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">xi</span> <span class="o">-</span> <span class="n">x_mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">X</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">((</span><span class="n">yi</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">yi</span> <span class="ow">in</span> <span class="n">y</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corr_</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coef_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr_</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intercept_</span> <span class="o">=</span> <span class="n">y_mean</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef_</span> <span class="o">*</span> <span class="n">x_mean</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">intercept_</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef_</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">y_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">ss_res</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">yi</span> <span class="o">-</span> <span class="n">yh</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">yi</span><span class="p">,</span> <span class="n">yh</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+        <span class="n">ss_tot</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">yi</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">yi</span> <span class="ow">in</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ss_res</span> <span class="o">/</span> <span class="n">ss_tot</span>
+
+
+<span class="n">slr</span> <span class="o">=</span> <span class="n">SimpleLinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"TV"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Sales"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"OOP:         m = </span><span class="si">{</span><span class="n">slr</span><span class="o">.</span><span class="n">coef_</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, c = </span><span class="si">{</span><span class="n">slr</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, R² = </span><span class="si">{</span><span class="n">slr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'TV'</span><span class="p">],</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="s1">'Sales'</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OOP:         m = 0.04746, c = 6.8875, R² = 0.6494
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model is an <strong>object</strong> that keeps its learned values (<code class="docutils literal notranslate"><span class="pre">coef_</span></code>, <code class="docutils literal notranslate"><span class="pre">intercept_</span></code>) as attributes and offers <strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">fit</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code>, <code class="docutils literal notranslate"><span class="pre">score</span></code>). This version also fixes a performance issue in the original notebook, which recomputed the mean inside every loop iteration — an easy mistake that makes the code <strong>quadratic</strong> in the number of rows.</p>
+</section>
+<section id="declarative-programming">
+<h2><strong>Declarative Programming</strong><a class="headerlink" href="#declarative-programming" title="Link to this heading">#</a></h2>
+<p><strong>Declarative programming</strong> focuses on describing <strong>what result is desired rather than explicitly specifying every step required to produce it</strong>. Instead of controlling the complete execution procedure, the programmer expresses rules, relationships, queries, or desired outcomes and allows another system or abstraction to determine how those results should be obtained. Python itself is primarily an imperative, object-oriented, and functional-capable language rather than a purely declarative language; however, <strong>declarative programming can still be practiced through Python libraries and frameworks</strong> that provide declarative interfaces. For example, a programmer can use a pandas expression such as <code class="docutils literal notranslate"><span class="pre">df.query(&quot;Sales</span> <span class="pre">&gt;</span> <span class="pre">1000&quot;)</span></code> to describe the records they want without manually specifying how every row should be traversed and checked. Similarly, Python ORMs allow database queries to be expressed through high-level model relationships rather than manually implementing the underlying database operations. Therefore, declarative Python shifts attention away from the procedure and toward the intended outcome, asking: <strong>“What result do I want?”</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"TV"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Sales"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Declarative: m = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, c = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, R² = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Declarative: m = 0.04746, c = 6.8875, R² = 0.6494
+</pre></div>
+</div>
+</div>
+</div>
+<p>We <strong>describe</strong> the model we want (<em>a linear regression of Sales on TV</em>) and the library decides <strong>how</strong> to compute it.</p>
+<section id="a-vectorized-numpy-version">
+<h3><strong>A vectorized NumPy version</strong><a class="headerlink" href="#a-vectorized-numpy-version" title="Link to this heading">#</a></h3>
+<p>NumPy lets us write the formulas almost exactly as they appear mathematically — another declarative style:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"TV"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Sales"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">y</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"NumPy:       m = </span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, c = </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, R² = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy:       m = 0.04746, c = 6.8875, R² = 0.6494
+</pre></div>
+</div>
+</div>
+</div>
+<p>All five versions agree. They differ in <strong>how the solution is organized</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Imperative</p></th>
+<th class="head"><p>Functional</p></th>
+<th class="head"><p>Object-oriented</p></th>
+<th class="head"><p>Declarative</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Organization</strong></p></td>
+<td><p>loops updating variables</p></td>
+<td><p>small composed functions</p></td>
+<td><p>a model object with methods</p></td>
+<td><p>a library call / formulas</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Readability</strong></p></td>
+<td><p>step by step, but long</p></td>
+<td><p>each piece is short and named</p></td>
+<td><p>familiar <code class="docutils literal notranslate"><span class="pre">fit</span></code> / <code class="docutils literal notranslate"><span class="pre">predict</span></code> interface</p></td>
+<td><p>shortest</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Testing</strong></p></td>
+<td><p>hard to test parts separately</p></td>
+<td><p>easy: each function is pure</p></td>
+<td><p>test the object’s methods</p></td>
+<td><p>trust and verify the library</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reuse</strong></p></td>
+<td><p>copy and paste</p></td>
+<td><p>import the functions</p></td>
+<td><p>create many model objects</p></td>
+<td><p>built in</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Speed</strong> (200 rows → 1 million)</p></td>
+<td><p>slow</p></td>
+<td><p>slow (pure Python)</p></td>
+<td><p>slow (pure Python)</p></td>
+<td><p><strong>fast</strong> (compiled code)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Best for</strong></p></td>
+<td><p>learning what the formulas do</p></td>
+<td><p>pipelines and reusable math</p></td>
+<td><p>systems with state and many models</p></td>
+<td><p>everyday data science work</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="reflection">
+<h2><strong>Reflection</strong><a class="headerlink" href="#reflection" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Which version helped you <strong>understand</strong> the formulas best? Which would you use in a <strong>project</strong>?</p></li>
+<li><p>Where did you see <strong>state changing</strong> (imperative) versus <strong>new values being returned</strong> (functional)?</p></li>
+<li><p>scikit-learn’s <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> is itself an <strong>object</strong>. How does knowing the OOP version change the way you read <code class="docutils literal notranslate"><span class="pre">model.fit(X,</span> <span class="pre">y)</span></code>?</p></li>
+</ul>
+</section>
+<section id="additional-notes-paradigms-in-other-languages">
+<h2><strong>Additional Notes: Paradigms in Other Languages</strong><a class="headerlink" href="#additional-notes-paradigms-in-other-languages" title="Link to this heading">#</a></h2>
+<section id="functional-style-in-javascript">
+<h3><strong>Functional Style in JavaScript</strong><a class="headerlink" href="#functional-style-in-javascript" title="Link to this heading">#</a></h3>
+<p>Created by <strong>Brendan Eich</strong> at <strong>Netscape in 1995</strong>. Originally designed to add <strong>interactivity to web pages</strong></p>
+<ul class="simple">
+<li><p><strong>Major Milestones</strong></p>
+<ul>
+<li><p><strong>1997</strong> — Standardized as <strong>ECMAScript</strong></p></li>
+<li><p><strong>2000s</strong> — AJAX enabled richer, more interactive web applications</p></li>
+<li><p><strong>2009</strong> — <strong>Node.js</strong> expanded JavaScript to server-side development</p></li>
+<li><p><strong>2015</strong> — <strong>ES6</strong> introduced <code class="docutils literal notranslate"><span class="pre">let</span></code>, <code class="docutils literal notranslate"><span class="pre">const</span></code>, arrow functions, classes, and modules</p></li>
+</ul>
+</li>
+<li><p><strong>Applications</strong></p>
+<ul>
+<li><p>Interactive web development</p></li>
+<li><p>Backend/server development</p></li>
+<li><p>Mobile &amp; desktop applications</p></li>
+<li><p>APIs &amp; data visualization</p></li>
+<li><p>Machine learning</p></li>
+</ul>
+</li>
+<li><p><strong>Advantages</strong></p>
+<ul>
+<li><p>Native support in web browsers</p></li>
+<li><p>Large ecosystem</p></li>
+<li><p>Cross-platform</p></li>
+<li><p><strong>Multi-paradigm:</strong> imperative, OOP, and functional</p></li>
+</ul>
+</li>
+<li><p><strong>Disadvantages</strong></p>
+<ul>
+<li><p>Dynamic typing can cause <strong>runtime errors</strong></p></li>
+<li><p>Large projects can become difficult to maintain</p></li>
+<li><p>Dependency and tooling complexity</p></li>
+<li><p>Asynchronous programming can add complexity</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Transform</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">doubled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">numbers</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span>
+
+<span class="c1">// Select</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">even</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">numbers</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+
+<span class="c1">// Aggregate</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">numbers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="declarative-programming-in-sql">
+<h3><strong>Declarative Programming in SQL</strong><a class="headerlink" href="#declarative-programming-in-sql" title="Link to this heading">#</a></h3>
+<p>Developed at <strong>IBM in the 1970s</strong> by Donald Chamberlin and Raymond Boyce. Based on <strong>Edgar F. Codd’s relational model</strong>. Originally called <strong>SEQUEL</strong></p>
+<ul class="simple">
+<li><p><strong>Major Milestones</strong></p>
+<ul>
+<li><p><strong>1986</strong> — Became an ANSI standard</p></li>
+<li><p><strong>1987</strong> — Became an ISO standard</p></li>
+<li><p>Continued evolving through later SQL standards</p></li>
+</ul>
+</li>
+<li><p><strong>Applications</strong></p>
+<ul>
+<li><p>Managing and querying <strong>relational databases</strong></p></li>
+<li><p>Retrieving, filtering, joining, and aggregating data</p></li>
+<li><p>Used in systems such as MySQL, PostgreSQL, SQL Server, Oracle, and SQLite</p></li>
+</ul>
+</li>
+<li><p><strong>Advantages</strong></p>
+<ul>
+<li><p><strong>Declarative</strong> — focuses on <em>what</em> result is needed</p></li>
+<li><p>Powerful for structured and relational data</p></li>
+<li><p>Widely standardized and supported</p></li>
+</ul>
+</li>
+<li><p><strong>Disadvantages</strong></p>
+<ul>
+<li><p>SQL dialects vary across database systems</p></li>
+<li><p>Complex queries can be difficult to maintain</p></li>
+<li><p>Not intended as a general-purpose programming language</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50000</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="imperative-programming-in-c">
+<h3><strong>Imperative Programming in C</strong><a class="headerlink" href="#imperative-programming-in-c" title="Link to this heading">#</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numbers</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Abelson, H., &amp; Sussman, G. J. (1996). <em>Structure and interpretation of computer programs</em> (2nd ed.). MIT Press.</p>
+<p>Buitinck, L., Louppe, G., Blondel, M., Pedregosa, F., Mueller, A., Grisel, O., Niculae, V., Prettenhofer, P., Gramfort, A., Grobler, J., Layton, R., VanderPlas, J., Joly, A., Holt, B., &amp; Varoquaux, G. (2013). API design for machine learning software: Experiences from the scikit-learn project. <em>arXiv</em>. <a class="reference external" href="https://arxiv.org/abs/1309.0238">https://arxiv.org/abs/1309.0238</a></p>
+<p>Codd, E. F. (1970). A relational model of data for large shared data banks. <em>Communications of the ACM, 13</em>(6), 377–387. <a class="reference external" href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a></p>
+<p>Harris, C. R., Millman, K. J., van der Walt, S. J., Gommers, R., Virtanen, P., Cournapeau, D., Wieser, E., Taylor, J., Berg, S., Smith, N. J., Kern, R., Picus, M., Hoyer, S., van Kerkwijk, M. H., Brett, M., Haldane, A., del Río, J. F., Wiebe, M., Peterson, P., … Oliphant, T. E. (2020). Array programming with NumPy. <em>Nature, 585</em>(7825), 357–362. <a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a></p>
+<p>Hughes, J. (1989). Why functional programming matters. <em>The Computer Journal, 32</em>(2), 98–107. <a class="reference external" href="https://doi.org/10.1093/comjnl/32.2.98">https://doi.org/10.1093/comjnl/32.2.98</a></p>
+<p>James, G., Witten, D., Hastie, T., Tibshirani, R., &amp; Taylor, J. (2023). <em>An introduction to statistical learning: With applications in Python</em>. Springer. <a class="reference external" href="https://doi.org/10.1007/978-3-031-38747-0">https://doi.org/10.1007/978-3-031-38747-0</a></p>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>McKinney, W. (2022). <em>Python for data analysis: Data wrangling with pandas, NumPy, and Jupyter</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a></p>
+<p>Sebesta, R. W. (2019). <em>Concepts of programming languages</em> (12th ed.). Pearson.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="activities/W16_PandasPortfolio.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>pandas Portfolio</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="23_PyDataProject.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>The Integrated PyData Project</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task"><strong>Task</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data"><strong>The Data</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-programming"><strong>Imperative Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-programming"><strong>Functional Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-programming"><strong>Object-Oriented Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-programming"><strong>Declarative Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-vectorized-numpy-version"><strong>A vectorized NumPy version</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection"><strong>Reflection</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-paradigms-in-other-languages"><strong>Additional Notes: Paradigms in Other Languages</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-style-in-javascript"><strong>Functional Style in JavaScript</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-programming-in-sql"><strong>Declarative Programming in SQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-programming-in-c"><strong>Imperative Programming in C</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

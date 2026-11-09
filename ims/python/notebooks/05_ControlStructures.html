@@ -1,0 +1,1438 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Control Structures: Conditionals and Iteration &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/05_ControlStructures';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seatwork: Control Structures" href="exercises/05_Seatwork_ControlStructures.html" />
+    <link rel="prev" title="Seatwork: Variables, Expressions, and Statements" href="exercises/04_Seatwork_Variables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/05_ControlStructures.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Control Structures: Conditionals and Iteration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-with-if"><strong>Selection with <code class="docutils literal notranslate"><span class="pre">if</span></code></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-and-if-elif-else"><strong><code class="docutils literal notranslate"><span class="pre">if</span></code> … <code class="docutils literal notranslate"><span class="pre">else</span></code> and <code class="docutils literal notranslate"><span class="pre">if</span></code> … <code class="docutils literal notranslate"><span class="pre">elif</span></code> … <code class="docutils literal notranslate"><span class="pre">else</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-conditions-and-logical-operators"><strong>Nested conditions and logical operators</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-jeepney-fare-in-python"><strong>The jeepney fare in Python</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-with-while"><strong>Iteration with <code class="docutils literal notranslate"><span class="pre">while</span></code></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation-with-while"><strong>Input validation with <code class="docutils literal notranslate"><span class="pre">while</span></code></strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-with-for"><strong>Iteration with <code class="docutils literal notranslate"><span class="pre">for</span></code></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#range"><strong><code class="docutils literal notranslate"><span class="pre">range()</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-loop-patterns"><strong>Common loop patterns</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-continue-and-loop-else"><strong><code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code>, and loop <code class="docutils literal notranslate"><span class="pre">else</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-loops"><strong>Nested Loops</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-loop"><strong>Choosing the Right Loop</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="control-structures-conditionals-and-iteration">
+<h1><strong>Control Structures: Conditionals and Iteration</strong><a class="headerlink" href="#control-structures-conditionals-and-iteration" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 5:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Implement program logic in Python using conditional statements and loops.</p>
+<p>In Week 2 you learned that every algorithm is built from <strong>sequence</strong>, <strong>selection</strong>, and <strong>iteration</strong>. Python provides a statement for each:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Structure</p></th>
+<th class="head"><p>Flowchart</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sequence</p></td>
+<td><p>boxes one after another</p></td>
+<td><p>statements one after another</p></td>
+</tr>
+<tr class="row-odd"><td><p>selection</p></td>
+<td><p>diamond with two exits</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">elif</span></code>, <code class="docutils literal notranslate"><span class="pre">else</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>iteration</p></td>
+<td><p>arrow looping back to a diamond</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In Python, <strong>indentation</strong> marks which statements belong inside a structure — just like the indented steps in your pseudocode.</p>
+<section id="selection-with-if">
+<h2><strong>Selection with <code class="docutils literal notranslate"><span class="pre">if</span></code></strong><a class="headerlink" href="#selection-with-if" title="Link to this heading">#</a></h2>
+<pre  class="mermaid">
+        flowchart LR
+    Q{condition?} --&gt;|True| A[indented block runs]
+    Q --&gt;|False| N[skip the block]
+    A --&gt; N2[continue]
+    N --&gt; N2
+    </pre><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">38.2</span>
+
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;=</span> <span class="mf">37.5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Fever detected."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Please visit the clinic."</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Check complete."</span><span class="p">)</span>       <span class="c1"># not indented: always runs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fever detected.
+Please visit the clinic.
+Check complete.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="if-else-and-if-elif-else">
+<h3><strong><code class="docutils literal notranslate"><span class="pre">if</span></code> … <code class="docutils literal notranslate"><span class="pre">else</span></code> and <code class="docutils literal notranslate"><span class="pre">if</span></code> … <code class="docutils literal notranslate"><span class="pre">elif</span></code> … <code class="docutils literal notranslate"><span class="pre">else</span></code></strong><a class="headerlink" href="#if-else-and-if-elif-else" title="Link to this heading">#</a></h3>
+<p>Python checks conditions <strong>from top to bottom</strong> and runs only the <strong>first</strong> branch whose condition is true.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final</span> <span class="o">=</span> <span class="mf">83.4</span>
+
+<span class="k">if</span> <span class="n">final</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="s2">"Excellent"</span>
+<span class="k">elif</span> <span class="n">final</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="s2">"Very Good"</span>
+<span class="k">elif</span> <span class="n">final</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="s2">"Passed"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="s2">"Failed"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">final</span><span class="p">,</span> <span class="n">remark</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83.4 Very Good
+</pre></div>
+</div>
+</div>
+</div>
+<pre  class="mermaid">
+        flowchart TD
+    A{final ≥ 90?} --&gt;|Yes| E[Excellent]
+    A --&gt;|No| B{final ≥ 80?}
+    B --&gt;|Yes| V[Very Good]
+    B --&gt;|No| C{final ≥ 75?}
+    C --&gt;|Yes| P[Passed]
+    C --&gt;|No| F[Failed]
+    </pre><blockquote>
+<div><p><strong>Order matters.</strong> If the <code class="docutils literal notranslate"><span class="pre">final</span> <span class="pre">&gt;=</span> <span class="pre">75</span></code> test came first, an 83.4 would be labeled “Passed” and never reach “Very Good”.</p>
+</div></blockquote>
+</section>
+<section id="nested-conditions-and-logical-operators">
+<h3><strong>Nested conditions and logical operators</strong><a class="headerlink" href="#nested-conditions-and-logical-operators" title="Link to this heading">#</a></h3>
+<p>Conditions can be nested, but combining them with <code class="docutils literal notranslate"><span class="pre">and</span></code> / <code class="docutils literal notranslate"><span class="pre">or</span></code> is often clearer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final</span><span class="p">,</span> <span class="n">absences</span> <span class="o">=</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">4</span>
+
+<span class="c1"># nested</span>
+<span class="k">if</span> <span class="n">final</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">absences</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Passed"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Failed due to absences"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Failed"</span><span class="p">)</span>
+
+<span class="c1"># combined</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">"Passed"</span> <span class="k">if</span> <span class="n">final</span> <span class="o">&gt;=</span> <span class="mi">75</span> <span class="ow">and</span> <span class="n">absences</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="k">else</span> <span class="s2">"Failed"</span>     <span class="c1"># conditional expression</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed
+Passed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-jeepney-fare-in-python">
+<h3><strong>The jeepney fare in Python</strong><a class="headerlink" href="#the-jeepney-fare-in-python" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="p">,</span> <span class="n">is_discounted</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="n">fare</span> <span class="o">=</span> <span class="mf">13.00</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">fare</span> <span class="o">=</span> <span class="mf">13.00</span> <span class="o">+</span> <span class="p">(</span><span class="n">distance</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.80</span>
+
+<span class="k">if</span> <span class="n">is_discounted</span><span class="p">:</span>
+    <span class="n">fare</span> <span class="o">*=</span> <span class="mf">0.80</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"₱</span><span class="si">{</span><span class="n">fare</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>₱19.04
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="iteration-with-while">
+<h2><strong>Iteration with <code class="docutils literal notranslate"><span class="pre">while</span></code></strong><a class="headerlink" href="#iteration-with-while" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">while</span></code> loop repeats <strong>as long as</strong> its condition is true. Use it when you <strong>don’t know in advance</strong> how many repetitions are needed.</p>
+<blockquote>
+<div><p><strong>Analogy.</strong> <em>“While the rice is not yet cooked, keep the heat on and check every few minutes.”</em> You don’t know the exact number of checks; you stop when the condition changes.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">balance</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">month</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">balance</span> <span class="o">&lt;</span> <span class="mi">1500</span><span class="p">:</span>          <span class="c1"># how many months to grow 1,000 to 1,500 at 5% per month?</span>
+    <span class="n">balance</span> <span class="o">*=</span> <span class="mf">1.05</span>
+    <span class="n">month</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="s2">"months →"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9 months → 1551.33
+</pre></div>
+</div>
+</div>
+</div>
+<p>Something inside the loop must eventually make the condition <strong>false</strong>; otherwise you get an <strong>infinite loop</strong> (stop it with <strong>Kernel → Interrupt</strong>).</p>
+<section id="input-validation-with-while">
+<h3><strong>Input validation with <code class="docutils literal notranslate"><span class="pre">while</span></code></strong><a class="headerlink" href="#input-validation-with-while" title="Link to this heading">#</a></h3>
+<p>A very common pattern keeps asking until the input is valid:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">"Enter a score (0-100): "</span><span class="p">))</span>
+<span class="k">while</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Invalid score. Try again."</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">"Enter a score (0-100): "</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The cell below simulates the same pattern with a list of “typed” values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typed_values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"125"</span><span class="p">,</span> <span class="s2">"-4"</span><span class="p">,</span> <span class="s2">"88"</span><span class="p">]</span>          <span class="c1"># what a user might type, in order</span>
+<span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">typed_values</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+<span class="k">while</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2"> is invalid. Try again."</span><span class="p">)</span>
+    <span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">typed_values</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Accepted:"</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>125.0 is invalid. Try again.
+-4.0 is invalid. Try again.
+Accepted: 88.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="iteration-with-for">
+<h2><strong>Iteration with <code class="docutils literal notranslate"><span class="pre">for</span></code></strong><a class="headerlink" href="#iteration-with-for" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop repeats <strong>once for each item</strong> in a sequence. Use it when you have a collection or a known number of repetitions.</p>
+<blockquote>
+<div><p><strong>Analogy.</strong> <em>“For each answer sheet in the pile, check it.”</em> The loop ends when the pile runs out.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">70</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="s2">"passed"</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">75</span> <span class="k">else</span> <span class="s2">"failed"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78 passed
+92 passed
+64 failed
+85 passed
+70 failed
+</pre></div>
+</div>
+</div>
+</div>
+<section id="range">
+<h3><strong><code class="docutils literal notranslate"><span class="pre">range()</span></code></strong><a class="headerlink" href="#range" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">range(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code> produces numbers from <code class="docutils literal notranslate"><span class="pre">start</span></code> up to — <strong>but not including</strong> — <code class="docutils literal notranslate"><span class="pre">stop</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Call</p></th>
+<th class="head"><p>Numbers produced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">range(5)</span></code></p></td>
+<td><p>0, 1, 2, 3, 4</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">6)</span></code></p></td>
+<td><p>1, 2, 3, 4, 5</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">range(0,</span> <span class="pre">20,</span> <span class="pre">5)</span></code></p></td>
+<td><p>0, 5, 10, 15</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">range(10,</span> <span class="pre">0,</span> <span class="pre">-3)</span></code></p></td>
+<td><p>10, 7, 4, 1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Week"</span><span class="p">,</span> <span class="n">week</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Week 1
+Week 2
+Week 3
+Week 4
+Week 5
+[10, 7, 4, 1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="common-loop-patterns">
+<h3><strong>Common loop patterns</strong><a class="headerlink" href="#common-loop-patterns" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>accumulator</strong></p></td>
+<td><p>start a total at 0 and add to it each time</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>counter</strong></p></td>
+<td><p>start at 0 and add 1 when a condition holds</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>maximum / minimum</strong></p></td>
+<td><p>remember the best value seen so far</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>search</strong></p></td>
+<td><p>stop as soon as the item is found</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>                 <span class="c1"># accumulator</span>
+<span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span>                <span class="c1"># counter</span>
+<span class="n">highest</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>       <span class="c1"># maximum so far</span>
+
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">score</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+        <span class="n">passed</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">highest</span><span class="p">:</span>
+        <span class="n">highest</span> <span class="o">=</span> <span class="n">score</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Average: </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, passed: </span><span class="si">{</span><span class="n">passed</span><span class="si">}</span><span class="s2">, highest: </span><span class="si">{</span><span class="n">highest</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average: 81.33, passed: 4, highest: 99
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="break-continue-and-loop-else">
+<h2><strong><code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code>, and loop <code class="docutils literal notranslate"><span class="pre">else</span></code></strong><a class="headerlink" href="#break-continue-and-loop-else" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span></code> <strong>exits</strong> the loop immediately.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code> <strong>skips</strong> to the next repetition.</p></li>
+<li><p>A loop’s <code class="docutils literal notranslate"><span class="pre">else</span></code> block runs only if the loop finished <strong>without</strong> <code class="docutils literal notranslate"><span class="pre">break</span></code> — handy for searches.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"2026-001"</span><span class="p">,</span> <span class="s2">"2026-002"</span><span class="p">,</span> <span class="s2">"2026-003"</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="s2">"2026-002"</span>
+
+<span class="k">for</span> <span class="n">student_id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">student_id</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Found"</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s2">"not found"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>          <span class="c1"># skip invalid data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Processing"</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 2026-002
+Processing 80
+Processing 95
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="nested-loops">
+<h2><strong>Nested Loops</strong><a class="headerlink" href="#nested-loops" title="Link to this heading">#</a></h2>
+<p>A loop inside a loop repeats the <strong>inner</strong> loop completely for <strong>each</strong> repetition of the outer loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">col</span><span class="si">:</span><span class="s2">4</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   1   2   3   4   5
+   2   4   6   8  10
+   3   6   9  12  15
+   4   8  12  16  20
+   5  10  15  20  25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Paradigm lens · structured programming</p>
+<p><code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, and <code class="docutils literal notranslate"><span class="pre">for</span></code> are exactly the <strong>selection</strong> and <strong>iteration</strong> blocks of structured programming. Each has <strong>one entry and one exit</strong> (<code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code> are controlled exits within the loop), and indentation makes the nesting visible. Python has <strong>no <code class="docutils literal notranslate"><span class="pre">goto</span></code></strong> — spaghetti code is not even possible.</p>
+</div>
+</section>
+<section id="choosing-the-right-loop">
+<h2><strong>Choosing the Right Loop</strong><a class="headerlink" href="#choosing-the-right-loop" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situation</p></th>
+<th class="head"><p>Use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>go through every item in a list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">items</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>repeat a fixed number of times</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(n)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>repeat until something happens (valid input, a target is reached)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">condition</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Key idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">if</span></code> / <code class="docutils literal notranslate"><span class="pre">elif</span></code> / <code class="docutils literal notranslate"><span class="pre">else</span></code></p></td>
+<td><p>choose one branch; checked top to bottom</p></td>
+</tr>
+<tr class="row-odd"><td><p>conditional expression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">if</span> <span class="pre">condition</span> <span class="pre">else</span> <span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p>repeat while a condition is true; update something inside</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">for</span></code> + <code class="docutils literal notranslate"><span class="pre">range()</span></code></p></td>
+<td><p>repeat for each item / each number</p></td>
+</tr>
+<tr class="row-even"><td><p>accumulator, counter, max</p></td>
+<td><p>the most common loop patterns</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code>, <code class="docutils literal notranslate"><span class="pre">else</span></code></p></td>
+<td><p>exit early, skip, “not found” handling</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Böhm, C., &amp; Jacopini, G. (1966). Flow diagrams, Turing machines and languages with only two formation rules. <em>Communications of the ACM, 9</em>(5), 366–371. <a class="reference external" href="https://doi.org/10.1145/355592.365646">https://doi.org/10.1145/355592.365646</a></p>
+<p>Dijkstra, E. W. (1968). Go to statement considered harmful. <em>Communications of the ACM, 11</em>(3), 147–148. <a class="reference external" href="https://doi.org/10.1145/362929.362947">https://doi.org/10.1145/362929.362947</a></p>
+<p>Downey, A. B. (2024). <em>Think Python: How to think like a computer scientist</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://allendowney.github.io/ThinkPython/">https://allendowney.github.io/ThinkPython/</a></p>
+<p>Liang, Y. D. (2013). <em>Introduction to programming using Python</em>. Pearson.</p>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>Python Software Foundation. (2026). <em>The Python tutorial: 4. More control flow tools</em>. <a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html">https://docs.python.org/3/tutorial/controlflow.html</a></p>
+<p>Tutorialspoint. (2026). <em>Python tutorial</em>. <a class="reference external" href="https://www.tutorialspoint.com/python/">https://www.tutorialspoint.com/python/</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/04_Seatwork_Variables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Seatwork: Variables, Expressions, and Statements</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/05_Seatwork_ControlStructures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Seatwork: Control Structures</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-with-if"><strong>Selection with <code class="docutils literal notranslate"><span class="pre">if</span></code></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-and-if-elif-else"><strong><code class="docutils literal notranslate"><span class="pre">if</span></code> … <code class="docutils literal notranslate"><span class="pre">else</span></code> and <code class="docutils literal notranslate"><span class="pre">if</span></code> … <code class="docutils literal notranslate"><span class="pre">elif</span></code> … <code class="docutils literal notranslate"><span class="pre">else</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-conditions-and-logical-operators"><strong>Nested conditions and logical operators</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-jeepney-fare-in-python"><strong>The jeepney fare in Python</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-with-while"><strong>Iteration with <code class="docutils literal notranslate"><span class="pre">while</span></code></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation-with-while"><strong>Input validation with <code class="docutils literal notranslate"><span class="pre">while</span></code></strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-with-for"><strong>Iteration with <code class="docutils literal notranslate"><span class="pre">for</span></code></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#range"><strong><code class="docutils literal notranslate"><span class="pre">range()</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-loop-patterns"><strong>Common loop patterns</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-continue-and-loop-else"><strong><code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code>, and loop <code class="docutils literal notranslate"><span class="pre">else</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-loops"><strong>Nested Loops</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-loop"><strong>Choosing the Right Loop</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

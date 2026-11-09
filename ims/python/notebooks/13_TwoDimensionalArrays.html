@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Two-Dimensional Arrays &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/13_TwoDimensionalArrays';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seatwork: Two-Dimensional Arrays" href="exercises/13_Seatwork_2DArrays.html" />
+    <link rel="prev" title="Seatwork: One-Dimensional Arrays" href="exercises/12_Seatwork_1DArrays.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_ProgrammingParadigms.html">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/13_TwoDimensionalArrays.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Two-Dimensional Arrays</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-2d-arrays"><strong>Creating 2D Arrays</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing"><strong>Indexing and Slicing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-and-deletion"><strong>Insertion and Deletion</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching"><strong>Searching</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting"><strong>Sorting</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-and-splitting"><strong>Concatenation and Splitting</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting"><strong>Broadcasting</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="two-dimensional-arrays">
+<h1><strong>Two-Dimensional Arrays</strong><a class="headerlink" href="#two-dimensional-arrays" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 11:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Apply 2D array operations — insertion, deletion, searching, sorting, concatenation, splitting, and broadcasting — in simple programming problems.</p>
+<p>A <strong>two-dimensional (2D) array</strong> is a table of numbers with <strong>rows</strong> and <strong>columns</strong> — like a gradebook where each row is a student and each column is an assessment. The two dimensions are called <strong>axes</strong>:</p>
+<ul class="simple">
+<li><p><strong>axis 0</strong> runs <strong>down</strong> the rows;</p></li>
+<li><p><strong>axis 1</strong> runs <strong>across</strong> the columns.</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                axis 1 →
+               quiz  lab  midterm  final
+           ┌──────────────────────────────┐
+ axis 0  0 │  88    92     79       85    │  Ana
+   ↓     1 │  75    80     70       72    │  Ben
+         2 │  91    85     88       94    │  Carlo
+         3 │  62    70     58       66    │  Diana
+           └──────────────────────────────┘
+                     shape = (4, 4)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Ben"</span><span class="p">,</span> <span class="s2">"Carlo"</span><span class="p">,</span> <span class="s2">"Diana"</span><span class="p">])</span>
+<span class="n">grades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">85</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">72</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">94</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">62</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[88 92 79 85]
+ [75 80 70 72]
+ [91 85 88 94]
+ [62 70 58 66]]
+(4, 4) 2 16
+</pre></div>
+</div>
+</div>
+</div>
+<section id="creating-2d-arrays">
+<h2><strong>Creating 2D Arrays</strong><a class="headerlink" href="#creating-2d-arrays" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>     <span class="c1"># 12 numbers arranged as 3 rows × 4 columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>            <span class="c1"># identity matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0.]
+ [0. 0. 0.]]
+[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]
+[[1 0 0]
+ [0 1 0]
+ [0 0 1]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="indexing-and-slicing">
+<h2><strong>Indexing and Slicing</strong><a class="headerlink" href="#indexing-and-slicing" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">array[row,</span> <span class="pre">column]</span></code>. A <code class="docutils literal notranslate"><span class="pre">:</span></code> means “all” along that axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>          <span class="c1"># Carlo's final</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>             <span class="c1"># Ben's row</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>          <span class="c1"># every quiz score (column 0)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>       <span class="c1"># first two students, lab and midterm</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>        <span class="c1"># last row, last column</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94
+[75 80 70 72]
+[88 75 91 62]
+[[92 79]
+ [80 70]]
+66
+</pre></div>
+</div>
+</div>
+</div>
+<p>Boolean masks work on rows, too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_col</span> <span class="o">=</span> <span class="n">grades</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">final_col</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">])</span>            <span class="c1"># students whose final is at least 75</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="n">final_col</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">])</span>           <span class="c1"># their full rows</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['Ana' 'Carlo']
+[[88 92 79 85]
+ [91 85 88 94]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="insertion-and-deletion">
+<h2><strong>Insertion and Deletion</strong><a class="headerlink" href="#insertion-and-deletion" title="Link to this heading">#</a></h2>
+<p>Arrays have a fixed size, so <code class="docutils literal notranslate"><span class="pre">np.insert</span></code>, <code class="docutils literal notranslate"><span class="pre">np.append</span></code>, and <code class="docutils literal notranslate"><span class="pre">np.delete</span></code> <strong>return new arrays</strong> — the original is unchanged.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_student</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">90</span><span class="p">]])</span>
+<span class="n">with_ella</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">new_student</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>              <span class="c1"># add a row at the end</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">with_ella</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">bonus_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">with_bonus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bonus_col</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>            <span class="c1"># add a column at position 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">with_bonus</span><span class="p">)</span>
+
+<span class="n">without_ben</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>                      <span class="c1"># remove row 1</span>
+<span class="n">without_lab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                      <span class="c1"># remove column 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">without_ben</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">without_lab</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 4)
+[[88 92 79 85  5]
+ [75 80 70 72  0]
+ [91 85 88 94  3]
+ [62 70 58 66  2]]
+(3, 4) (4, 3) (4, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Because each insertion copies the whole array, avoid inserting inside a loop. Collect values in a <strong>list</strong> first, then convert to an array once.</p>
+</div></blockquote>
+</section>
+<section id="searching">
+<h2><strong>Searching</strong><a class="headerlink" href="#searching" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grades</span> <span class="o">&lt;</span> <span class="mi">65</span><span class="p">)</span>                 <span class="c1"># positions that satisfy a condition</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">rows</span><span class="p">],</span> <span class="n">cols</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">argmax</span><span class="p">())</span>                              <span class="c1"># position in the flattened array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">grades</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>   <span class="c1"># as (row, column)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">85</span><span class="p">]))</span>                    <span class="c1"># membership test, element by element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">grades</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">grades</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(np.str_('Diana'), np.int64(0)), (np.str_('Diana'), np.int64(2))]
+11
+(np.int64(2), np.int64(3))
+[[False False False  True]
+ [False False  True False]
+ [False  True False False]
+ [False  True False False]]
+True True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sorting">
+<h2><strong>Sorting</strong><a class="headerlink" href="#sorting" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>          <span class="c1"># sort within each row</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>          <span class="c1"># sort within each column</span>
+
+<span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">grades</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># row order by final, highest first</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">order</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">[</span><span class="n">order</span><span class="p">])</span>                    <span class="c1"># whole rows reordered together</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[79 85 88 92]
+ [70 72 75 80]
+ [85 88 91 94]
+ [58 62 66 70]]
+[[62 70 58 66]
+ [75 80 70 72]
+ [88 85 79 85]
+ [91 92 88 94]]
+['Carlo' 'Ana' 'Ben' 'Diana']
+[[91 85 88 94]
+ [88 92 79 85]
+ [75 80 70 72]
+ [62 70 58 66]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">np.sort</span></code> sorts values but loses the link to other columns. <strong><code class="docutils literal notranslate"><span class="pre">argsort</span></code></strong> returns the <strong>order of positions</strong>, which you can use to reorder whole rows — the standard way to “sort a table by one column”.</p>
+</section>
+<section id="concatenation-and-splitting">
+<h2><strong>Concatenation and Splitting</strong><a class="headerlink" href="#concatenation-and-splitting" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">section_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">],</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">]])</span>
+<span class="n">section_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">85</span><span class="p">],</span> <span class="p">[</span><span class="mi">62</span><span class="p">,</span> <span class="mi">70</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">section_a</span><span class="p">,</span> <span class="n">section_b</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>   <span class="c1"># stack rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">section_a</span><span class="p">,</span> <span class="n">section_b</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>           <span class="c1"># same as axis=0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">section_a</span><span class="p">,</span> <span class="n">section_b</span><span class="p">]))</span>                 <span class="c1"># side by side (axis=1)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[88 92]
+ [75 80]
+ [91 85]
+ [62 70]]
+(4, 2)
+[[88 92 91 85]
+ [75 80 62 70]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vsplit</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>               <span class="c1"># into 2 groups of rows</span>
+<span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>             <span class="c1"># columns before / from index 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">top</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">bottom</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">left</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">right</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">parts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>         <span class="c1"># uneven splits allowed</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 4) (2, 4) (4, 2) (4, 2)
+[array([0, 1, 2, 3]), array([4, 5, 6]), array([7, 8, 9])]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="broadcasting">
+<h2><strong>Broadcasting</strong><a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
+<p><strong>Broadcasting</strong> lets NumPy combine arrays of <strong>different shapes</strong> by automatically “stretching” the smaller one, without copying data.</p>
+<p><strong>Rules.</strong> Compare shapes from the <strong>right</strong>. Two dimensions are compatible if they are <strong>equal</strong> or one of them is <strong>1</strong>. A missing dimension counts as 1.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>grades           (4, 4)
+weights             (4,)   → treated as (1, 4) → stretched down all 4 rows      ✓
+column_means     (4, 1)    → stretched across all 4 columns                      ✓
+(4, 4) and (3,)            → 4 ≠ 3, neither is 1                                 ✗ error
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Analogy.</strong> Broadcasting is like a teacher announcing <em>“add 5 points to the lab column”</em> to the whole class at once — the single instruction is applied to every row without being written out 40 times.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>           <span class="c1"># shape (4,)</span>
+<span class="n">weighted</span> <span class="o">=</span> <span class="n">grades</span> <span class="o">*</span> <span class="n">weights</span>                        <span class="c1"># (4, 4) * (4,) → each row times the weights</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weighted</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>               <span class="c1"># final grade per student</span>
+
+<span class="n">column_means</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>                 <span class="c1"># shape (4,)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">grades</span> <span class="o">-</span> <span class="n">column_means</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>            <span class="c1"># deviation from each assessment's mean</span>
+
+<span class="n">row_max</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        <span class="c1"># shape (4, 1)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">grades</span> <span class="o">/</span> <span class="n">row_max</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>                 <span class="c1"># each score relative to the student's best</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">grades</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ValueError:"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[86.5 74.6 89.5 64.8]
+[[  9.   10.2   5.2   5.8]
+ [ -4.   -1.8  -3.8  -7.2]
+ [ 12.    3.2  14.2  14.8]
+ [-17.  -11.8 -15.8 -13.2]]
+[[0.96 1.   0.86 0.92]
+ [0.94 1.   0.88 0.9 ]
+ [0.97 0.9  0.94 1.  ]
+ [0.89 1.   0.83 0.94]]
+ValueError: operands could not be broadcast together with shapes (4,4) (3,) 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Functions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.array(nested_list)</span></code>, <code class="docutils literal notranslate"><span class="pre">reshape</span></code>, <code class="docutils literal notranslate"><span class="pre">zeros((r,</span> <span class="pre">c))</span></code>, <code class="docutils literal notranslate"><span class="pre">eye</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>index / slice</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a[r,</span> <span class="pre">c]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[:,</span> <span class="pre">c]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[r1:r2,</span> <span class="pre">c1:c2]</span></code>, masks</p></td>
+</tr>
+<tr class="row-even"><td><p>insert / delete</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.insert</span></code>, <code class="docutils literal notranslate"><span class="pre">np.append</span></code>, <code class="docutils literal notranslate"><span class="pre">np.delete</span></code> (return new arrays)</p></td>
+</tr>
+<tr class="row-odd"><td><p>search</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.where</span></code>, <code class="docutils literal notranslate"><span class="pre">argmax</span></code> + <code class="docutils literal notranslate"><span class="pre">unravel_index</span></code>, <code class="docutils literal notranslate"><span class="pre">np.isin</span></code>, <code class="docutils literal notranslate"><span class="pre">any</span></code>, <code class="docutils literal notranslate"><span class="pre">all</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>sort</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.sort(axis=…)</span></code>, <code class="docutils literal notranslate"><span class="pre">argsort</span></code> to reorder rows</p></td>
+</tr>
+<tr class="row-odd"><td><p>combine / split</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">concatenate</span></code>, <code class="docutils literal notranslate"><span class="pre">vstack</span></code>, <code class="docutils literal notranslate"><span class="pre">hstack</span></code>, <code class="docutils literal notranslate"><span class="pre">vsplit</span></code>, <code class="docutils literal notranslate"><span class="pre">hsplit</span></code>, <code class="docutils literal notranslate"><span class="pre">array_split</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>broadcasting</p></td>
+<td><p>shapes compatible from the right when equal or 1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>McKinney, W. (2022). <em>Python for data analysis: Data wrangling with pandas, NumPy, and Jupyter</em> (3rd ed.). O’Reilly Media. <a class="reference external" href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a></p>
+<p>NumPy Developers. (2026). <em>Broadcasting</em>. <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">https://numpy.org/doc/stable/user/basics.broadcasting.html</a></p>
+<p>NumPy Developers. (2026). <em>NumPy documentation</em>. <a class="reference external" href="https://numpy.org/doc/stable/">https://numpy.org/doc/stable/</a></p>
+<p>VanderPlas, J. (2023). <em>Python data science handbook: Essential tools for working with data</em> (2nd ed.). O’Reilly Media. <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/12_Seatwork_1DArrays.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Seatwork: One-Dimensional Arrays</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/13_Seatwork_2DArrays.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Seatwork: Two-Dimensional Arrays</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-2d-arrays"><strong>Creating 2D Arrays</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing"><strong>Indexing and Slicing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-and-deletion"><strong>Insertion and Deletion</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching"><strong>Searching</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting"><strong>Sorting</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-and-splitting"><strong>Concatenation and Splitting</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting"><strong>Broadcasting</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

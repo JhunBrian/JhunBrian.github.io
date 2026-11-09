@@ -1,0 +1,1650 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Programming Paradigms &#8212; DS112 · Computer Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/ds112.css?v=cb964f76" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02_ProgrammingParadigms';</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seatwork: Same Problem, Different Paradigms" href="exercises/02_Seatwork_Paradigms.html" />
+    <link rel="prev" title="Seatwork: Algorithm Making" href="exercises/01_Seatwork_Algorithms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds112-mark.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/ds112-mark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Computer Programming</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Start here</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course-guide.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Course syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">01 · Introduction to Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_ProgrammingLanguages.html">Programming languages &amp; Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_AlgorithmsFlowcharts.html">Algorithms &amp; flowcharts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/01_Seatwork_Algorithms.html">Seatwork · Algorithm making</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Programming paradigms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/02_Seatwork_Paradigms.html">Seatwork · Same problem, different paradigms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_JupyterNotebook.html">Jupyter Notebook as an IDE</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/03_Seatwork_Jupyter.html">Seatwork · Jupyter notebook exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W03_Assignment1_ReflectionPaper.html">Activity · Assignment 1 (reflection paper)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 · Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_VariablesExpressions.html">Variables, expressions &amp; statements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/04_Seatwork_Variables.html">Seatwork · The canteen receipt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_ControlStructures.html">Control structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/05_Seatwork_ControlStructures.html">Seatwork · Barangay health monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W05_Assignment2_ControlStructures.html">Activity · Assignment 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_Functions.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/06_Seatwork_Functions.html">Seatwork · GWA toolkit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="07_ListsTuplesStrings.html">Lists, tuples &amp; strings</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/07_Seatwork_Sequences.html">Seatwork · Class list &amp; announcements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_DictionariesCollections.html">Dictionaries &amp; collections</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/08_Seatwork_Dictionaries.html">Seatwork · Canteen orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W07_Assignment3_FunctionsCollections.html">Activity · Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="09_FilesExceptions.html">Files &amp; exceptions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/09_Seatwork_FilesExceptions.html">Seatwork · Processing the gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_ObjectsClasses.html">Objects &amp; classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/10_Seatwork_Classes.html">Seatwork · Library book tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W08_Assignment4_FilesClasses.html">Activity · Assignment 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="MidtermReview.html">Midterm review guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 · NumPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_IntroNumPy.html">Introduction to NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/11_Seatwork_NumPyIntro.html">Seatwork · Creating arrays</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="12_OneDimensionalArrays.html">One-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/12_Seatwork_1DArrays.html">Seatwork · Daily rainfall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="13_TwoDimensionalArrays.html">Two-dimensional arrays</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/13_Seatwork_2DArrays.html">Seatwork · Store sales table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="14_UfuncsAxesReshaping.html">Ufuncs, axes &amp; reshaping</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/14_Seatwork_UfuncsAxes.html">Seatwork · Four weeks of temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_Assignment5_NumPy.html">Activity · Assignment 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W12_NumPyPortfolio.html">Activity · NumPy portfolio</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 · pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="15_IntroPandas.html">Series &amp; DataFrames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/15_Seatwork_PandasIntro.html">Seatwork · Canteen menu table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="16_ReadingWritingData.html">Reading &amp; writing data; text</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/16_Seatwork_TextData.html">Seatwork · Text preprocessing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="17_IndexingSelection.html">Indexing, selection &amp; summaries</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/17_Seatwork_Selection.html">Seatwork · The DS112 gradebook</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="18_ComputationVisualization.html">Computation &amp; visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/18_Seatwork_Visualization.html">Seatwork · Weather stations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="19_GroupByAggregation.html">GroupBy &amp; aggregation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/19_Seatwork_GroupBy.html">Seatwork · Canteen sales</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="20_MergeJoinConcat.html">Merge, join &amp; concatenate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/20_Seatwork_Merge.html">Seatwork · Combining tables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="21_ReshapingPivot.html">Reshaping &amp; pivot tables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/21_Seatwork_Pivot.html">Seatwork · Pivot tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_Assignment6_Pandas.html">Activity · Assignment 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activities/W16_PandasPortfolio.html">Activity · pandas portfolio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="22_RevisitingParadigms.html">Revisiting paradigms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 · Integrated PyData Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="23_PyDataProject.html">The integrated PyData project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="activities/W17_IntegratedPyDataProject.html">Activity · Integrated PyData project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/02_ProgrammingParadigms.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Programming Paradigms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> On this page </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-family-of-paradigms"><strong>The Family of Paradigms</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-starting-point-imperative-programming"><strong>The Starting Point: Imperative Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-programming"><strong>Structured Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-it-solved-spaghetti-code"><strong>The problem it solved: spaghetti code</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rules-of-structured-programming"><strong>The rules of structured programming</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-running-problem-structured"><strong>The running problem, structured</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strengths-and-limits"><strong>Strengths and limits</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedural-programming"><strong>Procedural Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposition"><strong>Decomposition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-running-problem-procedural"><strong>The running problem, procedural</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-procedures-help"><strong>Why procedures help</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-programming"><strong>Functional Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-ideas"><strong>Core ideas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#side-effects-the-thing-functional-programming-avoids"><strong>Side effects — the thing functional programming avoids</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-classic-tools-map-filter-reduce"><strong>Three classic tools: map, filter, reduce</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-running-problem-functional"><strong>The running problem, functional</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-matters-in-data-science"><strong>Why it matters in data science</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-brief-look-at-two-more-paradigms"><strong>A Brief Look at Two More Paradigms</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-programming-oop"><strong>Object-oriented programming (OOP)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-programming"><strong>Declarative programming</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#side-by-side-comparison"><strong>Side-by-Side Comparison</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-as-a-multi-paradigm-language"><strong>Python as a Multi-Paradigm Language</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-paradigm"><strong>Choosing a Paradigm</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paradigms-throughout-this-course"><strong>Paradigms Throughout This Course</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-understanding"><strong>Check Your Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="programming-paradigms">
+<h1><strong>Programming Paradigms</strong><a class="headerlink" href="#programming-paradigms" title="Link to this heading">#</a></h1>
+<p><strong>DS112 — Computer Programming</strong></p>
+<p><strong>Week 3:</strong> · <strong>Suggested class time: 5 hours (2-hour lecture + 3-hour laboratory)</strong></p>
+<p><strong>ILO :</strong> Determine the differences of programming languages by comparing the programming paradigms they support, with emphasis on structured, procedural, and functional programming.</p>
+<p>Imagine three people asked to make <strong>adobo</strong> for a family gathering:</p>
+<ul class="simple">
+<li><p><strong>Lola</strong> cooks from memory, step by step, tasting and adjusting as she goes.</p></li>
+<li><p><strong>A restaurant kitchen</strong> splits the work: one station prepares the meat, another the sauce, another the plating — each station has one job and passes its result on.</p></li>
+<li><p><strong>A food factory</strong> runs the ingredients through a line of machines: wash → cut → marinate → cook → pack. Each machine takes something in and produces something new, without changing the machine itself.</p></li>
+</ul>
+<p>All three produce adobo, but they <strong>organize the work differently</strong>.</p>
+<p>Programming works the same way. A <strong>programming paradigm</strong> is a <strong>style or way of thinking</strong> about how to organize a program — how to structure its steps, its data, and its logic. A paradigm is not a language; it is an <strong>approach</strong>. Many languages, including Python, let you use several paradigms.</p>
+<blockquote>
+<div><p><strong>Key idea:</strong> a paradigm answers the question <em>“How should I organize my solution?”</em></p>
+</div></blockquote>
+<section id="the-family-of-paradigms">
+<h2><strong>The Family of Paradigms</strong><a class="headerlink" href="#the-family-of-paradigms" title="Link to this heading">#</a></h2>
+<p>Paradigms are often grouped into two big families:</p>
+<pre  class="mermaid">
+        flowchart TB
+    P[&quot;Programming paradigms&quot;] --&gt; I[&quot;Imperative&lt;br/&gt;describe HOW, step by step&quot;]
+    P --&gt; D[&quot;Declarative&lt;br/&gt;describe WHAT result is wanted&quot;]
+    I --&gt; S[&quot;Structured&quot;]
+    I --&gt; PR[&quot;Procedural&quot;]
+    I --&gt; O[&quot;Object-oriented&quot;]
+    D --&gt; F[&quot;Functional&quot;]
+    D --&gt; Q[&quot;Query / logic&lt;br/&gt;(SQL, Prolog)&quot;]
+    </pre><p>This course focuses on the three paradigms you will use most as a beginning data scientist:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paradigm</p></th>
+<th class="head"><p>Guiding question</p></th>
+<th class="head"><p>Organizes the program around…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Structured</strong></p></td>
+<td><p>How do I control the flow of steps clearly?</p></td>
+<td><p>sequence, selection, and iteration — no jumping around</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Procedural</strong></p></td>
+<td><p>What smaller tasks (procedures) make up the job?</p></td>
+<td><p>named, reusable procedures (functions)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Functional</strong></p></td>
+<td><p>What transformations turn the input into the output?</p></td>
+<td><p>functions that take values in and return new values out</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We will also take a short look at <strong>object-oriented</strong> and <strong>declarative</strong> programming, which you will meet again later in the course and in DS212.</p>
+<p>To compare paradigms fairly, we will solve <strong>the same problem</strong> in each one.</p>
+<blockquote>
+<div><p><strong>Running problem.</strong> You have a list of quiz scores. Keep only the <strong>passing</strong> scores (75 and above), add a <strong>5-point bonus</strong> to each (but never above 100), and compute the <strong>average</strong> of the bonus-adjusted passing scores.</p>
+<p>Scores: <code class="docutils literal notranslate"><span class="pre">78,</span> <span class="pre">92,</span> <span class="pre">64,</span> <span class="pre">85,</span> <span class="pre">70,</span> <span class="pre">99</span></code></p>
+</div></blockquote>
+</section>
+<section id="the-starting-point-imperative-programming">
+<h2><strong>The Starting Point: Imperative Programming</strong><a class="headerlink" href="#the-starting-point-imperative-programming" title="Link to this heading">#</a></h2>
+<p><strong>Imperative</strong> programming describes a computation as a <strong>sequence of commands that change the program’s state</strong> (the values stored in its variables). It answers: <em>“What steps should the computer perform, in what order?”</em></p>
+<blockquote>
+<div><p><strong>Analogy — a whiteboard.</strong> Imagine a whiteboard with a few labeled boxes (<code class="docutils literal notranslate"><span class="pre">total</span></code>, <code class="docutils literal notranslate"><span class="pre">count</span></code>). Each instruction tells you to <strong>erase and rewrite</strong> a box: <em>“add 83 to total”, “add 1 to count”</em>. At the end, you read the answer from the board. The <strong>state</strong> of the whiteboard changes with every step.</p>
+</div></blockquote>
+<p>All the paradigms below except functional are <strong>refinements of imperative programming</strong> — they add rules and organization on top of it.</p>
+</section>
+<section id="structured-programming">
+<h2><strong>Structured Programming</strong><a class="headerlink" href="#structured-programming" title="Link to this heading">#</a></h2>
+<section id="the-problem-it-solved-spaghetti-code">
+<h3><strong>The problem it solved: spaghetti code</strong><a class="headerlink" href="#the-problem-it-solved-spaghetti-code" title="Link to this heading">#</a></h3>
+<p>Early programs often used <code class="docutils literal notranslate"><span class="pre">GOTO</span></code> statements that jumped to any line of the program. As programs grew, the flow became a tangle that was almost impossible to follow — programmers called it <strong>spaghetti code</strong>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>10  INPUT score
+20  IF score &lt; 75 GOTO 60
+30  LET score = score + 5
+40  IF score &gt; 100 GOTO 80
+50  GOTO 90
+60  PRINT "skip"
+70  GOTO 10
+80  LET score = 100
+90  PRINT score
+95  GOTO 10
+</pre></div>
+</div>
+<p>Try following it: line 20 jumps to 60, which jumps back to 10; line 40 jumps to 80, which falls into 90, which jumps to 10… Now imagine 10,000 lines like this.</p>
+<blockquote>
+<div><p><strong>Analogy — a road map with teleporters.</strong> Spaghetti code is like a city where any street might suddenly <strong>teleport</strong> you to another part of town. Structured programming replaces the teleporters with <strong>ordinary roads, intersections, and roundabouts</strong> — you can always see where you came from and where you are going.</p>
+</div></blockquote>
+<p>In 1968, Edsger Dijkstra published his famous letter <em>“Go To Statement Considered Harmful,”</em> arguing that programs should be built only from <strong>clean, nestable control structures</strong>. Two years earlier, Böhm and Jacopini had proven this was always possible.</p>
+</section>
+<section id="the-rules-of-structured-programming">
+<h3><strong>The rules of structured programming</strong><a class="headerlink" href="#the-rules-of-structured-programming" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Use only <strong>three control structures</strong>: <strong>sequence</strong>, <strong>selection</strong> (<code class="docutils literal notranslate"><span class="pre">if</span></code>), and <strong>iteration</strong> (<code class="docutils literal notranslate"><span class="pre">while</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>).</p></li>
+<li><p>Every structure has <strong>one entry and one exit</strong>.</p></li>
+<li><p>Structures may be <strong>nested</strong> inside each other, but never <strong>jump</strong> into or out of the middle of one.</p></li>
+<li><p>Use <strong>indentation</strong> so the structure is visible.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Analogy — LEGO blocks.</strong> You have only three kinds of blocks, and each has exactly one connector on top and one at the bottom. You can stack them, or put one inside another — and anything you build stays sturdy and easy to understand.</p>
+</div></blockquote>
+</section>
+<section id="the-running-problem-structured">
+<h3><strong>The running problem, structured</strong><a class="headerlink" href="#the-running-problem-structured" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>START
+    SET scores ← [78, 92, 64, 85, 70, 99]
+    SET total ← 0
+    SET count ← 0
+    FOR each score IN scores DO                 ← iteration
+        IF score ≥ 75 THEN                       ← selection
+            SET adjusted ← score + 5             ← sequence
+            IF adjusted &gt; 100 THEN
+                SET adjusted ← 100
+            ENDIF
+            SET total ← total + adjusted
+            SET count ← count + 1
+        ENDIF
+    ENDFOR
+    OUTPUT total / count
+END
+</pre></div>
+</div>
+<pre  class="mermaid">
+        flowchart TD
+    S([Start]) --&gt; Z[&quot;total ← 0, count ← 0&quot;]
+    Z --&gt; L{More scores?}
+    L --&gt;|Yes| G[Take next score]
+    G --&gt; P{score ≥ 75?}
+    P --&gt;|No| L
+    P --&gt;|Yes| A[&quot;adjusted ← score + 5&quot;]
+    A --&gt; C{adjusted &gt; 100?}
+    C --&gt;|Yes| H[&quot;adjusted ← 100&quot;]
+    C --&gt;|No| T[&quot;total ← total + adjusted&lt;br/&gt;count ← count + 1&quot;]
+    H --&gt; T
+    T --&gt; L
+    L --&gt;|No| O[/Output total ÷ count/]
+    O --&gt; E([End])
+    </pre><p>Every path in the flowchart moves <strong>forward</strong> or <strong>loops back to the loop’s single decision</strong> — there are no jumps into the middle of anything.</p>
+</section>
+<section id="strengths-and-limits">
+<h3><strong>Strengths and limits</strong><a class="headerlink" href="#strengths-and-limits" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Strengths</p></th>
+<th class="head"><p>Limits</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>easy to read, trace, and debug</p></td>
+<td><p>everything is still in one long block</p></td>
+</tr>
+<tr class="row-odd"><td><p>the flowchart and the code match closely</p></td>
+<td><p>the same logic (e.g., capping at 100) may be repeated in many places</p></td>
+</tr>
+<tr class="row-even"><td><p>the basis of almost every modern language</p></td>
+<td><p>large programs need more organization → <strong>procedural</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="procedural-programming">
+<h2><strong>Procedural Programming</strong><a class="headerlink" href="#procedural-programming" title="Link to this heading">#</a></h2>
+<p><strong>Procedural</strong> programming keeps the structured rules but organizes the program into <strong>procedures</strong> (also called <strong>subroutines</strong> or <strong>functions</strong>): named blocks of steps that perform one task, can receive <strong>parameters</strong>, and can <strong>return</strong> a result.</p>
+<blockquote>
+<div><p><strong>Analogy — a barangay hall.</strong> Instead of one person doing everything, the hall has windows: one issues <strong>clearances</strong>, one handles <strong>cedulas</strong>, one records <strong>complaints</strong>. Each window does <strong>one job</strong>, follows its own steps, and returns a document. The <strong>barangay captain</strong> (the main program) just sends each request to the right window.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Another analogy — a recipe with sub-recipes.</strong> A cookbook’s lasagna recipe says <em>“prepare the white sauce (see page 12).”</em> You don’t rewrite the white-sauce steps inside every recipe that needs it — you <strong>call</strong> the sub-recipe.</p>
+</div></blockquote>
+<section id="decomposition">
+<h3><strong>Decomposition</strong><a class="headerlink" href="#decomposition" title="Link to this heading">#</a></h3>
+<p>The heart of procedural programming is <strong>decomposition</strong>: breaking a problem into smaller procedures.</p>
+<pre  class="mermaid">
+        flowchart TB
+    M[&quot;main program&lt;br/&gt;compute bonus average&quot;] --&gt; P1[&quot;is_passing(score)&quot;]
+    M --&gt; P2[&quot;add_bonus(score)&quot;]
+    M --&gt; P3[&quot;average(values)&quot;]
+    P2 --&gt; P4[&quot;cap(value, limit)&quot;]
+    </pre></section>
+<section id="the-running-problem-procedural">
+<h3><strong>The running problem, procedural</strong><a class="headerlink" href="#the-running-problem-procedural" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PROCEDURE is_passing(score)
+    RETURN score ≥ 75
+ENDPROCEDURE
+
+PROCEDURE add_bonus(score)
+    RETURN cap(score + 5, 100)
+ENDPROCEDURE
+
+PROCEDURE cap(value, limit)
+    IF value &gt; limit THEN RETURN limit ELSE RETURN value ENDIF
+ENDPROCEDURE
+
+PROCEDURE average(values)
+    SET total ← 0
+    FOR each v IN values DO SET total ← total + v ENDFOR
+    RETURN total / LENGTH(values)
+ENDPROCEDURE
+
+MAIN
+    SET adjusted ← empty list
+    FOR each score IN scores DO
+        IF is_passing(score) THEN
+            APPEND add_bonus(score) TO adjusted
+        ENDIF
+    ENDFOR
+    OUTPUT average(adjusted)
+ENDMAIN
+</pre></div>
+</div>
+<p>In a flowchart, a call to a procedure is drawn with the <strong>predefined process</strong> symbol:</p>
+<pre  class="mermaid">
+        flowchart TD
+    S([Start]) --&gt; L{More scores?}
+    L --&gt;|Yes| P[[&quot;is_passing(score)&quot;]]
+    P --&gt;|True| B[[&quot;add_bonus(score)&quot;]]
+    B --&gt; A[&quot;append to adjusted&quot;]
+    A --&gt; L
+    P --&gt;|False| L
+    L --&gt;|No| AV[[&quot;average(adjusted)&quot;]]
+    AV --&gt; O[/Output result/]
+    O --&gt; E([End])
+    </pre></section>
+<section id="why-procedures-help">
+<h3><strong>Why procedures help</strong><a class="headerlink" href="#why-procedures-help" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Benefit</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Reuse</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">average()</span></code> works for scores, prices, temperatures…</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Readability</strong></p></td>
+<td><p>the main program reads like a summary of the solution</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Easier testing</strong></p></td>
+<td><p>test <code class="docutils literal notranslate"><span class="pre">add_bonus(98)</span></code> by itself → should give 100</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Easier change</strong></p></td>
+<td><p>change the bonus rule in <strong>one</strong> place</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Teamwork</strong></p></td>
+<td><p>different people can write different procedures</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Important:</strong> procedures can still <strong>change shared data</strong> (state). A procedure that modifies a global variable can surprise other parts of the program. Functional programming tackles exactly this problem.</p>
+</div></blockquote>
+<p>Procedural programming is the <strong>main paradigm of this course</strong>: from Week 6 onward, you will design almost every program as a set of well-named functions. Languages such as C, Pascal, and Fortran are classic procedural languages, and Python supports the style naturally.</p>
+</section>
+</section>
+<section id="functional-programming">
+<h2><strong>Functional Programming</strong><a class="headerlink" href="#functional-programming" title="Link to this heading">#</a></h2>
+<p><strong>Functional</strong> programming treats computation as <strong>evaluating functions</strong> — in the mathematical sense. A function takes values <strong>in</strong> and gives a <strong>new value out</strong>, and it does <strong>not change anything else</strong>.</p>
+<blockquote>
+<div><p><strong>Analogy — a juice machine.</strong> Put in mangoes, get mango juice. Put in the same mangoes tomorrow, get the same juice. The machine does not secretly change the fruit on your counter or keep a tally on the wall — it only <strong>transforms input into output</strong>.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Analogy — an assembly line.</strong> Raw materials enter, pass through stations — <em>wash</em>, <em>cut</em>, <em>filter out the bad pieces</em>, <em>package</em> — and a finished product comes out. Each station is a function; the product of one station becomes the input of the next.</p>
+</div></blockquote>
+<section id="core-ideas">
+<h3><strong>Core ideas</strong><a class="headerlink" href="#core-ideas" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Idea</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Analogy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Pure functions</strong></p></td>
+<td><p>same input → same output, no side effects</p></td>
+<td><p>a calculator: <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">×</span> <span class="pre">8</span></code> is always 56, and pressing it doesn’t change anything else</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Immutability</strong></p></td>
+<td><p>data is not changed in place; new data is created</p></td>
+<td><p>photocopying a form and filling in the copy, keeping the original clean</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Functions as values</strong></p></td>
+<td><p>functions can be passed to other functions</p></td>
+<td><p>giving a machine a different <strong>attachment</strong> (blade, whisk, grinder)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Composition</strong></p></td>
+<td><p>build big transformations by chaining small ones</p></td>
+<td><p>stations in an assembly line</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="side-effects-the-thing-functional-programming-avoids">
+<h3><strong>Side effects — the thing functional programming avoids</strong><a class="headerlink" href="#side-effects-the-thing-functional-programming-avoids" title="Link to this heading">#</a></h3>
+<p>A <strong>side effect</strong> is anything a function does <strong>besides</strong> returning a value: changing a global variable, modifying a list it received, printing, writing to a file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Impure (has a side effect):                Pure (no side effect):
+
+SET bonus_total ← 0                        FUNCTION add_bonus(score)
+PROCEDURE add_bonus(score)                     RETURN MIN(score + 5, 100)
+    SET bonus_total ← bonus_total + 5      ENDFUNCTION
+    RETURN score + 5
+ENDPROCEDURE
+</pre></div>
+</div>
+<p>The impure version secretly changes <code class="docutils literal notranslate"><span class="pre">bonus_total</span></code> every time it is called — call it twice by accident and the total is wrong. The pure version can be called a thousand times safely.</p>
+</section>
+<section id="three-classic-tools-map-filter-reduce">
+<h3><strong>Three classic tools: map, filter, reduce</strong><a class="headerlink" href="#three-classic-tools-map-filter-reduce" title="Link to this heading">#</a></h3>
+<p>Functional programs rarely write loops directly. Instead, they use general-purpose <strong>higher-order functions</strong> that take another function as input:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tool</p></th>
+<th class="head"><p>What it does</p></th>
+<th class="head"><p>Analogy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>filter</strong></p></td>
+<td><p>keep only the items that pass a test</p></td>
+<td><p>a sieve that lets only the good grains through</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>map</strong></p></td>
+<td><p>apply a function to <strong>every</strong> item</p></td>
+<td><p>a stamping machine that stamps every envelope</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>reduce</strong></p></td>
+<td><p>combine all items into one value</p></td>
+<td><p>a blender that turns many fruits into one smoothie</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-running-problem-functional">
+<h3><strong>The running problem, functional</strong><a class="headerlink" href="#the-running-problem-functional" title="Link to this heading">#</a></h3>
+<pre  class="mermaid">
+        flowchart LR
+    A[&quot;[78, 92, 64, 85, 70, 99]&quot;] --&gt;|&quot;filter: score ≥ 75&quot;| B[&quot;[78, 92, 85, 99]&quot;]
+    B --&gt;|&quot;map: min(score + 5, 100)&quot;| C[&quot;[83, 97, 90, 100]&quot;]
+    C --&gt;|&quot;reduce: average&quot;| D[&quot;92.5&quot;]
+    </pre><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>result ← average( map(add_bonus, filter(is_passing, scores)) )
+</pre></div>
+</div>
+<p>There is <strong>no counter, no running total, no variable being overwritten</strong> — just data flowing through transformations. The original <code class="docutils literal notranslate"><span class="pre">scores</span></code> list is never modified.</p>
+</section>
+<section id="why-it-matters-in-data-science">
+<h3><strong>Why it matters in data science</strong><a class="headerlink" href="#why-it-matters-in-data-science" title="Link to this heading">#</a></h3>
+<p>Data analysis is naturally a <strong>pipeline of transformations</strong>: <em>load → clean → filter → transform → summarize</em>. Libraries such as <strong>pandas</strong> and <strong>NumPy</strong> are designed around this style, which is why functional thinking will make Weeks 10–16 much easier.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Strengths</p></th>
+<th class="head"><p>Limits</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>easy to test (pure functions)</p></td>
+<td><p>some problems are naturally step-by-step</p></td>
+</tr>
+<tr class="row-odd"><td><p>safe to reuse and combine</p></td>
+<td><p>can feel unfamiliar at first</p></td>
+</tr>
+<tr class="row-even"><td><p>pipelines read like a description of the data flow</p></td>
+<td><p>long chains can become hard to debug</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="a-brief-look-at-two-more-paradigms">
+<h2><strong>A Brief Look at Two More Paradigms</strong><a class="headerlink" href="#a-brief-look-at-two-more-paradigms" title="Link to this heading">#</a></h2>
+<section id="object-oriented-programming-oop">
+<h3><strong>Object-oriented programming (OOP)</strong><a class="headerlink" href="#object-oriented-programming-oop" title="Link to this heading">#</a></h3>
+<p>OOP organizes a program around <strong>objects</strong> that bundle <strong>data</strong> (attributes) together with the <strong>actions</strong> (methods) that work on that data.</p>
+<blockquote>
+<div><p><strong>Analogy — students in a class.</strong> Each student <em>has</em> data (name, ID, scores) and <em>can do</em> things (submit work, compute their own average). Instead of one central program keeping track of everyone’s scores, <strong>each student object manages its own</strong>.</p>
+</div></blockquote>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>student ← Student("Ana", [78, 92, 64])
+student.passing_average()
+</pre></div>
+</div>
+<p>You will meet objects in Week 8, and OOP is the focus of <strong>DS212</strong>.</p>
+</section>
+<section id="declarative-programming">
+<h3><strong>Declarative programming</strong><a class="headerlink" href="#declarative-programming" title="Link to this heading">#</a></h3>
+<p>Declarative programming describes <strong>what result you want</strong>, and lets the system decide <strong>how</strong> to produce it.</p>
+<blockquote>
+<div><p><strong>Analogy — ordering food.</strong> At a restaurant, you say <em>“one chicken adobo, extra rice.”</em> You don’t tell the cook how to light the stove. Using a ride-hailing app is similar: you set the <strong>destination</strong>, not every turn on the route.</p>
+</div></blockquote>
+<p>The classic declarative language is <strong>SQL</strong>:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- SQLite syntax: MIN(a, b) returns the smaller of two values</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="k">MIN</span><span class="p">(</span><span class="n">score</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">quiz_scores</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">75</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In Python, data libraries such as pandas let you write in a similar style: <code class="docutils literal notranslate"><span class="pre">scores[scores</span> <span class="pre">&gt;=</span> <span class="pre">75]</span></code> describes <strong>which</strong> scores you want without writing the loop.</p>
+</section>
+</section>
+<section id="side-by-side-comparison">
+<h2><strong>Side-by-Side Comparison</strong><a class="headerlink" href="#side-by-side-comparison" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Structured</p></th>
+<th class="head"><p>Procedural</p></th>
+<th class="head"><p>Functional</p></th>
+<th class="head"><p>Object-oriented</p></th>
+<th class="head"><p>Declarative</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Main idea</strong></p></td>
+<td><p>clear control flow</p></td>
+<td><p>decompose into procedures</p></td>
+<td><p>transform data with pure functions</p></td>
+<td><p>objects with data + behavior</p></td>
+<td><p>describe the result</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Basic unit</strong></p></td>
+<td><p>control structures</p></td>
+<td><p>procedure / function</p></td>
+<td><p>pure function</p></td>
+<td><p>object / class</p></td>
+<td><p>query / rule</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>State changes</strong></p></td>
+<td><p>yes</p></td>
+<td><p>yes (often local)</p></td>
+<td><p>avoided</p></td>
+<td><p>inside objects</p></td>
+<td><p>hidden from the programmer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Analogy</strong></p></td>
+<td><p>LEGO blocks</p></td>
+<td><p>barangay windows</p></td>
+<td><p>juice machine / assembly line</p></td>
+<td><p>students managing their own records</p></td>
+<td><p>ordering at a restaurant</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Example languages</strong></p></td>
+<td><p>Pascal, C</p></td>
+<td><p>C, Fortran, Python</p></td>
+<td><p>Haskell, Lisp; Python &amp; R support it</p></td>
+<td><p>Java, C#, Python</p></td>
+<td><p>SQL, Prolog</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>In this course</strong></p></td>
+<td><p>Weeks 2–5</p></td>
+<td><p>Weeks 6–9 (main)</p></td>
+<td><p>Weeks 6–7, 10–16</p></td>
+<td><p>Week 8 (intro)</p></td>
+<td><p>pandas, Weeks 13–16</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="python-as-a-multi-paradigm-language">
+<h2><strong>Python as a Multi-Paradigm Language</strong><a class="headerlink" href="#python-as-a-multi-paradigm-language" title="Link to this heading">#</a></h2>
+<p>Python does not force a single paradigm. You can write the running problem in <strong>each</strong> style. You will learn the syntax from Week 4 onward — for now, simply <strong>read</strong> the code and match it to the pseudocode above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+
+<span class="c1"># ---------- Structured (imperative) ----------</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+        <span class="n">adjusted</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="mi">5</span>
+        <span class="k">if</span> <span class="n">adjusted</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="n">adjusted</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">adjusted</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Structured:"</span><span class="p">,</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Structured: 92.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------- Procedural ----------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_passing</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">75</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">limit</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">limit</span> <span class="k">else</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_bonus</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">cap</span><span class="p">(</span><span class="n">score</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+
+<span class="n">adjusted</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">is_passing</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+        <span class="n">adjusted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">add_bonus</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Procedural:"</span><span class="p">,</span> <span class="n">average</span><span class="p">(</span><span class="n">adjusted</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Procedural: 92.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------- Functional ----------</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="n">passing</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+<span class="n">bonus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">passing</span><span class="p">))</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">bonus</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Functional:"</span><span class="p">,</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">bonus</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Functional: 92.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------- Declarative style (with pandas) ----------</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Declarative:"</span><span class="p">,</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Original scores unchanged:"</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Declarative: 92.5
+Original scores unchanged: [78, 92, 64, 85, 70, 99]
+</pre></div>
+</div>
+</div>
+</div>
+<p>All four produce <strong>92.5</strong> — the paradigms differ in <strong>organization</strong>, not in the answer.</p>
+<p>Python itself is primarily <strong>imperative</strong> with strong support for <strong>objects</strong>, and it borrows many <strong>functional</strong> tools such as <code class="docutils literal notranslate"><span class="pre">lambda</span></code>, <code class="docutils literal notranslate"><span class="pre">map()</span></code>, <code class="docutils literal notranslate"><span class="pre">filter()</span></code>, and comprehensions. Declarative-style Python appears mainly through libraries such as pandas. As the original course notes put it, it is useful to distinguish between <em>Python being a declarative language</em> and <em>writing declarative-style Python</em>.</p>
+</section>
+<section id="choosing-a-paradigm">
+<h2><strong>Choosing a Paradigm</strong><a class="headerlink" href="#choosing-a-paradigm" title="Link to this heading">#</a></h2>
+<p>There is no single “best” paradigm. Good programmers <strong>mix</strong> them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situation</p></th>
+<th class="head"><p>A natural choice</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a short script that runs once</p></td>
+<td><p>structured / imperative</p></td>
+</tr>
+<tr class="row-odd"><td><p>a program with repeated tasks</p></td>
+<td><p>procedural — put each task in a function</p></td>
+</tr>
+<tr class="row-even"><td><p>a data-cleaning pipeline</p></td>
+<td><p>functional — chain transformations</p></td>
+</tr>
+<tr class="row-odd"><td><p>a system of interacting things (students, courses, sensors)</p></td>
+<td><p>object-oriented</p></td>
+</tr>
+<tr class="row-even"><td><p>selecting and summarizing table data</p></td>
+<td><p>declarative (pandas, SQL)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="paradigms-throughout-this-course">
+<h2><strong>Paradigms Throughout This Course</strong><a class="headerlink" href="#paradigms-throughout-this-course" title="Link to this heading">#</a></h2>
+<pre  class="mermaid">
+        flowchart LR
+    W2[&quot;W2–W3&lt;br/&gt;algorithms &amp; flowcharts&lt;br/&gt;STRUCTURED&quot;] --&gt; W4[&quot;W4–W5&lt;br/&gt;variables &amp; control&lt;br/&gt;STRUCTURED&quot;]
+    W4 --&gt; W6[&quot;W6–W7&lt;br/&gt;functions &amp; collections&lt;br/&gt;PROCEDURAL + FUNCTIONAL&quot;]
+    W6 --&gt; W8[&quot;W8&lt;br/&gt;objects &amp; classes&lt;br/&gt;OOP preview&quot;]
+    W8 --&gt; W10[&quot;W10–W16&lt;br/&gt;NumPy &amp; pandas&lt;br/&gt;FUNCTIONAL + DECLARATIVE&quot;]
+    </pre><p>Look for the <strong>Paradigm lens</strong> notes in later lessons — they point out which way of thinking a new tool belongs to. In Week 16, we return to this topic and solve a full data science task in every paradigm.</p>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A <strong>paradigm</strong> is a way of organizing a program, not a language.</p></li>
+<li><p><strong>Imperative</strong> programs change state step by step; <strong>declarative</strong> programs describe the result.</p></li>
+<li><p><strong>Structured</strong> programming uses only sequence, selection, and iteration, each with one entry and one exit — no spaghetti jumps.</p></li>
+<li><p><strong>Procedural</strong> programming decomposes a problem into named, reusable procedures.</p></li>
+<li><p><strong>Functional</strong> programming builds results by passing data through pure functions, avoiding side effects.</p></li>
+<li><p><strong>Python</strong> supports all of these, so you can choose — and combine — the style that fits the problem.</p></li>
+</ul>
+</section>
+<section id="check-your-understanding">
+<h2><strong>Check Your Understanding</strong><a class="headerlink" href="#check-your-understanding" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Use your own analogy (not one from this page) to explain the difference between imperative and declarative programming.</p></li>
+<li><p>Why is code with many <code class="docutils literal notranslate"><span class="pre">GOTO</span></code> jumps hard to debug? Which three structures replace it?</p></li>
+<li><p>Draw a decomposition tree for a program that computes a student’s GWA from a list of subjects and units.</p></li>
+<li><p>Which of these is a pure function? Explain.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FUNCTION total_price(price, qty)          PROCEDURE record_sale(price, qty)
+    RETURN price × qty                        SET sales_today ← sales_today + price × qty
+ENDFUNCTION                               ENDPROCEDURE
+</pre></div>
+</div>
+</li>
+<li><p>Describe the running problem as a <strong>filter → map → reduce</strong> pipeline for a different dataset of your choice.</p></li>
+</ol>
+</section>
+<section id="references">
+<h2><strong>References</strong><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Abelson, H., &amp; Sussman, G. J. (1996). <em>Structure and interpretation of computer programs</em> (2nd ed.). MIT Press.</p>
+<p>Böhm, C., &amp; Jacopini, G. (1966). Flow diagrams, Turing machines and languages with only two formation rules. <em>Communications of the ACM, 9</em>(5), 366–371. <a class="reference external" href="https://doi.org/10.1145/355592.365646">https://doi.org/10.1145/355592.365646</a></p>
+<p>Codd, E. F. (1970). A relational model of data for large shared data banks. <em>Communications of the ACM, 13</em>(6), 377–387. <a class="reference external" href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a></p>
+<p>Dijkstra, E. W. (1968). Go to statement considered harmful. <em>Communications of the ACM, 11</em>(3), 147–148. <a class="reference external" href="https://doi.org/10.1145/362929.362947">https://doi.org/10.1145/362929.362947</a></p>
+<p>Hughes, J. (1989). Why functional programming matters. <em>The Computer Journal, 32</em>(2), 98–107. <a class="reference external" href="https://doi.org/10.1093/comjnl/32.2.98">https://doi.org/10.1093/comjnl/32.2.98</a></p>
+<p>Kuchling, A. M. (2026). <em>Functional programming HOWTO</em>. Python Software Foundation. <a class="reference external" href="https://docs.python.org/3/howto/functional.html">https://docs.python.org/3/howto/functional.html</a></p>
+<p>Maulion, M. R. (2022). <em>DS 112 computer programming</em> [Instructional material]. University of Science and Technology of Southern Philippines.</p>
+<p>Sebesta, R. W. (2019). <em>Concepts of programming languages</em> (12th ed.). Pearson.</p>
+<p>Van Roy, P., &amp; Haridi, S. (2004). <em>Concepts, techniques, and models of computer programming</em>. MIT Press.</p>
+<p>Wikipedia contributors. (2026). <em>Programming paradigm</em>. Wikipedia. <a class="reference external" href="https://en.wikipedia.org/wiki/Programming_paradigm">https://en.wikipedia.org/wiki/Programming_paradigm</a></p>
+<p>Wirth, N. (1971). Program development by stepwise refinement. <em>Communications of the ACM, 14</em>(4), 221–227. <a class="reference external" href="https://doi.org/10.1145/362575.362577">https://doi.org/10.1145/362575.362577</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercises/01_Seatwork_Algorithms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Seatwork: Algorithm Making</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/02_Seatwork_Paradigms.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Seatwork: Same Problem, Different Paradigms</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-family-of-paradigms"><strong>The Family of Paradigms</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-starting-point-imperative-programming"><strong>The Starting Point: Imperative Programming</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-programming"><strong>Structured Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-it-solved-spaghetti-code"><strong>The problem it solved: spaghetti code</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rules-of-structured-programming"><strong>The rules of structured programming</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-running-problem-structured"><strong>The running problem, structured</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strengths-and-limits"><strong>Strengths and limits</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedural-programming"><strong>Procedural Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposition"><strong>Decomposition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-running-problem-procedural"><strong>The running problem, procedural</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-procedures-help"><strong>Why procedures help</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-programming"><strong>Functional Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-ideas"><strong>Core ideas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#side-effects-the-thing-functional-programming-avoids"><strong>Side effects — the thing functional programming avoids</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-classic-tools-map-filter-reduce"><strong>Three classic tools: map, filter, reduce</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-running-problem-functional"><strong>The running problem, functional</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-matters-in-data-science"><strong>Why it matters in data science</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-brief-look-at-two-more-paradigms"><strong>A Brief Look at Two More Paradigms</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-programming-oop"><strong>Object-oriented programming (OOP)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-programming"><strong>Declarative programming</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#side-by-side-comparison"><strong>Side-by-Side Comparison</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-as-a-multi-paradigm-language"><strong>Python as a Multi-Paradigm Language</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-paradigm"><strong>Choosing a Paradigm</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paradigms-throughout-this-course"><strong>Paradigms Throughout This Course</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-understanding"><strong>Check Your Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><strong>References</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Department of Data Science · USTP
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
